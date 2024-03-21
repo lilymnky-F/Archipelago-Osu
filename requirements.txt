@@ -12,3 +12,17 @@ cython>=3.0.8
 cymem>=2.0.8
 orjson>=3.9.10
 typing-extensions>=4.7.0
+
+requests~=2.31.0
+pymem~=1.13.1
+pyevermizer~=0.46.1
+xxtea~=3.2.0
+zilliandomizer~=0.7.0
+s2clientprotocol~=5.0.12.91115.0
+mpyq~=0.2.5
+portpicker~=1.6.0
+aiohttp~=3.9.3
+loguru~=0.7.2
+pip~=22.3.1
+setuptools~=65.5.1
+MarkupSafe~=2.1.5

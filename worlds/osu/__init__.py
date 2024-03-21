@@ -1,14 +1,20 @@
-from typing import List
-
 from BaseClasses import Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from .Items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool
 from .Locations import OsuLocation, location_table, location_data_table
 from .Options import osu_options
 from .Regions import region_data_table
-from .Rules import get_button_rule
 from math import floor
+from multiprocessing import Process
+from ..LauncherComponents import Component, components, Type
 
+def run_client():
+    from worlds.osu.Client import main  # lazy import
+    p = Process(target=main)
+    p.start()
+
+
+components.append(Component("osu!Client", func=run_client, component_type=Type.CLIENT))
 
 class OsuWebWorld(WebWorld):
     theme = "partyTime"
@@ -39,7 +45,6 @@ class OsuWorld(World):
     location_name_to_id = location_table
     item_name_to_id = item_table
 
-    # I *should* make a class for song data and then can type things here but didn't oops, will do that later lol
     song_pool = osu_song_pool.copy()
     song_data = osu_song_data.copy()
     pairs = {}
@@ -146,9 +151,9 @@ class OsuWorld(World):
             song_select_region.connect(region, name, lambda state, place=name: state.has(place, self.player))
 
             # Up to 2 Locations are defined per song
-            region.add_locations({name + " (Item 1)": location_data_table[name + " (Item 1)"]}, OsuLocation)
+            region.add_locations({name + " (Item 1)": location_data_table[name + " (Item 1)"].address}, OsuLocation)
             if i < two_item_location_count:
-                region.add_locations({name + " (Item 2)": location_data_table[name + " (Item 2)"]}, OsuLocation)
+                region.add_locations({name + " (Item 2)": location_data_table[name + " (Item 2)"].address}, OsuLocation)
 
     def get_filler_item_name(self) -> str:
         return "Circle"
