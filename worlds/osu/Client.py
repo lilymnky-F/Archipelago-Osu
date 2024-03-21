@@ -131,7 +131,6 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                     return
                 for i in range(2):
                     location_id = 727000000 + (2 * list(self.ctx.pairs.keys()).index(song))+i
-                    self.output(str(location_id))
                     if location_id in self.ctx.missing_locations:
                         filename = f"send{location_id}"
                         with open(os.path.join(self.ctx.game_communication_path, filename), 'w') as f:
@@ -315,6 +314,7 @@ def main():
     colorama.init()
     asyncio.run(_main(args))
     colorama.deinit()
+
 
 if __name__ == '__main__':
     main()

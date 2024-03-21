@@ -9,7 +9,7 @@ from multiprocessing import Process
 from ..LauncherComponents import Component, components, Type
 
 def run_client():
-    from worlds.osu.Client import main  # lazy import
+    from worlds.osu.Client import main
     p = Process(target=main)
     p.start()
 
@@ -36,7 +36,7 @@ class OsuWorld(World):
     and songs downloadable from its website.
     """
 
-    # Some Code is stolen from both Muse Dash
+    # Lots of code is taken from Mushdash, Clique, and various other APworlds
     game = "osu!"
     data_version = 3
     web = OsuWebWorld()
