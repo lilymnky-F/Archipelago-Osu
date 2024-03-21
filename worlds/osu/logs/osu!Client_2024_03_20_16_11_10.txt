@@ -1,0 +1,2351 @@
+﻿[root at 2024-03-20 16:11:10,663]: Archipelago (0.4.4) logging initialized on Windows-10-10.0.22631-SP0 running Python 3.11.1
+[root at 2024-03-20 16:11:10,824]: Could not load world WorldSource(adventure, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\adventure\__init__.py", line 11, in <module>
+    from BaseClasses import Entrance, Item, ItemClassification, MultiWorld, Region, Tutorial, \
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\adventure\__init__.py", line 11, in <module>
+    from BaseClasses import Entrance, Item, ItemClassification, MultiWorld, Region, Tutorial, \
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:10,853]: Could not load world WorldSource(alttp, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\alttp\__init__.py", line 9, in <module>
+    from BaseClasses import Item, CollectionState, Tutorial, MultiWorld
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\alttp\__init__.py", line 9, in <module>
+    from BaseClasses import Item, CollectionState, Tutorial, MultiWorld
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:10,901]: Could not load world WorldSource(archipidle, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\archipidle\__init__.py", line 1, in <module>
+    from BaseClasses import Item, MultiWorld, Region, Location, Entrance, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\archipidle\__init__.py", line 1, in <module>
+    from BaseClasses import Item, MultiWorld, Region, Location, Entrance, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:10,941]: Could not load world WorldSource(bk_sudoku, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\bk_sudoku\__init__.py", line 3, in <module>
+    from BaseClasses import Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\bk_sudoku\__init__.py", line 3, in <module>
+    from BaseClasses import Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:10,965]: Could not load world WorldSource(blasphemous, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\blasphemous\__init__.py", line 3, in <module>
+    from BaseClasses import Region, Entrance, Location, Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\blasphemous\__init__.py", line 3, in <module>
+    from BaseClasses import Region, Entrance, Location, Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:10,980]: Could not load world WorldSource(bumpstik, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\bumpstik\__init__.py", line 6, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\bumpstik\__init__.py", line 6, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,006]: Could not load world WorldSource(checksfinder, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\checksfinder\__init__.py", line 1, in <module>
+    from BaseClasses import Region, Entrance, Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\checksfinder\__init__.py", line 1, in <module>
+    from BaseClasses import Region, Entrance, Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,010]: Could not load world WorldSource(clique, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\clique\__init__.py", line 3, in <module>
+    from BaseClasses import Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\clique\__init__.py", line 3, in <module>
+    from BaseClasses import Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,039]: Could not load world WorldSource(dark_souls_3, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\dark_souls_3\__init__.py", line 4, in <module>
+    from BaseClasses import MultiWorld, Region, Item, Entrance, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\dark_souls_3\__init__.py", line 4, in <module>
+    from BaseClasses import MultiWorld, Region, Item, Entrance, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,063]: Could not load world WorldSource(dkc3, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\dkc3\__init__.py", line 7, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\dkc3\__init__.py", line 7, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,082]: Could not load world WorldSource(dlcquest, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\dlcquest\__init__.py", line 3, in <module>
+    from BaseClasses import Tutorial, CollectionState
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\dlcquest\__init__.py", line 3, in <module>
+    from BaseClasses import Tutorial, CollectionState
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,105]: Could not load world WorldSource(doom_1993, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\doom_1993\__init__.py", line 5, in <module>
+    from BaseClasses import Entrance, CollectionState, Item, ItemClassification, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\doom_1993\__init__.py", line 5, in <module>
+    from BaseClasses import Entrance, CollectionState, Item, ItemClassification, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,161]: Could not load world WorldSource(doom_ii, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\doom_ii\__init__.py", line 5, in <module>
+    from BaseClasses import Entrance, CollectionState, Item, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\doom_ii\__init__.py", line 5, in <module>
+    from BaseClasses import Entrance, CollectionState, Item, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,178]: Could not load world WorldSource(factorio, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\factorio\__init__.py", line 8, in <module>
+    from BaseClasses import Region, Entrance, Location, Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\factorio\__init__.py", line 8, in <module>
+    from BaseClasses import Region, Entrance, Location, Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,350]: Could not load world WorldSource(ff1, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\ff1\__init__.py", line 5, in <module>
+    from BaseClasses import Item, Location, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\ff1\__init__.py", line 5, in <module>
+    from BaseClasses import Item, Location, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,365]: Could not load world WorldSource(ffmq, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\ffmq\__init__.py", line 7, in <module>
+    from worlds.AutoWorld import World, WebWorld
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\AutoWorld.py", line 13, in <module>
+    from Options import PerGameCommonOptions
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\ffmq\__init__.py", line 7, in <module>
+    from worlds.AutoWorld import World, WebWorld
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\AutoWorld.py", line 13, in <module>
+    from Options import PerGameCommonOptions
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,393]: Could not load world WorldSource(generic, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\generic\__init__.py", line 4, in <module>
+    from BaseClasses import Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\generic\__init__.py", line 4, in <module>
+    from BaseClasses import Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,487]: Could not load world WorldSource(heretic, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\heretic\__init__.py", line 5, in <module>
+    from BaseClasses import Entrance, CollectionState, Item, ItemClassification, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\heretic\__init__.py", line 5, in <module>
+    from BaseClasses import Entrance, CollectionState, Item, ItemClassification, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,539]: Could not load world WorldSource(hk, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\hk\__init__.py", line 13, in <module>
+    from .Rules import set_rules, cost_terms
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\hk\Rules.py", line 1, in <module>
+    from ..generic.Rules import set_rule, add_rule
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\generic\__init__.py", line 4, in <module>
+    from BaseClasses import Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\hk\__init__.py", line 13, in <module>
+    from .Rules import set_rules, cost_terms
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\hk\Rules.py", line 1, in <module>
+    from ..generic.Rules import set_rule, add_rule
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\generic\__init__.py", line 4, in <module>
+    from BaseClasses import Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,550]: Could not load world WorldSource(hylics2, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\hylics2\__init__.py", line 2, in <module>
+    from BaseClasses import Region, Entrance, Location, Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\hylics2\__init__.py", line 2, in <module>
+    from BaseClasses import Region, Entrance, Location, Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,562]: Could not load world WorldSource(kh2, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\kh2\__init__.py", line 4, in <module>
+    from BaseClasses import Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\kh2\__init__.py", line 4, in <module>
+    from BaseClasses import Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,575]: Could not load world WorldSource(ladx, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\ladx\__init__.py", line 10, in <module>
+    from BaseClasses import Entrance, Item, ItemClassification, Location, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\ladx\__init__.py", line 10, in <module>
+    from BaseClasses import Entrance, Item, ItemClassification, Location, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,591]: Could not load world WorldSource(landstalker, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\landstalker\__init__.py", line 3, in <module>
+    from BaseClasses import LocationProgressType, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\landstalker\__init__.py", line 3, in <module>
+    from BaseClasses import LocationProgressType, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,626]: Could not load world WorldSource(lingo, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\lingo\__init__.py", line 6, in <module>
+    from BaseClasses import Item, ItemClassification, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\lingo\__init__.py", line 6, in <module>
+    from BaseClasses import Item, ItemClassification, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,648]: Could not load world WorldSource(lol, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\lol\__init__.py", line 3, in <module>
+    from BaseClasses import Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\lol\__init__.py", line 3, in <module>
+    from BaseClasses import Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,675]: Could not load world WorldSource(lufia2ac, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\lufia2ac\__init__.py", line 8, in <module>
+    from BaseClasses import Item, ItemClassification, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\lufia2ac\__init__.py", line 8, in <module>
+    from BaseClasses import Item, ItemClassification, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,688]: Could not load world WorldSource(meritous, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\meritous\__init__.py", line 6, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\meritous\__init__.py", line 6, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,698]: Could not load world WorldSource(messenger, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\messenger\__init__.py", line 4, in <module>
+    from BaseClasses import CollectionState, Item, ItemClassification, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\messenger\__init__.py", line 4, in <module>
+    from BaseClasses import CollectionState, Item, ItemClassification, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,707]: Could not load world WorldSource(minecraft, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\minecraft\__init__.py", line 8, in <module>
+    from BaseClasses import Region, Entrance, Item, Tutorial, ItemClassification, Location
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\minecraft\__init__.py", line 8, in <module>
+    from BaseClasses import Region, Entrance, Item, Tutorial, ItemClassification, Location
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,729]: Could not load world WorldSource(mmbn3, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\mmbn3\__init__.py", line 6, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification, Region, Entrance, \
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\mmbn3\__init__.py", line 6, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification, Region, Entrance, \
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,738]: Could not load world WorldSource(musedash, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\musedash\__init__.py", line 1, in <module>
+    from worlds.AutoWorld import World, WebWorld
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\AutoWorld.py", line 13, in <module>
+    from Options import PerGameCommonOptions
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\musedash\__init__.py", line 1, in <module>
+    from worlds.AutoWorld import World, WebWorld
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\AutoWorld.py", line 13, in <module>
+    from Options import PerGameCommonOptions
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,755]: Could not load world WorldSource(noita, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\noita\__init__.py", line 1, in <module>
+    from BaseClasses import Item, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\noita\__init__.py", line 1, in <module>
+    from BaseClasses import Item, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,790]: Could not load world WorldSource(oot, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\oot\__init__.py", line 13, in <module>
+    from .Location import OOTLocation, LocationFactory, location_name_to_id, build_location_name_groups
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\oot\Location.py", line 3, in <module>
+    from BaseClasses import Location
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\oot\__init__.py", line 13, in <module>
+    from .Location import OOTLocation, LocationFactory, location_name_to_id, build_location_name_groups
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\oot\Location.py", line 3, in <module>
+    from BaseClasses import Location
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,794]: Could not load world WorldSource(osu, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\__init__.py", line 3, in <module>
+    from BaseClasses import Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\__init__.py", line 3, in <module>
+    from BaseClasses import Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,814]: Could not load world WorldSource(overcooked2, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\overcooked2\__init__.py", line 4, in <module>
+    from BaseClasses import ItemClassification, CollectionState, Region, Entrance, Location, Tutorial, LocationProgressType
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\overcooked2\__init__.py", line 4, in <module>
+    from BaseClasses import ItemClassification, CollectionState, Region, Entrance, Location, Tutorial, LocationProgressType
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,827]: Could not load world WorldSource(pokemon_emerald, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\pokemon_emerald\__init__.py", line 10, in <module>
+    from BaseClasses import ItemClassification, MultiWorld, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\pokemon_emerald\__init__.py", line 10, in <module>
+    from BaseClasses import ItemClassification, MultiWorld, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,841]: Could not load world WorldSource(pokemon_rb, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\pokemon_rb\__init__.py", line 10, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification, LocationProgressType
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\pokemon_rb\__init__.py", line 10, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification, LocationProgressType
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,866]: Could not load world WorldSource(raft, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\raft\__init__.py", line 7, in <module>
+    from .Regions import create_regions, getConnectionName
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\raft\Regions.py", line 3, in <module>
+    from BaseClasses import Entrance
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\raft\__init__.py", line 7, in <module>
+    from .Regions import create_regions, getConnectionName
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\raft\Regions.py", line 3, in <module>
+    from BaseClasses import Entrance
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,895]: Could not load world WorldSource(rogue_legacy, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\rogue_legacy\__init__.py", line 3, in <module>
+    from BaseClasses import Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\rogue_legacy\__init__.py", line 3, in <module>
+    from BaseClasses import Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,911]: Could not load world WorldSource(ror2, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\ror2\__init__.py", line 3, in <module>
+    from .items import RiskOfRainItem, item_table, item_pool_weights, offset, filler_table, environment_offset
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\ror2\items.py", line 1, in <module>
+    from BaseClasses import Item, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\ror2\__init__.py", line 3, in <module>
+    from .items import RiskOfRainItem, item_table, item_pool_weights, offset, filler_table, environment_offset
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\ror2\items.py", line 1, in <module>
+    from BaseClasses import Item, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,922]: Could not load world WorldSource(sa2b, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\sa2b\__init__.py", line 5, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\sa2b\__init__.py", line 5, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,933]: Could not load world WorldSource(sc2wol, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\sc2wol\__init__.py", line 4, in <module>
+    from BaseClasses import Item, MultiWorld, Location, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\sc2wol\__init__.py", line 4, in <module>
+    from BaseClasses import Item, MultiWorld, Location, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,953]: Could not load world WorldSource(shivers, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\shivers\__init__.py", line 1, in <module>
+    from .Items import item_table, ShiversItem
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\shivers\Items.py", line 1, in <module>
+    from BaseClasses import Item, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\shivers\__init__.py", line 1, in <module>
+    from .Items import item_table, ShiversItem
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\shivers\Items.py", line 1, in <module>
+    from BaseClasses import Item, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:11,978]: Could not load world WorldSource(sm, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\sm\__init__.py", line 11, in <module>
+    from BaseClasses import CollectionState, Entrance, Item, ItemClassification, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\sm\__init__.py", line 11, in <module>
+    from BaseClasses import CollectionState, Entrance, Item, ItemClassification, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,012]: Could not load world WorldSource(sm64ex, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\sm64ex\__init__.py", line 4, in <module>
+    from .Items import item_table, cannon_item_table, SM64Item
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\sm64ex\Items.py", line 1, in <module>
+    from BaseClasses import Item
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\sm64ex\__init__.py", line 4, in <module>
+    from .Items import item_table, cannon_item_table, SM64Item
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\sm64ex\Items.py", line 1, in <module>
+    from BaseClasses import Item
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,025]: Could not load world WorldSource(smw, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\smw\__init__.py", line 7, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\smw\__init__.py", line 7, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,040]: Could not load world WorldSource(smz3, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\smz3\__init__.py", line 8, in <module>
+    from BaseClasses import Region, Entrance, Location, MultiWorld, Item, ItemClassification, CollectionState, \
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\smz3\__init__.py", line 8, in <module>
+    from BaseClasses import Region, Entrance, Location, MultiWorld, Item, ItemClassification, CollectionState, \
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,065]: Could not load world WorldSource(soe, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\soe\__init__.py", line 8, in <module>
+    from worlds.AutoWorld import WebWorld, World
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\AutoWorld.py", line 13, in <module>
+    from Options import PerGameCommonOptions
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\soe\__init__.py", line 8, in <module>
+    from worlds.AutoWorld import WebWorld, World
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\AutoWorld.py", line 13, in <module>
+    from Options import PerGameCommonOptions
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,100]: Could not load world WorldSource(spire, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\spire\__init__.py", line 3, in <module>
+    from BaseClasses import Entrance, Item, ItemClassification, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\spire\__init__.py", line 3, in <module>
+    from BaseClasses import Entrance, Item, ItemClassification, Location, MultiWorld, Region, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,119]: Could not load world WorldSource(stardew_valley, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\stardew_valley\__init__.py", line 4, in <module>
+    from BaseClasses import Region, Entrance, Location, Item, Tutorial, CollectionState, ItemClassification, MultiWorld, Group as ItemLinkGroup
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\stardew_valley\__init__.py", line 4, in <module>
+    from BaseClasses import Region, Entrance, Location, Item, Tutorial, CollectionState, ItemClassification, MultiWorld, Group as ItemLinkGroup
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,142]: Could not load world WorldSource(subnautica, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\subnautica\__init__.py", line 7, in <module>
+    from BaseClasses import Region, Entrance, Location, Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\subnautica\__init__.py", line 7, in <module>
+    from BaseClasses import Region, Entrance, Location, Item, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,157]: Could not load world WorldSource(terraria, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\terraria\__init__.py", line 4, in <module>
+    from worlds.AutoWorld import WebWorld, World
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\AutoWorld.py", line 13, in <module>
+    from Options import PerGameCommonOptions
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\terraria\__init__.py", line 4, in <module>
+    from worlds.AutoWorld import WebWorld, World
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\AutoWorld.py", line 13, in <module>
+    from Options import PerGameCommonOptions
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,166]: Could not load world WorldSource(timespinner, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\timespinner\__init__.py", line 2, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\timespinner\__init__.py", line 2, in <module>
+    from BaseClasses import Item, MultiWorld, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,175]: Could not load world WorldSource(tloz, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\tloz\__init__.py", line 11, in <module>
+    from BaseClasses import Item, Location, Region, Entrance, MultiWorld, ItemClassification, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\tloz\__init__.py", line 11, in <module>
+    from BaseClasses import Item, Location, Region, Entrance, MultiWorld, ItemClassification, Tutorial
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,191]: Could not load world WorldSource(undertale, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\undertale\__init__.py", line 1, in <module>
+    from .Items import UndertaleItem, item_table, required_armor, required_weapons, non_key_items, key_items, \
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\undertale\Items.py", line 1, in <module>
+    from BaseClasses import Item, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\undertale\__init__.py", line 1, in <module>
+    from .Items import UndertaleItem, item_table, required_armor, required_weapons, non_key_items, key_items, \
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\undertale\Items.py", line 1, in <module>
+    from BaseClasses import Item, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,236]: Could not load world WorldSource(v6, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\v6\__init__.py", line 3, in <module>
+    from .Items import item_table, V6Item
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\v6\Items.py", line 1, in <module>
+    from BaseClasses import Item
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\v6\__init__.py", line 3, in <module>
+    from .Items import item_table, V6Item
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\v6\Items.py", line 1, in <module>
+    from BaseClasses import Item
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,263]: Could not load world WorldSource(wargroove, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\wargroove\__init__.py", line 5, in <module>
+    from BaseClasses import Item, MultiWorld, Region, Location, Entrance, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\wargroove\__init__.py", line 5, in <module>
+    from BaseClasses import Item, MultiWorld, Region, Location, Entrance, Tutorial, ItemClassification
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,278]: Could not load world WorldSource(witness, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\witness\__init__.py", line 7, in <module>
+    from BaseClasses import Region, Location, MultiWorld, Item, Entrance, Tutorial, CollectionState
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\witness\__init__.py", line 7, in <module>
+    from BaseClasses import Region, Location, MultiWorld, Item, Entrance, Tutorial, CollectionState
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[root at 2024-03-20 16:11:12,290]: Could not load world WorldSource(zillion, is_zip=False, relative=True):
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\zillion\__init__.py", line 11, in <module>
+    from BaseClasses import ItemClassification, LocationProgressType, \
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 71, in load
+    importlib.import_module(f".{self.path}", "worlds")
+  File "C:\Users\jlljf\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1206, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1178, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1149, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\zillion\__init__.py", line 11, in <module>
+    from BaseClasses import ItemClassification, LocationProgressType, \
+  File "D:\.Downloads and Working\Archipelago-0.4.4\BaseClasses.py", line 18, in <module>
+    import Options
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
+[Client at 2024-03-20 16:11:12,292]: Uncaught exception
+Traceback (most recent call last):
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Client.py", line 18, in <module>
+    from CommonClient import gui_enabled, logger, get_base_parser, ClientCommandProcessor, \
+  File "D:\.Downloads and Working\Archipelago-0.4.4\CommonClient.py", line 26, in <module>
+    from worlds import network_data_package, AutoWorldRegister
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\__init__.py", line 106, in <module>
+    from .AutoWorld import AutoWorldRegister
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\AutoWorld.py", line 13, in <module>
+    from Options import PerGameCommonOptions
+  File "D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py", line 2, in <module>
+    from Options import Option
+ImportError: cannot import name 'Option' from partially initialized module 'Options' (most likely due to a circular import) (D:\.Downloads and Working\Archipelago-0.4.4\worlds\osu\Options.py)
