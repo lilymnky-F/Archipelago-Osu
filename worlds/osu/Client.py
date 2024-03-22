@@ -4,6 +4,7 @@ import sys
 import asyncio
 import shutil
 import requests
+import time
 
 import ModuleUpdate
 
@@ -22,6 +23,7 @@ from CommonClient import gui_enabled, logger, get_base_parser, ClientCommandProc
 class APosuClientCommandProcessor(ClientCommandProcessor):
     def __init__(self, ctx: APosuContext):
         self.ctx = ctx
+        self.last_scores = []
 
     def _cmd_slot_data(self):
         """Show Slot Data, For Debug Purposes. Probably don't run this"""
@@ -73,6 +75,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def _cmd_show_songs(self):
         """Display all songs in logic."""
         indexes = self.get_available_ids()
+        if not indexes:
+            self.output("You do not have any Songs in Logic")
         for i in indexes:
             song = list(self.ctx.pairs.keys())[i]
             beatmapset = self.ctx.pairs[song]
@@ -93,48 +97,35 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         # Make URl for the request
         try:
-            request = f"https://osu.ppy.sh/api/v2/users/{os.environ['PLAYER_ID']}/scores/recent?include_fails=1&limit=5"
+            request = f"https://osu.ppy.sh/api/v2/users/{os.environ['PLAYER_ID']}/scores/recent?include_fails=1&limit=15"
         except KeyError:
             self.output("Please set a Player ID.")
             return
         # Add Mode to request, otherwise it will use the user's default
         if mode and mode.lower() in ['fruits', 'mania', 'osu', 'taiko']:
-            request += f"&mode={mode}"
+            request += f"&mode={mode.lower()}"
         scores = requests.get(request, headers={"Accept": "application/json", "Content-Type": "application/json",
                                                 "Authorization": f"Bearer {token}"})
         # Get Scores with Token
         try:
-            score = scores.json()[0]
+            score_list = scores.json()
         except (KeyError, IndexError):
-            if scores.ok:
-                self.output("No plays found.")
-                return
             self.output("Error Retrieving plays, Check your API Key.")
             return
-        self.output(score['beatmapset']['title'] + " " + score['beatmap']['version'] + f' Passed: {score["passed"]}')
-        # Check if the score is a pass, then check if it's in the AP
-        if not score['passed']:
-            self.output("You cannot check a location without passing the song")
+        if not score_list:
+            self.output("No Plays Found. Check the Gamemode")
             return
-        for song in self.ctx.pairs:
-            if self.ctx.pairs[song]['id'] == score['beatmapset']['id']:
-                self.output(f'Play Matches {song}')
-                if song == "Victory":
-                    if self.check_for_item(726999999, self.ctx.preformance_points_needed):
-                        with open(os.path.join(self.ctx.game_communication_path, 'victory'), 'w') as f:
-                            f.close()
-                        return
-                    self.output("You don't have enough preformance points")
-                    return
-                if not self.check_for_item(727000000+list(self.ctx.pairs.keys()).index(song), 1):
-                    self.output("You don't have this song unlocked")
-                    return
-                for i in range(2):
-                    location_id = 727000000 + (2 * list(self.ctx.pairs.keys()).index(song))+i
-                    if location_id in self.ctx.missing_locations:
-                        filename = f"send{location_id}"
-                        with open(os.path.join(self.ctx.game_communication_path, filename), 'w') as f:
-                            f.close()
+        found = False
+        for score in score_list:
+            if score in self.last_scores:
+                if not found:
+                    self.output("No New Plays Found.")
+                return
+            found = True
+            self.last_scores.append(score)
+            if len(self.last_scores) > 15:
+                self.last_scores.pop(0)
+            self.check_location(score)
 
     def check_for_item(self, code, amount) -> bool:
         current = 0
@@ -157,6 +148,32 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             incomplete_items.append(-1)
         incomplete_items.sort()
         return incomplete_items
+
+    def check_location(self, score):
+        self.output(score['beatmapset']['title'] + " " + score['beatmap']['version'] + f' Passed: {score["passed"]}')
+        # Check if the score is a pass, then check if it's in the AP
+        if not score['passed']:
+            self.output("You cannot check a location without passing the song")
+            return
+        for song in self.ctx.pairs:
+            if self.ctx.pairs[song]['id'] == score['beatmapset']['id']:
+                self.output(f'Play Matches {song}')
+                if song == "Victory":
+                    if self.check_for_item(726999999, self.ctx.preformance_points_needed):
+                        with open(os.path.join(self.ctx.game_communication_path, 'victory'), 'w') as f:
+                            f.close()
+                        return
+                    self.output("You don't have enough preformance points")
+                    return
+                if not self.check_for_item(727000000 + list(self.ctx.pairs.keys()).index(song), 1):
+                    self.output("You don't have this song unlocked")
+                    return
+                for i in range(2):
+                    location_id = 727000000 + (2 * list(self.ctx.pairs.keys()).index(song)) + i
+                    if location_id in self.ctx.missing_locations:
+                        filename = f"send{location_id}"
+                        with open(os.path.join(self.ctx.game_communication_path, filename), 'w') as f:
+                            f.close()
 
 class APosuContext(CommonContext):
     command_processor: int = APosuClientCommandProcessor
