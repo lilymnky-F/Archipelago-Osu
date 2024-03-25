@@ -4,7 +4,7 @@ import sys
 import asyncio
 import shutil
 import requests
-import time
+import webbrowser
 
 import ModuleUpdate
 
@@ -127,6 +127,19 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                 self.last_scores.pop(0)
             self.check_location(score)
 
+    def _cmd_download(self, number=''):
+        """Downloads the given song number, or 'victory' for the goal song."""
+        try:
+            song_number = int(number)-1
+        except ValueError:
+            if not (number.lower().capitalize() == 'Victory'):
+                self.output("Please Give a Number or 'Victory'")
+            song_number = -1
+        song = list(self.ctx.pairs.keys())[song_number]
+        beatmapset = self.ctx.pairs[song]
+        self.output(f"Downloading {song}: {beatmapset['title']} (ID: {beatmapset['id']}) as '{beatmapset['id']} {beatmapset['artist']} - {beatmapset['title']}.osz'")
+        self.download_beatmapset(beatmapset)
+
     def check_for_item(self, code, amount) -> bool:
         current = 0
         for item in self.ctx.items_received:
@@ -142,7 +155,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         for item in self.ctx.items_received:
             song_index = item.item-727000000
             location_id = (song_index*2)+727000000
-            if location_id in self.ctx.missing_locations:
+            if location_id in self.ctx.missing_locations and song_index not in incomplete_items:
                 incomplete_items.append(song_index)
         if self.check_for_item(726999999, self.ctx.preformance_points_needed):
             incomplete_items.append(-1)
@@ -174,6 +187,20 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                         filename = f"send{location_id}"
                         with open(os.path.join(self.ctx.game_communication_path, filename), 'w') as f:
                             f.close()
+
+    def download_beatmapset(self, beatmapset):
+        print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
+        req = requests.get(f"https://api.chimu.moe/v1/download/{beatmapset['id']}")
+        if len(req.content) < 400:
+            self.output(f'Error Downloading {beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz')
+            self.output('Please Manually Add the Map or Try Again Later.')
+            return
+        f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
+        filename = "".join(i for i in f if i not in "\/:*?<>|")
+        path = self.ctx.game_communication_path + ' config'
+        with open(os.path.join(path, filename), 'wb') as f:
+            f.write(req.content)
+        webbrowser.open(os.path.join(path, filename))
 
 class APosuContext(CommonContext):
     command_processor: int = APosuClientCommandProcessor

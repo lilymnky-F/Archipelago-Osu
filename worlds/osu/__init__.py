@@ -2,11 +2,14 @@ from BaseClasses import Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from .Items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool
 from .Locations import OsuLocation, location_table, location_data_table
-from .Options import osu_options
+from Options import PerGameCommonOptions  # Muse Dash uses this for a type, but I'm having an error
+from typing import ClassVar               # where the "Type" Import below breaks, so I'm ignoring it!
+from .Options import OsuOptions
 from .Regions import region_data_table
 from math import floor
 from multiprocessing import Process
 from ..LauncherComponents import Component, components, Type
+
 
 def run_client():
     from worlds.osu.Client import main
@@ -15,6 +18,7 @@ def run_client():
 
 
 components.append(Component("osu!Client", func=run_client, component_type=Type.CLIENT))
+
 
 class OsuWebWorld(WebWorld):
     theme = "partyTime"
@@ -38,10 +42,11 @@ class OsuWorld(World):
 
     # Lots of code is taken from Mushdash, Clique, and various other APworlds
     game = "osu!"
+    options_dataclass = OsuOptions
+    options: OsuOptions
     data_version = 3
     web = OsuWebWorld()
 
-    option_definitions = osu_options
     location_name_to_id = location_table
     item_name_to_id = item_table
 
@@ -54,8 +59,8 @@ class OsuWorld(World):
     location_count: int
 
     def generate_early(self):
-        starting_song_count = 5
-        additional_song_count = 40
+        starting_song_count = self.options.starting_songs
+        additional_song_count = self.options.additional_songs
         for song in self.song_pool[:starting_song_count]:
             self.starting_songs.append(song)
         for song in self.song_pool[starting_song_count:additional_song_count+starting_song_count]:
@@ -164,10 +169,14 @@ class OsuWorld(World):
 
     # next three all taken from muse dash apworld for futureproofing
     def get_music_sheet_count(self) -> int:
-        return 10
+        multiplier = 20.0 / 100.0
+        song_count = (len(self.starting_songs) * 2) + len(self.included_songs)
+        return max(1, floor(song_count * multiplier))
 
     def get_music_sheet_win_count(self) -> int:
-        return 8
+        multiplier = 80.0 / 100.0
+        sheet_count = self.get_music_sheet_count()
+        return max(1, floor(sheet_count * multiplier))
 
     def get_additional_item_percentage(self) -> int:
         return 80
