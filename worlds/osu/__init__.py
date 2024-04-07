@@ -57,8 +57,12 @@ class OsuWorld(World):
     starting_songs = []
     included_songs = []
     location_count: int
+    disallowed_modes = []
 
     def generate_early(self):
+        for i in zip(['osu', 'fruits', 'taiko', 'mania'], [self.options.disable_standard, self.options.disable_catch, self.options.disable_taiko, self.options.disable_mania]):
+            if i[1]:
+                self.disallowed_modes.append(i[0])
         starting_song_count = self.options.starting_songs
         additional_song_count = self.options.additional_songs
         for song in self.song_pool[:starting_song_count]:
@@ -68,6 +72,8 @@ class OsuWorld(World):
 
         # Pair the Generic Songs to their proper Songs
         self.get_eligible_songs()
+        if len(self.song_data) < len(self.starting_songs + self.included_songs + ["Victory"]):
+            raise Exception(f"Player {self.player}'s settings cannot generate enough songs")
         self.random.shuffle(self.song_data)
         for generic_song, osu_song in zip((self.starting_songs + self.included_songs + ["Victory"]), self.song_data):
             self.pairs[generic_song] = osu_song
@@ -95,18 +101,15 @@ class OsuWorld(World):
     def check_eligibility(self, beatmapset):
         if beatmapset["nsfw"]:
             return False
-        return True
+        for difficulty in beatmapset["beatmaps"]:
+            if difficulty['mode'] not in self.disallowed_modes and self.options.minimum_difficulty <= difficulty['sr']*100 <= self.options.maximum_difficulty:
+                return True
+        return False
 
     def create_item(self, name: str) -> OsuItem:
         return OsuItem(name, item_data_table[name].type, item_data_table[name].code, self.player)
 
     def create_items(self) -> None:
-        """item_pool: List[OsuItem] = []
-        for name, item in item_data_table.items():
-            item_pool.append(self.create_item(name))
-
-        self.multiworld.itempool += item_pool"""
-
         song_keys_in_pool = self.included_songs.copy()
 
         # Note: Item count will be off if plando is involved.
@@ -114,7 +117,7 @@ class OsuWorld(World):
 
         # First add all goal song tokens
         for _ in range(0, item_count):
-            self.multiworld.itempool.append(self.create_item("Preformance Points"))
+            self.multiworld.itempool.append(self.create_item("Performance Points"))
 
         # Next fill all remaining slots with song items
         needed_item_count = self.location_count
@@ -167,7 +170,6 @@ class OsuWorld(World):
         self.multiworld.completion_condition[self.player] = lambda state: \
             state.has("Preformance Points", self.player, self.get_music_sheet_win_count())
 
-    # next three all taken from muse dash apworld for futureproofing
     def get_music_sheet_count(self) -> int:
         multiplier = 20.0 / 100.0
         song_count = (len(self.starting_songs) * 2) + len(self.included_songs)

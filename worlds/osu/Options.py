@@ -20,7 +20,59 @@ class AdditionalSongs(Range):
     display_name = "Additional Song Count"
 
 
+class MinimumDifficulty(Range):
+    """Atleast 1 difficulty of each included song will have a Star Rating between this and the Maximum.
+    Star Ratings are multipled by 100, ie: a Star Rating of 1.23 will be 123
+    """
+    range_start = 0
+    range_end = 1000
+    default = 0
+    display_name = "Minimum Star Rating"
+
+
+class MaximumDifficulty(Range):
+    """Atleast 1 difficulty of each included song will have a Star Rating between this and the Minimum.
+    Star Ratings are multipled by 100, ie: a Star Rating of 1.23 will be 123
+    """
+    range_start = 0
+    range_end = 1000
+    default = 1000
+    display_name = "Maximum Star Rating"
+
+
+class DisableDifficultyReduction(Toggle):
+    """Prevents plays using difficulty reduction mods from sending checks. Doesn't currently Work."""
+    display_name = "Disable Difficulty Reduction"
+
+
+class DisableStandard(Toggle):
+    """Ignores Standard Difficultys when Generating"""
+    display_name = "Disable Standard"
+
+
+class DisableCatch(Toggle):
+    """Ignores Catch The Beat Difficultys when Generating"""
+    display_name = "Disable Catch The Beat"
+
+
+class DisableTaiko(Toggle):
+    """Ignores Taiko Difficultys when Generating"""
+    display_name = "Disable Taiko"
+
+
+class DisableMania(Toggle):
+    """Ignores Mania Difficultys when Generating"""
+    display_name = "Disable Mania"
+
+
 @dataclass
 class OsuOptions(PerGameCommonOptions):
     starting_songs: StartingSongs
     additional_songs: AdditionalSongs
+    disable_difficulty_reduction: DisableDifficultyReduction
+    maximum_difficulty: MaximumDifficulty
+    minimum_difficulty: MinimumDifficulty
+    disable_standard: DisableStandard
+    disable_catch: DisableCatch
+    disable_taiko: DisableTaiko
+    disable_mania: DisableMania

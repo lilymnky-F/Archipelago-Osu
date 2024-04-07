@@ -82,6 +82,12 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             beatmapset = self.ctx.pairs[song]
             self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']})")
 
+    def _cmd_show_all_songs(self):
+        """Displays all songs included in current generation."""
+        for song in self.ctx.pairs:
+            beatmapset = self.ctx.pairs[song]
+            self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']})")
+
     def _cmd_get_last_scores(self, mode=''):
         """Gets the player's last score, in a given gamemode or their set default"""
 
@@ -128,7 +134,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             self.check_location(score)
 
     def _cmd_download(self, number=''):
-        """Downloads the given song number, or 'victory' for the goal song."""
+        """Downloads the given song number in '/show_songs', or 'victory' for the goal song."""
         try:
             song_number = int(number)-1
         except ValueError:

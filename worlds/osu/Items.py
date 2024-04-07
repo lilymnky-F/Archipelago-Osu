@@ -33,7 +33,7 @@ osu_song_max = len(osu_song_data)
 osu_song_pool = []
 
 item_data_table: Dict[str, OsuItemData] = {
-    "Preformance Points": OsuItemData(
+    "Performance Points": OsuItemData(
         code=726999999,
         type=ItemClassification.progression,
     ),
