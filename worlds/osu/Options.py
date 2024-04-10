@@ -40,6 +40,15 @@ class MaximumDifficulty(Range):
     display_name = "Maximum Star Rating"
 
 
+class MaximumLength(Range):
+    """Maximum Length a Song can be, in seconds.
+    """
+    range_start = 0
+    range_end = 2200
+    default = 300
+    display_name = "Maximum Length"
+
+
 class DisableDifficultyReduction(Toggle):
     """Prevents plays using difficulty reduction mods from sending checks. Doesn't currently Work."""
     display_name = "Disable Difficulty Reduction"
@@ -47,22 +56,22 @@ class DisableDifficultyReduction(Toggle):
 
 class DisableStandard(Toggle):
     """Ignores Standard Difficultys when Generating"""
-    display_name = "Disable Standard"
+    display_name = "Exclude Standard"
 
 
 class DisableCatch(Toggle):
     """Ignores Catch The Beat Difficultys when Generating"""
-    display_name = "Disable Catch The Beat"
+    display_name = "Exclude Catch The Beat"
 
 
 class DisableTaiko(Toggle):
     """Ignores Taiko Difficultys when Generating"""
-    display_name = "Disable Taiko"
+    display_name = "Exclude Taiko"
 
 
 class DisableMania(Toggle):
     """Ignores Mania Difficultys when Generating"""
-    display_name = "Disable Mania"
+    display_name = "Exclude Mania"
 
 
 @dataclass
@@ -72,7 +81,8 @@ class OsuOptions(PerGameCommonOptions):
     disable_difficulty_reduction: DisableDifficultyReduction
     maximum_difficulty: MaximumDifficulty
     minimum_difficulty: MinimumDifficulty
-    disable_standard: DisableStandard
-    disable_catch: DisableCatch
-    disable_taiko: DisableTaiko
-    disable_mania: DisableMania
+    maximum_length: MaximumLength
+    exclude_standard: DisableStandard
+    exclude_catch: DisableCatch
+    exclude_taiko: DisableTaiko
+    exclude_mania: DisableMania

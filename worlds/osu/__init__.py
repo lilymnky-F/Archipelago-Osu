@@ -2,8 +2,8 @@ from BaseClasses import Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from .Items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool
 from .Locations import OsuLocation, location_table, location_data_table
-from Options import PerGameCommonOptions  # Muse Dash uses this for a type, but I'm having an error
-from typing import ClassVar               # where the "Type" Import below breaks, so I'm ignoring it!
+from Options import PerGameCommonOptions  # Muse Dash uses this for a type (where I don't) but I'm having an error
+from typing import ClassVar               # where the "Type" Import below breaks if I remove this, so I'm ignoring it!
 from .Options import OsuOptions
 from .Regions import region_data_table
 from math import floor
@@ -50,17 +50,22 @@ class OsuWorld(World):
     location_name_to_id = location_table
     item_name_to_id = item_table
 
-    song_pool = osu_song_pool.copy()
-    song_data = osu_song_data.copy()
-    pairs = {}
-    victory_song = None
-    starting_songs = []
-    included_songs = []
+    song_pool: list
+    song_data: list
+    pairs = dict
+    starting_songs: list
+    included_songs: list
     location_count: int
-    disallowed_modes = []
+    disallowed_modes: list
 
     def generate_early(self):
-        for i in zip(['osu', 'fruits', 'taiko', 'mania'], [self.options.disable_standard, self.options.disable_catch, self.options.disable_taiko, self.options.disable_mania]):
+        self.pairs = {}
+        self.song_pool = osu_song_pool.copy()
+        self.song_data = osu_song_data.copy()
+        self.disallowed_modes = []
+        self.starting_songs = []
+        self.included_songs = []
+        for i in zip(['osu', 'fruits', 'taiko', 'mania'], [self.options.exclude_standard, self.options.exclude_catch, self.options.exclude_taiko, self.options.exclude_mania]):
             if i[1]:
                 self.disallowed_modes.append(i[0])
         starting_song_count = self.options.starting_songs
@@ -99,7 +104,7 @@ class OsuWorld(World):
             self.song_data.remove(beatmapset)
 
     def check_eligibility(self, beatmapset):
-        if beatmapset["nsfw"]:
+        if beatmapset["nsfw"] or beatmapset["length"] > self.options.maximum_length:
             return False
         for difficulty in beatmapset["beatmaps"]:
             if difficulty['mode'] not in self.disallowed_modes and self.options.minimum_difficulty <= difficulty['sr']*100 <= self.options.maximum_difficulty:
@@ -168,7 +173,7 @@ class OsuWorld(World):
 
     def set_rules(self) -> None:
         self.multiworld.completion_condition[self.player] = lambda state: \
-            state.has("Preformance Points", self.player, self.get_music_sheet_win_count())
+            state.has("Performance Points", self.player, self.get_music_sheet_win_count())
 
     def get_music_sheet_count(self) -> int:
         multiplier = 20.0 / 100.0
