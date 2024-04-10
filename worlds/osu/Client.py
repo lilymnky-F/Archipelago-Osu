@@ -24,11 +24,22 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def __init__(self, ctx: APosuContext):
         self.ctx = ctx
         self.last_scores = []
+        self.mode_names = {'fruits': 'fruits',
+                           'catch': 'fruits',
+                           'ctb': 'fruits',
+                           '4k': 'mania',
+                           '7k': 'mania',
+                           'o!m': 'mania',
+                           'mania': 'mania',
+                           'osu': 'osu',
+                           'std': 'osu',
+                           'standard': 'osu',
+                           'taiko': 'taiko'}
 
-    def _cmd_slot_data(self):
-        """Show Slot Data, For Debug Purposes. Probably don't run this"""
-        self.output(f"Data: {str(self.ctx.pairs)}")
-        pass
+    # def _cmd_slot_data(self):
+    #    """Show Slot Data, For Debug Purposes. Probably don't run this"""
+    #    self.output(f"Data: {str(self.ctx.pairs)}")
+    #    pass
 
     def _cmd_resync(self):
         """Manually trigger a resync. Usually Shouldn't be needed"""
@@ -75,6 +86,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def _cmd_show_songs(self):
         """Display all songs in logic."""
         indexes = self.get_available_ids()
+        self.output(f"You Have {self.count_item(726999999)} Performance Points, you need {self.ctx.preformance_points_needed} to unlock your goal.")
         if not indexes:
             self.output("You do not have any Songs in Logic")
         for i in indexes:
@@ -108,8 +120,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             self.output("Please set a Player ID.")
             return
         # Add Mode to request, otherwise it will use the user's default
-        if mode and mode.lower() in ['fruits', 'mania', 'osu', 'taiko']:
-            request += f"&mode={mode.lower()}"
+        if mode and mode.lower() in self.mode_names.keys():
+            request += f"&mode={self.mode_names[mode.lower()]}"
         scores = requests.get(request, headers={"Accept": "application/json", "Content-Type": "application/json",
                                                 "Authorization": f"Bearer {token}"})
         # Get Scores with Token
@@ -140,20 +152,23 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         except ValueError:
             if not (number.lower().capitalize() == 'Victory'):
                 self.output("Please Give a Number or 'Victory'")
+                return
             song_number = -1
-        song = list(self.ctx.pairs.keys())[song_number]
+        try:
+            song = list(self.ctx.pairs.keys())[song_number]
+        except IndexError:
+            self.output("Use the Numbers in '/show_songs'")
+            return
         beatmapset = self.ctx.pairs[song]
         self.output(f"Downloading {song}: {beatmapset['title']} (ID: {beatmapset['id']}) as '{beatmapset['id']} {beatmapset['artist']} - {beatmapset['title']}.osz'")
         self.download_beatmapset(beatmapset)
 
-    def check_for_item(self, code, amount) -> bool:
+    def count_item(self, code) -> int:
         current = 0
         for item in self.ctx.items_received:
             if item.item == code:
                 current += 1
-                if current >= amount:
-                    return True
-        return False
+        return current
 
     def get_available_ids(self):
         # Gets the Index of each Song the player has but has not played
@@ -163,7 +178,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             location_id = (song_index*2)+727000000
             if location_id in self.ctx.missing_locations and song_index not in incomplete_items:
                 incomplete_items.append(song_index)
-        if self.check_for_item(726999999, self.ctx.preformance_points_needed):
+        if self.count_item(726999999) >= self.ctx.preformance_points_needed:
             incomplete_items.append(-1)
         incomplete_items.sort()
         return incomplete_items
@@ -174,17 +189,20 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         if not score['passed']:
             self.output("You cannot check a location without passing the song")
             return
+        if self.ctx.disable_difficulty_reduction and any(x in score['mods'] for x in ['NF', 'EZ', 'HT']):
+            self.output("Your current settings do not allow difficulty reduction mods.")
+            return
         for song in self.ctx.pairs:
             if self.ctx.pairs[song]['id'] == score['beatmapset']['id']:
                 self.output(f'Play Matches {song}')
                 if song == "Victory":
-                    if self.check_for_item(726999999, self.ctx.preformance_points_needed):
+                    if self.count_item(726999999) >= self.ctx.preformance_points_needed:
                         with open(os.path.join(self.ctx.game_communication_path, 'victory'), 'w') as f:
                             f.close()
                         return
                     self.output("You don't have enough preformance points")
                     return
-                if not self.check_for_item(727000000 + list(self.ctx.pairs.keys()).index(song), 1):
+                if not self.count_item(727000000 + list(self.ctx.pairs.keys()).index(song)):
                     self.output("You don't have this song unlocked")
                     return
                 for i in range(2):
@@ -208,6 +226,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             f.write(req.content)
         webbrowser.open(os.path.join(path, filename))
 
+
 class APosuContext(CommonContext):
     command_processor: int = APosuClientCommandProcessor
     game = "osu!"
@@ -220,8 +239,9 @@ class APosuContext(CommonContext):
         self.syncing = False
         self.awaiting_bridge = False
         self.pairs: dict = {}
+        self.disable_difficulty_reduction = False
         self.all_locations: list[int] = []
-        self.preformance_points_needed = 9999 # High Enough to never accidently trigger if the slot data fails
+        self.preformance_points_needed = 9999  # High Enough to never accidently trigger if the slot data fails
         # self.game_communication_path: files go in this path to pass data between us and the actual game
         if "localappdata" in os.environ:
             self.game_communication_path = os.path.expandvars(r"%localappdata%/APosu")
@@ -276,6 +296,7 @@ class APosuContext(CommonContext):
             if slot_data:
                 self.pairs = slot_data.get('Pairs', {})
                 self.preformance_points_needed = slot_data.get('PreformancePointsNeeded', 0)
+                self.disable_difficulty_reduction = slot_data.get('DisableDifficultyReduction', False)
             if not os.path.exists(self.game_communication_path):
                 os.makedirs(self.game_communication_path)
             for ss in self.checked_locations:

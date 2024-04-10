@@ -13,9 +13,10 @@ class StartingSongs(Range):
 class AdditionalSongs(Range):
     """The total number of songs that will be placed in the randomization pool.
     - This does not count any starting songs or the goal song.
+    Not all gamemodes have enough songs for the maximum amount on their own.
     """
     range_start = 15
-    range_end = 80
+    range_end = 400
     default = 40
     display_name = "Additional Song Count"
 
@@ -50,7 +51,7 @@ class MaximumLength(Range):
 
 
 class DisableDifficultyReduction(Toggle):
-    """Prevents plays using difficulty reduction mods from sending checks. Doesn't currently Work."""
+    """Prevents plays using difficulty reduction mods from sending checks."""
     display_name = "Disable Difficulty Reduction"
 
 
@@ -69,9 +70,37 @@ class DisableTaiko(Toggle):
     display_name = "Exclude Taiko"
 
 
-class DisableMania(Toggle):
-    """Ignores Mania Difficultys when Generating"""
-    display_name = "Exclude Mania"
+class Disable4k(Toggle):
+    """Ignores 4-Key Mania Difficultys when Generating"""
+    display_name = "Exclude 4k"
+
+
+class Disable7k(Toggle):
+    """Ignores 7-Key Mania Difficultys when Generating"""
+    display_name = "Exclude 7k"
+
+
+class DisableMiscKeymodes(Toggle):
+    """Ignores Mania Difficultys of Key Counts other than 4 and 7 when Generating"""
+    display_name = "Exclude Miscellaneous Key Counts"
+
+
+class PerformancePointsPercentage(Range):
+    """Collecting enough 'Performace Points' will unlock the goal song needed for completion.
+    This option controls how many are in the item pool, based on the total number of songs.
+    The 'Performance Points' in this multiworld are unrelated to your accounts PP Score"""
+    range_start = 10
+    range_end = 40
+    default = 20
+    display_name = "Performance Points Percentage"
+
+
+class PerformancePointsWinCountPercentage(Range):
+    """The percentage of Performance Points in the item pool required to unlock the winning song."""
+    range_start = 50
+    range_end = 100
+    default = 80
+    display_name = "Percentage of Performace Points Needed"
 
 
 @dataclass
@@ -85,4 +114,8 @@ class OsuOptions(PerGameCommonOptions):
     exclude_standard: DisableStandard
     exclude_catch: DisableCatch
     exclude_taiko: DisableTaiko
-    exclude_mania: DisableMania
+    exclude_4k: Disable4k
+    exclude_7k: Disable7k
+    exclude_other_keys: DisableMiscKeymodes
+    performance_points_count_percentage: PerformancePointsPercentage
+    performance_points_win_count_percentage: PerformancePointsWinCountPercentage

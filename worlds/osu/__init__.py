@@ -57,6 +57,7 @@ class OsuWorld(World):
     included_songs: list
     location_count: int
     disallowed_modes: list
+    disable_difficulty_reduction: bool
 
     def generate_early(self):
         self.pairs = {}
@@ -65,9 +66,12 @@ class OsuWorld(World):
         self.disallowed_modes = []
         self.starting_songs = []
         self.included_songs = []
-        for i in zip(['osu', 'fruits', 'taiko', 'mania'], [self.options.exclude_standard, self.options.exclude_catch, self.options.exclude_taiko, self.options.exclude_mania]):
+        self.disable_difficulty_reduction = bool(self.options.disable_difficulty_reduction.value)
+        for i in zip(['osu', 'fruits', 'taiko', '4k', '7k'], [self.options.exclude_standard, self.options.exclude_catch, self.options.exclude_taiko, self.options.exclude_4k, self.options.exclude_7k]):
             if i[1]:
                 self.disallowed_modes.append(i[0])
+        if self.options.exclude_other_keys:
+            self.disallowed_modes.extend([f'{x}k' for x in range(1, 19) if x not in [4, 7]])
         starting_song_count = self.options.starting_songs
         additional_song_count = self.options.additional_songs
         for song in self.song_pool[:starting_song_count]:
@@ -176,12 +180,12 @@ class OsuWorld(World):
             state.has("Performance Points", self.player, self.get_music_sheet_win_count())
 
     def get_music_sheet_count(self) -> int:
-        multiplier = 20.0 / 100.0
+        multiplier = self.options.performance_points_count_percentage / 100.0
         song_count = (len(self.starting_songs) * 2) + len(self.included_songs)
         return max(1, floor(song_count * multiplier))
 
     def get_music_sheet_win_count(self) -> int:
-        multiplier = 80.0 / 100.0
+        multiplier = self.options.performance_points_win_count_percentage.value / 100.0
         sheet_count = self.get_music_sheet_count()
         return max(1, floor(sheet_count * multiplier))
 
@@ -191,5 +195,6 @@ class OsuWorld(World):
     def fill_slot_data(self):
         return {
             "Pairs": self.pairs,
-            "PreformancePointsNeeded": self.get_music_sheet_win_count()
+            "PreformancePointsNeeded": self.get_music_sheet_win_count(),
+            "DisableDifficultyReduction": self.disable_difficulty_reduction
         }
