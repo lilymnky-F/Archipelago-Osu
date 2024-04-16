@@ -135,13 +135,13 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         found = False
         for score in score_list:
-            if score in self.last_scores:
+            if score['created_at'] in self.last_scores:
                 if not found:
                     self.output("No New Plays Found.")
                 return
             found = True
-            self.last_scores.append(score)
-            if len(self.last_scores) > 15:
+            self.last_scores.append(score['created_at'])
+            if len(self.last_scores) > 20:
                 self.last_scores.pop(0)
             self.check_location(score)
 
@@ -176,7 +176,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         for item in self.ctx.items_received:
             song_index = item.item-727000000
             location_id = (song_index*2)+727000000
-            if location_id in self.ctx.missing_locations and song_index not in incomplete_items:
+            if (location_id in self.ctx.missing_locations or location_id+1 in self.ctx.missing_locations) and song_index not in incomplete_items:
                 incomplete_items.append(song_index)
         if self.count_item(726999999) >= self.ctx.preformance_points_needed:
             incomplete_items.append(-1)
@@ -187,7 +187,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         self.output(score['beatmapset']['title'] + " " + score['beatmap']['version'] + f' Passed: {score["passed"]}')
         # Check if the score is a pass, then check if it's in the AP
         if not score['passed']:
-            self.output("You cannot check a location without passing the song")
+            # self.output("You cannot check a location without passing the song")
             return
         if self.ctx.disable_difficulty_reduction and any(x in score['mods'] for x in ['NF', 'EZ', 'HT']):
             self.output("Your current settings do not allow difficulty reduction mods.")
