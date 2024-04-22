@@ -214,7 +214,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def download_beatmapset(self, beatmapset):
         print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
-        req = requests.get(f"https://api.chimu.moe/v1/download/{beatmapset['id']}")
+        req = requests.get(f"https://beatconnect.io/b/{beatmapset['id']}")
         if len(req.content) < 400:
             self.output(f'Error Downloading {beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz')
             self.output('Please Manually Add the Map or Try Again Later.')
