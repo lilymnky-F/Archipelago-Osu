@@ -96,9 +96,10 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_show_all_songs(self):
         """Displays all songs included in current generation."""
+        played_songs = self.get_played_songs()
         for song in self.ctx.pairs:
             beatmapset = self.ctx.pairs[song]
-            self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']})")
+            self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']}) {'(passed)' if song in played_songs else ''}")
 
     def _cmd_get_last_scores(self, mode=''):
         """Gets the player's last score, in a given gamemode or their set default"""
@@ -182,6 +183,25 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             incomplete_items.append(-1)
         incomplete_items.sort()
         return incomplete_items
+
+    def get_played_ids(self):
+        # Gets the Index of each Song the player has played
+        played_items = []
+        for item in self.ctx.items_received:
+            song_index = item.item-727000000
+            location_id = (song_index*2)+727000000
+            if location_id not in self.ctx.missing_locations and location_id+1 not in self.ctx.missing_locations:
+                played_items.append(song_index)
+        played_items.sort()
+        return played_items
+    
+    def get_played_songs(self):
+        # Gets the Song value of each Song the player has played
+        played_ids = self.get_played_ids()
+        played_songs = []
+        for played in played_ids:
+            played_songs.append(list(self.ctx.pairs.keys())[played])
+        return played_songs
 
     def check_location(self, score):
         self.output(score['beatmapset']['title'] + " " + score['beatmap']['version'] + f' Passed: {score["passed"]}')
