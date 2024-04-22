@@ -98,7 +98,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         """Displays all songs included in current generation."""
         for song in self.ctx.pairs:
             beatmapset = self.ctx.pairs[song]
-            self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']})")
+            has_played = song not in self.ctx.missing_locations
+            self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']}) {'(passed)' if has_played else ''}")
 
     def _cmd_get_last_scores(self, mode=''):
         """Gets the player's last score, in a given gamemode or their set default"""
