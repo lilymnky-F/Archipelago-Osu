@@ -4,6 +4,7 @@ import sys
 import asyncio
 import shutil
 import requests
+import aiohttp
 import webbrowser
 
 import ModuleUpdate
@@ -23,7 +24,6 @@ from CommonClient import gui_enabled, logger, get_base_parser, ClientCommandProc
 class APosuClientCommandProcessor(ClientCommandProcessor):
     def __init__(self, ctx: APosuContext):
         self.ctx = ctx
-        self.last_scores = []
         self.mode_names = {'fruits': 'fruits',
                            'catch': 'fruits',
                            'ctb': 'fruits',
@@ -103,7 +103,6 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_get_last_scores(self, mode=''):
         """Gets the player's last score, in a given gamemode or their set default"""
-
         # Requests a token using the user's Client ID and Secret
         try:
             authreq = requests.post("https://osu.ppy.sh/oauth/token",
@@ -136,14 +135,14 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         found = False
         for score in score_list:
-            if score['created_at'] in self.last_scores:
+            if score['created_at'] in self.ctx.last_scores:
                 if not found:
                     self.output("No New Plays Found.")
                 return
             found = True
-            self.last_scores.append(score['created_at'])
-            if len(self.last_scores) > 20:
-                self.last_scores.pop(0)
+            self.ctx.last_scores.append(score['created_at'])
+            if len(self.ctx.last_scores) > 20:
+                self.ctx.last_scores.pop(0)
             self.check_location(score)
 
     def _cmd_download(self, number=''):
@@ -154,7 +153,6 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             else:
                 self.output("You have no songs to download")
                 return
-        
         try:
             song_number = int(number)-1
         except ValueError:
@@ -165,11 +163,11 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         try:
             song = list(self.ctx.pairs.keys())[song_number]
         except IndexError:
-            self.output("Use the Numbers in '/show_songs'")
+            self.output("Use the Song Numbers in '/show_songs' (Not the IDs)")
             return
         beatmapset = self.ctx.pairs[song]
         self.output(f"Downloading {song}: {beatmapset['title']} (ID: {beatmapset['id']}) as '{beatmapset['id']} {beatmapset['artist']} - {beatmapset['title']}.osz'")
-        self.download_beatmapset(beatmapset)
+        asyncio.create_task(self.download_beatmapset(beatmapset))
 
     def count_item(self, code) -> int:
         current = 0
@@ -205,9 +203,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def get_played_songs(self):
         # Gets the Song value of each Song the player has played
         played_ids = self.get_played_ids()
-        if(-1 in played_ids):
+        if -1 in played_ids:
             played_ids.remove(-1) # Remove victory song from played songs as it was somehow showing up
-        
         played_songs = []
         for played in played_ids:
             played_songs.append(list(self.ctx.pairs.keys())[played])
@@ -242,10 +239,11 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                         with open(os.path.join(self.ctx.game_communication_path, filename), 'w') as f:
                             f.close()
 
-    def download_beatmapset(self, beatmapset):
+    async def download_beatmapset(self, beatmapset):
         print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
-        req = requests.get(f"https://beatconnect.io/b/{beatmapset['id']}")
-        if len(req.content) < 400:
+        async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
+            content = await req.read()
+        if len(content) < 400:
             self.output(f'Error Downloading {beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz')
             self.output('Please Manually Add the Map or Try Again Later.')
             return
@@ -253,7 +251,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         filename = "".join(i for i in f if i not in "\/:*?<>|")
         path = self.ctx.game_communication_path + ' config'
         with open(os.path.join(path, filename), 'wb') as f:
-            f.write(req.content)
+            f.write(content)
         webbrowser.open(os.path.join(path, filename))
 
 
@@ -269,7 +267,10 @@ class APosuContext(CommonContext):
         self.syncing = False
         self.awaiting_bridge = False
         self.pairs: dict = {}
-        self.disable_difficulty_reduction = False
+        self.last_scores: list = []
+        self.auto_modes: list[str] = []
+        self.token: str = ''
+        self.disable_difficulty_reduction: bool = False
         self.all_locations: list[int] = []
         self.preformance_points_needed = 9999  # High Enough to never accidently trigger if the slot data fails
         # self.game_communication_path: files go in this path to pass data between us and the actual game
@@ -362,6 +363,10 @@ class APosuContext(CommonContext):
 
         self.ui = ChecksFinderManager(self)
         self.ui_task = asyncio.create_task(self.ui.async_run(), name="UI")
+
+
+async def auto_get_last_scores(ctx, mode=''):
+    pass
 
 
 async def game_watcher(ctx: APosuContext):
