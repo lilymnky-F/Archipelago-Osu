@@ -86,7 +86,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def _cmd_show_songs(self):
         """Display all songs in logic."""
         indexes = self.get_available_ids()
-        self.output(f"You currently have {len(indexes)} songs in Logic")
+        self.output(f"You currently have {len(indexes)-1} songs in Logic")
         self.output(f"You Have {self.count_item(726999999)} Performance Points, you need {self.ctx.preformance_points_needed} to unlock your goal.")
         for i in indexes:
             song = list(self.ctx.pairs.keys())[i]
@@ -205,6 +205,9 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def get_played_songs(self):
         # Gets the Song value of each Song the player has played
         played_ids = self.get_played_ids()
+        if(-1 in played_ids):
+            played_ids.remove(-1) # Remove victory song from played songs as it was somehow showing up
+        
         played_songs = []
         for played in played_ids:
             played_songs.append(list(self.ctx.pairs.keys())[played])
