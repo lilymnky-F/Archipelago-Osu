@@ -159,7 +159,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             song_number = int(number)-1
         except ValueError:
             if not (number.lower().capitalize() == 'Victory'):
-                self.output("Please Give a Number or 'Victory'")
+                self.output("Please Give a Number, 'next' or 'Victory'")
                 return
             song_number = -1
         try:
@@ -197,6 +197,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         for item in self.ctx.items_received:
             song_index = item.item-727000000
             location_id = (song_index*2)+727000000
+            if location_id == 726999999: continue
             if location_id not in self.ctx.missing_locations and location_id+1 not in self.ctx.missing_locations:
                 played_items.append(song_index)
         played_items.sort()
@@ -205,8 +206,6 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def get_played_songs(self):
         # Gets the Song value of each Song the player has played
         played_ids = self.get_played_ids()
-        if(-1 in played_ids):
-            played_ids.remove(-1) # Remove victory song from played songs as it was somehow showing up
         
         played_songs = []
         for played in played_ids:
