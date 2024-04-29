@@ -86,8 +86,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def _cmd_show_songs(self):
         """Display all songs in logic."""
         indexes = self.get_available_ids()
-        self.output(f"You currently have {len(indexes)-1} songs in Logic")
         self.output(f"You Have {self.count_item(726999999)} Performance Points, you need {self.ctx.preformance_points_needed} to unlock your goal.")
+        self.output(f"You currently have {len(indexes)} songs in Logic")
         for i in indexes:
             song = list(self.ctx.pairs.keys())[i]
             beatmapset = self.ctx.pairs[song]
@@ -96,7 +96,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def _cmd_show_all_songs(self):
         """Displays all songs included in current generation."""
         played_songs = self.get_played_songs()
-        self.output(f"You have played {len(played_songs)}/{len(self.ctx.pairs)} songs")
+        self.output(f"You have played {len(played_songs)}/{len(self.ctx.pairs)-1} songs")
         for song in self.ctx.pairs:
             beatmapset = self.ctx.pairs[song]
             self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']}) {'(passed)' if song in played_songs else ''}")
@@ -148,9 +148,9 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_download(self, number=''):
         """Downloads the given song number in '/show_songs', or 'victory' for the goal song."""
-        if (number.lower() == 'next'):
-            if(len(self.get_available_ids()) > 0):
-                number = self.get_available_ids()[0]
+        if number.lower() == 'next':
+            if len(self.get_available_ids()) > 0:
+                number = self.get_available_ids()[0]+1
             else:
                 self.output("You have no songs to download")
                 return
