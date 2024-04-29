@@ -197,7 +197,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         for item in self.ctx.items_received:
             song_index = item.item-727000000
             location_id = (song_index*2)+727000000
-            if location_id == 726999999: continue
+            if location_id < 727000000: continue
             if location_id not in self.ctx.missing_locations and location_id+1 not in self.ctx.missing_locations:
                 played_items.append(song_index)
         played_items.sort()
