@@ -96,6 +96,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def _cmd_show_all_songs(self):
         """Displays all songs included in current generation."""
         played_songs = self.get_played_songs()
+        self.output(f"You have played {len(played_songs)}/{len(self.ctx.pairs)} songs")
         for song in self.ctx.pairs:
             beatmapset = self.ctx.pairs[song]
             self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']}) {'(passed)' if song in played_songs else ''}")
