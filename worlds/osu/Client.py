@@ -86,6 +86,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def _cmd_show_songs(self):
         """Display all songs in logic."""
         indexes = self.get_available_ids()
+        self.output(f"You currently have {len(indexes)} songs in Logic")
         self.output(f"You Have {self.count_item(726999999)} Performance Points, you need {self.ctx.preformance_points_needed} to unlock your goal.")
         if not indexes:
             self.output("You do not have any Songs in Logic")
