@@ -84,7 +84,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             os.environ['API_KEY'], os.environ['CLIENT_ID'], os.environ['PLAYER_ID'] = d[0], d[1], d[2],
             self.output("Loaded Previous Data")
 
-    def _cmd_show_songs(self):
+    def _cmd_songs(self):
         """Display all songs in logic."""
         indexes = self.get_available_ids()
         self.output(f"You Have {count_item(self.ctx, 726999999)} Performance Points, you need {self.ctx.preformance_points_needed} to unlock your goal.")
@@ -94,7 +94,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             beatmapset = self.ctx.pairs[song]
             self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']})")
 
-    def _cmd_show_all_songs(self):
+    def _cmd_all_songs(self):
         """Displays all songs included in current generation."""
         played_songs = self.get_played_songs()
         self.output(f"You have played {len(played_songs)}/{len(self.ctx.pairs)-1} songs")
@@ -102,7 +102,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             beatmapset = self.ctx.pairs[song]
             self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']}) {'(passed)' if song in played_songs else ''}")
 
-    def _cmd_get_last_scores(self, mode=''):
+    def _cmd_update(self, mode=''):
         """Gets the player's last score, in a given gamemode or their set default"""
         # Requests a token using the user's Client ID and Secret
         try:
