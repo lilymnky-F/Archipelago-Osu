@@ -148,6 +148,13 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_download(self, number=''):
         """Downloads the given song number in '/show_songs', or 'victory' for the goal song."""
+        if (number.lower() == 'next'):
+            if(len(self.get_available_ids()) > 0):
+                number = self.get_available_ids()[0]
+            else:
+                self.output("You have no songs to download")
+                return
+        
         try:
             song_number = int(number)-1
         except ValueError:
