@@ -88,8 +88,6 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         indexes = self.get_available_ids()
         self.output(f"You currently have {len(indexes)} songs in Logic")
         self.output(f"You Have {self.count_item(726999999)} Performance Points, you need {self.ctx.preformance_points_needed} to unlock your goal.")
-        if not indexes:
-            self.output("You do not have any Songs in Logic")
         for i in indexes:
             song = list(self.ctx.pairs.keys())[i]
             beatmapset = self.ctx.pairs[song]
