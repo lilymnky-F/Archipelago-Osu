@@ -170,7 +170,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         self.output(f"Downloading {song}: {beatmapset['title']} (ID: {beatmapset['id']}) as '{beatmapset['id']} {beatmapset['artist']} - {beatmapset['title']}.osz'")
         asyncio.create_task(self.download_beatmapset(beatmapset))
 
-    def _cmd_auto_toggle(self, mode=''):
+    def _cmd_auto_track(self, mode=''):
         """Toggles Auto Tracking for the Given Mode"""
         if mode.lower() in self.mode_names.keys():
             if self.mode_names[mode.lower()] not in self.ctx.auto_modes:
@@ -180,6 +180,9 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         self.output('Please Supply a Valid Mode')
 
+    def _cmd_test(self, number=''):
+        message = [{"cmd": 'LocationChecks', "locations": [int(number)]}]
+        asyncio.create_task(self.ctx.send_msgs(message))
 
     def get_available_ids(self):
         # Gets the Index of each Song the player has but has not played
@@ -253,7 +256,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             self.output('Please Manually Add the Map or Try Again Later.')
             return
         f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
-        filename = "".join(i for i in f if i not in "\/:*?<>'|\"")
+        filename = "".join(i for i in f if i not in "\/:*?<>|\"")
         path = self.ctx.game_communication_path + ' config'
         with open(os.path.join(path, filename), 'wb') as f:
             f.write(content)
