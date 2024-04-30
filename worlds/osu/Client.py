@@ -172,10 +172,17 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_auto_track(self, mode=''):
         """Toggles Auto Tracking for the Given Mode"""
+        try:
+            [os.environ['API_KEY'], os.environ['CLIENT_ID'], os.environ['PLAYER_ID']]
+        except KeyError:
+            self.output('Please set your Client ID, Client Secret, and Player ID')
+            return
         if mode.lower() in self.mode_names.keys():
             if self.mode_names[mode.lower()] not in self.ctx.auto_modes:
                 self.ctx.auto_modes.append(self.mode_names[mode.lower()])
+                self.output(f'Auto Tracking Enabled{f" for {mode}" if mode else " for your default mode"}')
                 return
+            self.output(f'Auto Tracking Disabled{f" for {mode}" if mode else " for your default mode"}')
             self.ctx.auto_modes.remove(self.mode_names[mode.lower()])
             return
         self.output('Please Supply a Valid Mode')
@@ -232,8 +239,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                 self.output(f'Play Matches {song}')
                 if song == "Victory":
                     if count_item(self.ctx, 726999999) >= self.ctx.preformance_points_needed:
-                        with open(os.path.join(self.ctx.game_communication_path, 'victory'), 'w') as f:
-                            f.close()
+                        message = [{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}]
+                        asyncio.create_task(self.ctx.send_msgs(message))
                         return
                     self.output("You don't have enough preformance points")
                     return
@@ -243,9 +250,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                 for i in range(2):
                     location_id = 727000000 + (2 * list(self.ctx.pairs.keys()).index(song)) + i
                     if location_id in self.ctx.missing_locations:
-                        filename = f"send{location_id}"
-                        with open(os.path.join(self.ctx.game_communication_path, filename), 'w') as f:
-                            f.close()
+                        message = [{"cmd": 'LocationChecks', "locations": [int(location_id)]}]
+                        asyncio.create_task(self.ctx.send_msgs(message))
 
     async def download_beatmapset(self, beatmapset):
         print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
@@ -338,26 +344,6 @@ class APosuContext(CommonContext):
                 self.disable_difficulty_reduction = slot_data.get('DisableDifficultyReduction', False)
             if not os.path.exists(self.game_communication_path):
                 os.makedirs(self.game_communication_path)
-            for ss in self.checked_locations:
-                filename = f"send{ss}"
-                with open(os.path.join(self.game_communication_path, filename), 'w') as f:
-                    f.close()
-
-        if cmd in {"ReceivedItems"}:
-            start_index = args["index"]
-            if start_index != len(self.items_received):
-                for item in args['items']:
-                    filename = f"AP_{str(NetworkItem(*item).location)}PLR{str(NetworkItem(*item).player)}.item"
-                    with open(os.path.join(self.game_communication_path, filename), 'w') as f:
-                        f.write(str(NetworkItem(*item).item))
-                        f.close()
-
-        if cmd in {"RoomUpdate"}:
-            if "checked_locations" in args:
-                for ss in self.checked_locations:
-                    filename = f"send{ss}"
-                    with open(os.path.join(self.game_communication_path, filename), 'w') as f:
-                        f.close()
 
     def run_gui(self):
         """Import kivy UI system and start running it as self.ui_task."""
@@ -444,8 +430,7 @@ def check_location(ctx, score):
             print(f'Play Matches {song}')
             if song == "Victory":
                 if count_item(ctx, 726999999) >= ctx.preformance_points_needed:
-                    with open(os.path.join(ctx.game_communication_path, 'victory'), 'w') as f:
-                        f.close()
+                    asyncio.create_task(ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}]))
                     return
                 print("You don't have enough preformance points")
                 return
@@ -455,27 +440,21 @@ def check_location(ctx, score):
             for i in range(2):
                 location_id = 727000000 + (2 * list(ctx.pairs.keys()).index(song)) + i
                 if location_id in ctx.missing_locations:
-                    filename = f"send{location_id}"
-                    with open(os.path.join(ctx.game_communication_path, filename), 'w') as f:
-                        f.close()
+                    if location_id in ctx.missing_locations:
+                        message = [{"cmd": 'LocationChecks', "locations": [int(location_id)]}]
+                        asyncio.create_task(ctx.send_msgs(message))
 
 
 async def game_watcher(ctx: APosuContext):
     count = 0
     while not ctx.exit_event.is_set():
-        if ctx.syncing:
-            sync_msg = [{'cmd': 'Sync'}]
-            if ctx.locations_checked:
-                sync_msg.append({"cmd": "LocationChecks", "locations": list(ctx.locations_checked)})
-            await ctx.send_msgs(sync_msg)
-            ctx.syncing = False
         if count >= 30:
             for mode in ctx.auto_modes:
                 await auto_get_last_scores(ctx, mode)
                 await asyncio.sleep(0.2)
             count = 0
         count += 1
-        sending = []
+        """sending = []
         victory = False
         for root, dirs, files in os.walk(ctx.game_communication_path):
             for file in files:
@@ -489,7 +468,7 @@ async def game_watcher(ctx: APosuContext):
         await ctx.send_msgs(message)
         if not ctx.finished_game and victory:
             await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
-            ctx.finished_game = True
+            ctx.finished_game = True"""
         await asyncio.sleep(0.1)
 
 
