@@ -451,24 +451,9 @@ async def game_watcher(ctx: APosuContext):
         if count >= 30:
             for mode in ctx.auto_modes:
                 await auto_get_last_scores(ctx, mode)
-                await asyncio.sleep(0.2)
+                await asyncio.sleep(1)
             count = 0
         count += 1
-        """sending = []
-        victory = False
-        for root, dirs, files in os.walk(ctx.game_communication_path):
-            for file in files:
-                if file.find("send") > -1:
-                    st = file.split("send", -1)[1]
-                    sending = sending + [(int(st))]
-                if file.find("victory") > -1:
-                    victory = True
-        ctx.locations_checked = sending
-        message = [{"cmd": 'LocationChecks', "locations": sending}]
-        await ctx.send_msgs(message)
-        if not ctx.finished_game and victory:
-            await ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}])
-            ctx.finished_game = True"""
         await asyncio.sleep(0.1)
 
 
