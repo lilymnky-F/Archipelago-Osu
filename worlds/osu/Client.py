@@ -187,10 +187,6 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         self.output('Please Supply a Valid Mode')
 
-    def _cmd_test(self, number=''):
-        message = [{"cmd": 'LocationChecks', "locations": [int(number)]}]
-        asyncio.create_task(self.ctx.send_msgs(message))
-
     def get_available_ids(self):
         # Gets the Index of each Song the player has but has not played
         incomplete_items = []
