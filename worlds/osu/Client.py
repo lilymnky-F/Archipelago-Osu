@@ -147,7 +147,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             self.check_location(score)
 
     def _cmd_download(self, number=''):
-        """Downloads the given song number in '/show_songs', or 'victory' for the goal song."""
+        """Downloads the given song number in '/songs'. Also Accepts "Next" and "Victory"."""
         if number.lower() == 'next':
             if len(self.get_available_ids()) > 0:
                 number = self.get_available_ids()[0]+1
@@ -164,18 +164,22 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         try:
             song = list(self.ctx.pairs.keys())[song_number]
         except IndexError:
-            self.output("Use the Song Numbers in '/show_songs' (Not the IDs)")
+            self.output("Use the Song Numbers in '/songs' (Not the IDs)")
             return
         beatmapset = self.ctx.pairs[song]
         self.output(f"Downloading {song}: {beatmapset['title']} (ID: {beatmapset['id']}) as '{beatmapset['id']} {beatmapset['artist']} - {beatmapset['title']}.osz'")
         asyncio.create_task(self.download_beatmapset(beatmapset))
 
     def _cmd_auto_track(self, mode=''):
-        """Toggles Auto Tracking for the Given Mode"""
+        """Toggles Auto Tracking for the Given Mode (or "All"). Supports Multiple Modes."""
         try:
             [os.environ['API_KEY'], os.environ['CLIENT_ID'], os.environ['PLAYER_ID']]
         except KeyError:
             self.output('Please set your Client ID, Client Secret, and Player ID')
+            return
+        if mode.lower() == 'all':
+            self.ctx.auto_modes = ['osu', 'fruits', 'taiko', 'mania']
+            self.output('Auto Tracking Enabled for all modes')
             return
         if mode.lower() in self.mode_names.keys():
             if self.mode_names[mode.lower()] not in self.ctx.auto_modes:
