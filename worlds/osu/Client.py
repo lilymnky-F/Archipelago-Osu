@@ -258,11 +258,12 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
             content_length = req.headers.get('Content-Length')
 
-            # With beatconnect we always know the total size of the download
+            # With beatconnect we always know the total size of the download, so this is always true
             if content_length is not None:
                 total_bytes = int(content_length)
                 total_mb = total_bytes / (1024 ** 2)
-                self.output(f"Starting download of beatmapset ({total_mb:.2f}MB)")
+                # Beatconnect is slow to respond, so this message will appear when the download starts unlike when you run the command
+                self.output(f"Starting download of beatmapset ({total_mb:.2f}MB)") 
             
             downloaded_content = []
             downloaded_bytes = 0
@@ -298,7 +299,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         path = self.ctx.game_communication_path + ' config'
         with open(os.path.join(path, filename), 'wb') as f:
             f.write(content)
-        self.output(f'Opening {filename}...')
+        self.output(f'Opening {filename}...') # More feedback to the user
         webbrowser.open(os.path.join(path, filename))
 
 
