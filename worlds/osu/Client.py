@@ -6,6 +6,7 @@ import shutil
 import requests
 import aiohttp
 import webbrowser
+import time
 
 import ModuleUpdate
 
@@ -211,7 +212,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             song_index = item.item-727000000
             location_id = (song_index*2)+727000000
             if location_id < 727000000: continue
-            if location_id not in self.ctx.missing_locations and location_id+1 not in self.ctx.missing_locations:
+            if (location_id not in self.ctx.missing_locations and location_id+1 not in self.ctx.missing_locations) and song_index not in played_items:
                 played_items.append(song_index)
         played_items.sort()
         return played_items
@@ -255,7 +256,40 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     async def download_beatmapset(self, beatmapset):
         print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
         async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
-            content = await req.read()
+            content_length = req.headers.get('Content-Length')
+
+            # With beatconnect we always know the total size of the download, so this is always true
+            if content_length is not None:
+                total_bytes = int(content_length)
+                total_mb = total_bytes / (1024 ** 2)
+                # Beatconnect is slow to respond, so this message will appear when the download starts unlike when you run the command
+                self.output(f"Starting download of beatmapset ({total_mb:.2f}MB)") 
+            
+            downloaded_content = []
+            downloaded_bytes = 0
+            last_print_time = time.time()
+            async for chunk in req.content.iter_any():
+                downloaded_content.append(chunk)
+                downloaded_bytes += len(chunk)
+                downloaded_mb = downloaded_bytes / (1024 ** 2)
+
+                # If we know the total size, calculate the progress
+                if content_length is not None:
+                    progress = min(100, int(downloaded_bytes / total_bytes * 100))
+
+                    # Check if at least half a second has passed since last print or if the download is done
+                    # Filesizes are small enough that we can do half a second intervals instead of 1 second
+                    current_time = time.time()
+                    if current_time - last_print_time >= 0.5 or downloaded_bytes == total_bytes:
+                        self.output(f"Downloaded: {downloaded_mb:.2f}MB / {total_mb:.2f}MB ({progress}%)")
+                        last_print_time = current_time
+                
+                # If we don't know the total size, just print the downloaded amount
+                else:
+                    self.output(f"Downloaded: {downloaded_mb:.2f}MB")
+            
+            # Combine all the chunks into one just like req.read() would do
+            content = b"".join(downloaded_content)
         if len(content) < 400:
             self.output(f'Error Downloading {beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz')
             self.output('Please Manually Add the Map or Try Again Later.')
@@ -265,6 +299,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         path = self.ctx.game_communication_path + ' config'
         with open(os.path.join(path, filename), 'wb') as f:
             f.write(content)
+        self.output(f'Opening {filename}...') # More feedback to the user
         webbrowser.open(os.path.join(path, filename))
 
 
