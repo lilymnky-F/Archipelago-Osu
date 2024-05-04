@@ -67,11 +67,9 @@ class OsuWorld(World):
         self.starting_songs = []
         self.included_songs = []
         self.disable_difficulty_reduction = bool(self.options.disable_difficulty_reduction.value)
-        for i in zip(['osu', 'fruits', 'taiko', '4k', '7k'], [self.options.exclude_standard, self.options.exclude_catch, self.options.exclude_taiko, self.options.exclude_4k, self.options.exclude_7k]):
+        for i in zip(['osu', 'fruits', 'taiko', '4k', '7k', 'other'], [self.options.exclude_standard, self.options.exclude_catch, self.options.exclude_taiko, self.options.exclude_4k, self.options.exclude_7k, self.options.exclude_other_keys]):
             if i[1]:
                 self.disallowed_modes.append(i[0])
-        if self.options.exclude_other_keys:
-            self.disallowed_modes.extend([f'{x}k' for x in range(1, 19) if x not in [4, 7]])
         starting_song_count = self.options.starting_songs
         additional_song_count = self.options.additional_songs
         for song in self.song_pool[:starting_song_count]:
@@ -82,7 +80,8 @@ class OsuWorld(World):
         # Pair the Generic Songs to their proper Songs
         self.get_eligible_songs()
         if len(self.song_data) < len(self.starting_songs + self.included_songs + ["Victory"]):
-            raise Exception(f"Player {self.player}'s settings cannot generate enough songs")
+            raise Exception(f"Player {self.player}'s settings cannot generate enough songs, their settings only allow "
+                            f"{len(self.song_data)} out of {len(self.starting_songs + self.included_songs + ['Victory'])} required songs.")
         self.random.shuffle(self.song_data)
         for generic_song, osu_song in zip((self.starting_songs + self.included_songs + ["Victory"]), self.song_data):
             self.pairs[generic_song] = osu_song
@@ -108,7 +107,11 @@ class OsuWorld(World):
             self.song_data.remove(beatmapset)
 
     def check_eligibility(self, beatmapset):
-        if beatmapset["nsfw"] or beatmapset["length"] > self.options.maximum_length:
+        if beatmapset["length"] > self.options.maximum_length:
+            return False
+        if (not self.options.explicit_lyrics) and beatmapset["nsfw"]:
+            return False
+        if beatmapset["status"] == 'loved' and (not self.options.enable_loved):
             return False
         for difficulty in beatmapset["beatmaps"]:
             if difficulty['mode'] not in self.disallowed_modes and self.options.minimum_difficulty <= difficulty['sr']*100 <= self.options.maximum_difficulty:

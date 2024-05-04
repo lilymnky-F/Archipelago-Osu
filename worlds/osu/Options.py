@@ -55,6 +55,17 @@ class DisableDifficultyReduction(Toggle):
     display_name = "Disable Difficulty Reduction"
 
 
+class EnableExplicitLyrics(Toggle):
+    """Allows Songs with 18+ Lyrics to generate.
+    While this can be played on the main Archipelago Server, Streaming them there is not reccomended."""
+    display_name = "Include Explicit Lyrics"
+
+
+class EnableLoved(Toggle):
+    """Allows Loved Beatmaps to Appear when Generating. Not Reccomended with 'Disable Difficulty Reduction' Enabled."""
+    display_name = "Enable Loved Beatmaps"
+
+
 class DisableStandard(Toggle):
     """Ignores Standard Difficultys when Generating"""
     display_name = "Exclude Standard"
@@ -119,3 +130,5 @@ class OsuOptions(PerGameCommonOptions):
     exclude_other_keys: DisableMiscKeymodes
     performance_points_count_percentage: PerformancePointsPercentage
     performance_points_win_count_percentage: PerformancePointsWinCountPercentage
+    explicit_lyrics: EnableExplicitLyrics
+    enable_loved: EnableLoved
