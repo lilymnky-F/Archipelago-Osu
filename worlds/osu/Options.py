@@ -1,5 +1,6 @@
 from Options import Toggle, Option, Range, Choice, DeathLink, ItemSet, OptionSet, PerGameCommonOptions
 from dataclasses import dataclass
+from .Items import get_song_data
 
 
 class StartingSongs(Range):
@@ -114,6 +115,14 @@ class PerformancePointsWinCountPercentage(Range):
     display_name = "Percentage of Performace Points Needed"
 
 
+class IncludeSongs(OptionSet):
+    """List of Beatmapset IDs to include. Will add songs in order after the starting songs.
+    IE: If you have 5 starting songs, the first ID will be song 6
+    """
+    display_name = "Include Songs"
+    valid_keys = {beatmapset['id'] for beatmapset in get_song_data()}
+
+
 @dataclass
 class OsuOptions(PerGameCommonOptions):
     starting_songs: StartingSongs
@@ -132,3 +141,4 @@ class OsuOptions(PerGameCommonOptions):
     performance_points_win_count_percentage: PerformancePointsWinCountPercentage
     explicit_lyrics: EnableExplicitLyrics
     enable_loved: EnableLoved
+    include_songs: IncludeSongs
