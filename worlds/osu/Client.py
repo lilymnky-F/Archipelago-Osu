@@ -296,11 +296,17 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
         filename = "".join(i for i in f if i not in "\/:*?<>|\"")
-        path = self.ctx.game_communication_path + ' config'
-        with open(os.path.join(path, filename), 'wb') as f:
+        path = os.path.join(self.ctx.game_communication_path, 'config')
+        
+        if not os.path.exists(path):
+            os.makedirs(path)
+        
+        file_path = os.path.join(path, filename)
+        with open(file_path, 'wb') as f:
             f.write(content)
+        
         self.output(f'Opening {filename}...') # More feedback to the user
-        webbrowser.open(os.path.join(path, filename))
+        webbrowser.open(file_path)
 
 
 class APosuContext(CommonContext):
