@@ -34,6 +34,16 @@ class OsuWebWorld(WebWorld):
     ]
 
 
+class OsuMode:
+    def __init__(self, minimum_difficulty: int, maximum_difficulty: int, exclude: int):
+        if exclude:
+            self.minimum_difficulty = -1
+            self.maximum_difficulty = -1
+            return
+        self.minimum_difficulty = minimum_difficulty
+        self.maximum_difficulty = maximum_difficulty
+
+
 class OsuWorld(World):
     """
     osu! is a free to play rhythm game featuring 4 modes, an online ranking system/statistics,
@@ -52,24 +62,33 @@ class OsuWorld(World):
 
     song_pool: list
     song_data: list
+    modes: {str: OsuMode}
     pairs = dict
     starting_songs: list
     included_songs: list
     location_count: int
-    disallowed_modes: list
     disable_difficulty_reduction: bool
 
     def generate_early(self):
         self.pairs = {}
         self.song_pool = osu_song_pool.copy()
         self.song_data = osu_song_data.copy()
-        self.disallowed_modes = []
+        self.modes = {}
         self.starting_songs = []
         self.included_songs = []
         self.disable_difficulty_reduction = bool(self.options.disable_difficulty_reduction.value)
-        for i in zip(['osu', 'fruits', 'taiko', '4k', '7k', 'other'], [self.options.exclude_standard, self.options.exclude_catch, self.options.exclude_taiko, self.options.exclude_4k, self.options.exclude_7k, self.options.exclude_other_keys]):
-            if i[1]:
-                self.disallowed_modes.append(i[0])
+        self.modes['osu'] = OsuMode(self.options.minimum_difficulty_standard.value,
+                                    self.options.maximum_difficulty_standard.value, self.options.exclude_standard.value)
+        self.modes['fruits'] = OsuMode(self.options.minimum_difficulty_catch.value,
+                                       self.options.maximum_difficulty_catch.value, self.options.exclude_catch.value)
+        self.modes['taiko'] = OsuMode(self.options.minimum_difficulty_taiko.value,
+                                      self.options.maximum_difficulty_taiko.value, self.options.exclude_taiko.value)
+        self.modes['4k'] = OsuMode(self.options.minimum_difficulty_4k.value,
+                                   self.options.maximum_difficulty_4k.value, self.options.exclude_4k.value)
+        self.modes['7k'] = OsuMode(self.options.minimum_difficulty_7k.value,
+                                   self.options.maximum_difficulty_7k.value, self.options.exclude_7k.value)
+        self.modes['other'] = OsuMode(self.options.minimum_difficulty_other.value,
+                                      self.options.maximum_difficulty_other.value, self.options.exclude_other_keys.value)
         starting_song_count = self.options.starting_songs
         additional_song_count = self.options.additional_songs
         for song in self.song_pool[:starting_song_count]:
@@ -118,7 +137,8 @@ class OsuWorld(World):
         if beatmapset["status"] == 'loved' and (not self.options.enable_loved):
             return False
         for difficulty in beatmapset["beatmaps"]:
-            if difficulty['mode'] not in self.disallowed_modes and self.options.minimum_difficulty <= difficulty['sr']*100 <= self.options.maximum_difficulty:
+            mode = self.modes[difficulty['mode']]
+            if mode.minimum_difficulty <= difficulty['sr']*100 <= mode.maximum_difficulty:
                 return True
         return False
 

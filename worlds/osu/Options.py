@@ -22,26 +22,6 @@ class AdditionalSongs(Range):
     display_name = "Additional Song Count"
 
 
-class MinimumDifficulty(Range):
-    """Atleast 1 difficulty of each included song will have a Star Rating between this and the Maximum.
-    Star Ratings are multipled by 100, ie: a Star Rating of 1.23 will be 123
-    """
-    range_start = 0
-    range_end = 1000
-    default = 0
-    display_name = "Minimum Star Rating"
-
-
-class MaximumDifficulty(Range):
-    """Atleast 1 difficulty of each included song will have a Star Rating between this and the Minimum.
-    Star Ratings are multipled by 100, ie: a Star Rating of 1.23 will be 123
-    """
-    range_start = 0
-    range_end = 1000
-    default = 1000
-    display_name = "Maximum Star Rating"
-
-
 class MaximumLength(Range):
     """Maximum Length a Song can be, in seconds.
     """
@@ -56,6 +36,135 @@ class DisableDifficultyReduction(Toggle):
     display_name = "Disable Difficulty Reduction"
 
 
+class DisableStandard(Toggle):
+    """Ignores Standard Difficultys when Generating."""
+    display_name = "Exclude Standard"
+
+
+class StandardMinimumDifficulty(Range):
+    """Atleast 1 difficulty of each included Beatmapset will have a difficulty between the Maximum and Minimum for an included Mode.
+    Star Ratings are multipled by 100, ie: a Star Rating of 1.23 will be 123.
+    Has No Effect if the given mode is Excluded.
+    """
+    range_start = 0
+    range_end = 1000
+    default = 0
+    display_name = "Standard Minimum Star Rating"
+
+
+class StandardMaximumDifficulty(Range):
+    """Maximum Difficulty for Standard. Star Ratings are multipled by 100."""
+    range_start = 0
+    range_end = 1000
+    default = 1000
+    display_name = "Standard Maximum Star Rating"
+
+
+class DisableCatch(Toggle):
+    """Ignores Catch The Beat Difficultys when Generating."""
+    display_name = "Exclude Catch The Beat"
+
+
+class CatchMinimumDifficulty(Range):
+    """Minimum Difficulty for Catch the Beat. Star Ratings are multipled by 100."""
+    range_start = 0
+    range_end = 1000
+    default = 0
+    display_name = "Catch Minimum Star Rating"
+
+
+class CatchMaximumDifficulty(Range):
+    """Maximum Difficulty for Catch the Beat. Star Ratings are multipled by 100."""
+    range_start = 0
+    range_end = 1000
+    default = 1000
+    display_name = "Catch Maximum Star Rating"
+
+
+class DisableTaiko(Toggle):
+    """Ignores Taiko Difficultys when Generating."""
+    display_name = "Exclude Taiko"
+
+
+class TaikoMinimumDifficulty(Range):
+    """Minimum Difficulty for 4-Key Mania. Star Ratings are multipled by 100."""
+    range_start = 0
+    range_end = 1000
+    default = 0
+    display_name = "Taiko Minimum Star Rating"
+
+
+class TaikoMaximumDifficulty(Range):
+    """Maximum Difficulty for Taiko. Star Ratings are multipled by 100."""
+    range_start = 0
+    range_end = 1000
+    default = 1000
+    display_name = "Taiko Maximum Star Rating"
+
+
+class Disable4k(Toggle):
+    """Ignores 4-Key Mania Difficultys when Generating."""
+    display_name = "Exclude 4k"
+
+
+class FourKeyMinimumDifficulty(Range):
+    """Minimum Difficulty for 4-Key Mania. Star Ratings are multipled by 100."""
+    range_start = 0
+    range_end = 1000
+    default = 0
+    display_name = "4-Key Mania Minimum Star Rating"
+
+
+class FourKeyMaximumDifficulty(Range):
+    """Maximum Difficulty for 4-Key Mania. Star Ratings are multipled by 100."""
+    range_start = 0
+    range_end = 1000
+    default = 1000
+    display_name = "4-Key Mania Maximum Star Rating"
+
+
+class Disable7k(Toggle):
+    """Ignores 7-Key Mania Difficultys when Generating."""
+    display_name = "Exclude 7k"
+
+
+class SevenKeyMinimumDifficulty(Range):
+    """Minimum Difficulty for 7-Key Mania. Star Ratings are multipled by 100."""
+    range_start = 0
+    range_end = 1000
+    default = 0
+    display_name = "7-Key Mania Minimum Star Rating"
+
+
+class SevenKeyMaximumDifficulty(Range):
+    """Maximum Difficulty for 7-Key Mania. Star Ratings are multipled by 100."""
+    range_start = 0
+    range_end = 1000
+    default = 1000
+    display_name = "7-Key Mania Maximum Star Rating"
+
+
+class DisableMiscKeymodes(Toggle):
+    """Ignores Mania Difficultys of Key Counts other than 4 and 7 when Generating."""
+    display_name = "Exclude Miscellaneous Key Counts"
+
+
+class MiscKeyMinimumDifficulty(Range):
+    """Minimum Difficulty for Key Counts other than 4 and 7. Star Ratings are multipled by 100."""
+    range_start = 0
+    range_end = 1000
+    default = 0
+    display_name = "Miscellaneous Key Counts Minimum Star Rating"
+
+
+class MiscKeyMaximumDifficulty(Range):
+    """Maximum Difficulty for Key Counts other than 4 and 7. Star Ratings are multipled by 100."""
+    range_start = 0
+    range_end = 1000
+    default = 1000
+    display_name = "Miscellaneous Key Counts Maximum Star Rating"
+
+
 class EnableExplicitLyrics(Toggle):
     """Allows Songs with 18+ Lyrics to generate.
     While this can be played on the main Archipelago Server, Streaming them there is not reccomended."""
@@ -65,36 +174,6 @@ class EnableExplicitLyrics(Toggle):
 class EnableLoved(Toggle):
     """Allows Loved Beatmaps to Appear when Generating. Not Reccomended with 'Disable Difficulty Reduction' Enabled."""
     display_name = "Enable Loved Beatmaps"
-
-
-class DisableStandard(Toggle):
-    """Ignores Standard Difficultys when Generating"""
-    display_name = "Exclude Standard"
-
-
-class DisableCatch(Toggle):
-    """Ignores Catch The Beat Difficultys when Generating"""
-    display_name = "Exclude Catch The Beat"
-
-
-class DisableTaiko(Toggle):
-    """Ignores Taiko Difficultys when Generating"""
-    display_name = "Exclude Taiko"
-
-
-class Disable4k(Toggle):
-    """Ignores 4-Key Mania Difficultys when Generating"""
-    display_name = "Exclude 4k"
-
-
-class Disable7k(Toggle):
-    """Ignores 7-Key Mania Difficultys when Generating"""
-    display_name = "Exclude 7k"
-
-
-class DisableMiscKeymodes(Toggle):
-    """Ignores Mania Difficultys of Key Counts other than 4 and 7 when Generating"""
-    display_name = "Exclude Miscellaneous Key Counts"
 
 
 # next few taken pretty much or entirely from Muse Dash
@@ -112,7 +191,7 @@ class AdditionalItemPercentage(Range):
 class PerformancePointsPercentage(Range):
     """Collecting enough 'Performace Points' will unlock the goal song needed for completion.
     This option controls how many are in the item pool, based on the total number of songs.
-    The 'Performance Points' in this multiworld are unrelated to your accounts PP Score"""
+    The 'Performance Points' in this multiworld are unrelated to your accounts PP Score."""
     range_start = 10
     range_end = 40
     default = 20
@@ -129,14 +208,14 @@ class PerformancePointsWinCountPercentage(Range):
 
 class IncludeSongs(OptionSet):
     """List of Beatmapset IDs to include. Will add songs in ascending order by ID after the starting songs.
-    IE: If you have 5 starting songs, the first ID will be song 6
+    IE: If you have 5 starting songs, the first ID will be song 6.
     """
     display_name = "Include Songs"
     valid_keys = {str(beatmapset['id']) for beatmapset in get_song_data()}
 
 
 class ExcludeSongs(OptionSet):
-    """List of Beatmapset IDs to exclude. Listed Beatmapset IDs cannot appear in the Rando
+    """List of Beatmapset IDs to exclude. Listed Beatmapset IDs cannot appear in the Rando.
     """
     display_name = "Exclude Songs"
     valid_keys = {str(beatmapset['id']) for beatmapset in get_song_data()}
@@ -148,15 +227,25 @@ class OsuOptions(PerGameCommonOptions):
     additional_songs: AdditionalSongs
     additional_item_percentage: AdditionalItemPercentage
     disable_difficulty_reduction: DisableDifficultyReduction
-    maximum_difficulty: MaximumDifficulty
-    minimum_difficulty: MinimumDifficulty
     maximum_length: MaximumLength
     exclude_standard: DisableStandard
+    minimum_difficulty_standard: StandardMinimumDifficulty
+    maximum_difficulty_standard: StandardMaximumDifficulty
     exclude_catch: DisableCatch
+    minimum_difficulty_catch: CatchMinimumDifficulty
+    maximum_difficulty_catch: CatchMaximumDifficulty
     exclude_taiko: DisableTaiko
+    minimum_difficulty_taiko: TaikoMinimumDifficulty
+    maximum_difficulty_taiko: TaikoMaximumDifficulty
     exclude_4k: Disable4k
+    minimum_difficulty_4k: FourKeyMinimumDifficulty
+    maximum_difficulty_4k: FourKeyMaximumDifficulty
     exclude_7k: Disable7k
+    minimum_difficulty_7k: SevenKeyMinimumDifficulty
+    maximum_difficulty_7k: SevenKeyMaximumDifficulty
     exclude_other_keys: DisableMiscKeymodes
+    minimum_difficulty_other: MiscKeyMinimumDifficulty
+    maximum_difficulty_other: MiscKeyMaximumDifficulty
     performance_points_count_percentage: PerformancePointsPercentage
     performance_points_win_count_percentage: PerformancePointsWinCountPercentage
     explicit_lyrics: EnableExplicitLyrics
