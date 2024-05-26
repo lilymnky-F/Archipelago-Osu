@@ -97,6 +97,18 @@ class DisableMiscKeymodes(Toggle):
     display_name = "Exclude Miscellaneous Key Counts"
 
 
+# next few taken pretty much or entirely from Muse Dash
+class AdditionalItemPercentage(Range):
+    """The percentage of songs that will have 2 items instead of 1 when completing them.
+    Starting Songs will always have 2 items.
+    Locations will be filled with duplicate songs if there are not enough items.
+    """
+    display_name = "Additional Item %"
+    range_start = 50
+    default = 80
+    range_end = 100
+
+
 class PerformancePointsPercentage(Range):
     """Collecting enough 'Performace Points' will unlock the goal song needed for completion.
     This option controls how many are in the item pool, based on the total number of songs.
@@ -134,6 +146,7 @@ class ExcludeSongs(OptionSet):
 class OsuOptions(PerGameCommonOptions):
     starting_songs: StartingSongs
     additional_songs: AdditionalSongs
+    additional_item_percentage: AdditionalItemPercentage
     disable_difficulty_reduction: DisableDifficultyReduction
     maximum_difficulty: MaximumDifficulty
     minimum_difficulty: MinimumDifficulty

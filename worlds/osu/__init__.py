@@ -197,7 +197,7 @@ class OsuWorld(World):
         return max(1, floor(sheet_count * multiplier))
 
     def get_additional_item_percentage(self) -> int:
-        return 80
+        return self.options.additional_item_percentage.value
 
     def fill_slot_data(self):
         return {
