@@ -116,11 +116,18 @@ class PerformancePointsWinCountPercentage(Range):
 
 
 class IncludeSongs(OptionSet):
-    """List of Beatmapset IDs to include. Will add songs in order after the starting songs.
+    """List of Beatmapset IDs to include. Will add songs in ascending order by ID after the starting songs.
     IE: If you have 5 starting songs, the first ID will be song 6
     """
     display_name = "Include Songs"
-    valid_keys = {beatmapset['id'] for beatmapset in get_song_data()}
+    valid_keys = {str(beatmapset['id']) for beatmapset in get_song_data()}
+
+
+class ExcludeSongs(OptionSet):
+    """List of Beatmapset IDs to exclude. Listed Beatmapset IDs cannot appear in the Rando
+    """
+    display_name = "Exclude Songs"
+    valid_keys = {str(beatmapset['id']) for beatmapset in get_song_data()}
 
 
 @dataclass
@@ -142,3 +149,4 @@ class OsuOptions(PerGameCommonOptions):
     explicit_lyrics: EnableExplicitLyrics
     enable_loved: EnableLoved
     include_songs: IncludeSongs
+    exclude_songs: ExcludeSongs

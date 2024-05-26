@@ -28,6 +28,13 @@ def get_song_data() -> list[dict]:
     return beatmapsets
 
 
+def find_beatmapset(id) -> dict:
+    for beatmapset in osu_song_data:
+        if beatmapset["id"] == id:
+            return beatmapset
+    raise ValueError("Beatmap not in Song Data")
+
+
 osu_song_data = get_song_data()
 osu_song_max = len(osu_song_data)
 osu_song_pool = []

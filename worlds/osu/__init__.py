@@ -1,6 +1,6 @@
 from BaseClasses import Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
-from .Items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool
+from .Items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool, find_beatmapset
 from .Locations import OsuLocation, location_table, location_data_table
 from Options import PerGameCommonOptions  # Muse Dash uses this for a type (where I don't) but I'm having an error
 from typing import ClassVar               # where the "Type" Import below breaks if I remove this, so I'm ignoring it!
@@ -79,10 +79,12 @@ class OsuWorld(World):
 
         # Pair the Generic Songs to their proper Songs
         self.get_eligible_songs()
+        self.random.shuffle(self.song_data)
+        for beatmapset in sorted(self.options.include_songs.value, key=int, reverse=True):
+            self.song_data.insert(self.options.starting_songs, find_beatmapset(int(beatmapset)))
         if len(self.song_data) < len(self.starting_songs + self.included_songs + ["Victory"]):
             raise Exception(f"Player {self.player}'s settings cannot generate enough songs, their settings only allow "
                             f"{len(self.song_data)} out of {len(self.starting_songs + self.included_songs + ['Victory'])} required songs.")
-        self.random.shuffle(self.song_data)
         for generic_song, osu_song in zip((self.starting_songs + self.included_songs + ["Victory"]), self.song_data):
             self.pairs[generic_song] = osu_song
 
@@ -107,6 +109,8 @@ class OsuWorld(World):
             self.song_data.remove(beatmapset)
 
     def check_eligibility(self, beatmapset):
+        if str(beatmapset["id"]) in self.options.include_songs.value.union(self.options.exclude_songs.value):
+            return False
         if beatmapset["length"] > self.options.maximum_length:
             return False
         if (not self.options.explicit_lyrics) and beatmapset["nsfw"]:
