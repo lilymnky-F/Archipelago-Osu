@@ -87,7 +87,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_songs(self):
         """Display all songs in logic."""
-        indexes = self.get_available_ids()
+        indexes = get_available_ids(self.ctx)
         self.output(f"You Have {count_item(self.ctx, 726999999)} Performance Points, you need {self.ctx.preformance_points_needed} to unlock your goal.")
         self.output(f"You currently have {len(indexes)} songs in Logic")
         for i in indexes:
@@ -150,8 +150,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def _cmd_download(self, number=''):
         """Downloads the given song number in '/songs'. Also Accepts "Next" and "Victory"."""
         if number.lower() == 'next':
-            if len(self.get_available_ids()) > 0:
-                number = self.get_available_ids()[0]+1
+            if len(get_available_ids(self.ctx)) > 0:
+                number = get_available_ids(self.ctx)[0]+1
             else:
                 self.output("You have no songs to download")
                 return
@@ -192,18 +192,13 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         self.output('Please Supply a Valid Mode')
 
-    def get_available_ids(self):
-        # Gets the Index of each Song the player has but has not played
-        incomplete_items = []
-        for item in self.ctx.items_received:
-            song_index = item.item-727000000
-            location_id = (song_index*2)+727000000
-            if (location_id in self.ctx.missing_locations or location_id+1 in self.ctx.missing_locations) and song_index not in incomplete_items:
-                incomplete_items.append(song_index)
-        if count_item(self.ctx, 726999999) >= self.ctx.preformance_points_needed:
-            incomplete_items.append(-1)
-        incomplete_items.sort()
-        return incomplete_items
+    def _cmd_auto_download(self):
+        """Toggles Auto Downloads when Auto Tracking"""
+        self.ctx.auto_download = not self.ctx.auto_download
+        if self.ctx.auto_download:
+            self.output('Toggled Auto Downloading On')
+            return
+        self.output('Toggled Auto Downloading Off')
 
     def get_played_ids(self):
         # Gets the Index of each Song the player has played
@@ -306,12 +301,11 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             with open(file_path, 'wb') as f:
                 f.write(content)
             
-            self.output(f'Opening {filename}...') # More feedback to the user
+            self.output(f'Opening {filename}...')  # More feedback to the user
             webbrowser.open(file_path)
         except Exception as e:
-            self.output(f"An error occurred: {e}")
+            self.output(f"An error occurred: {repr(e)}")
         
-
 
 class APosuContext(CommonContext):
     command_processor: int = APosuClientCommandProcessor
@@ -327,6 +321,7 @@ class APosuContext(CommonContext):
         self.pairs: dict = {}
         self.last_scores: list = []
         self.auto_modes: list[str] = []
+        self.auto_download: bool = False
         self.token: str = ''
         self.disable_difficulty_reduction: bool = False
         self.all_locations: list[int] = []
@@ -393,13 +388,13 @@ class APosuContext(CommonContext):
         """Import kivy UI system and start running it as self.ui_task."""
         from kvui import GameManager
 
-        class ChecksFinderManager(GameManager):
+        class OsuManager(GameManager):
             logging_pairs = [
                 ("Client", "Archipelago")
             ]
             base_title = "Archipelago osu! Client"
 
-        self.ui = ChecksFinderManager(self)
+        self.ui = OsuManager(self)
         self.ui_task = asyncio.create_task(self.ui.async_run(), name="UI")
 
 
@@ -409,6 +404,20 @@ def count_item(ctx, code) -> int:
         if item.item == code:
             current += 1
     return current
+
+
+def get_available_ids(ctx):
+    # Gets the Index of each Song the player has but has not played
+    incomplete_items = []
+    for item in ctx.items_received:
+        song_index = item.item-727000000
+        location_id = (song_index*2)+727000000
+        if (location_id in ctx.missing_locations or location_id+1 in ctx.missing_locations) and song_index not in incomplete_items:
+            incomplete_items.append(song_index)
+    if count_item(ctx, 726999999) >= ctx.preformance_points_needed:
+        incomplete_items.append(-1)
+    incomplete_items.sort()
+    return incomplete_items
 
 
 async def get_token(ctx):
@@ -426,10 +435,38 @@ async def get_token(ctx):
         return
 
 
+async def download_next_beatmapset_silent(ctx):
+    #change to a wait for
+    await asyncio.sleep(0.1)
+    if len(get_available_ids(ctx)) <= 0:
+        return
+    beatmapset = ctx.pairs[list(ctx.pairs.keys())[get_available_ids(ctx)[0]]]
+    print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
+    try:
+        async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
+            content = await req.read()
+        if len(content) < 400:
+            return
+        f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
+        filename = "".join(i for i in f if i not in "\/:*?<>|\"")
+        path = os.path.join(ctx.game_communication_path, 'config')
+
+        if not os.path.exists(path):
+            os.makedirs(path)
+
+        file_path = os.path.join(path, filename)
+        with open(file_path, 'wb') as f:
+            f.write(content)
+
+        webbrowser.open(file_path)
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
 async def auto_get_last_scores(ctx, mode=''):
     # Make URl for the request
     try:
-        request = f"https://osu.ppy.sh/api/v2/users/{os.environ['PLAYER_ID']}/scores/recent?include_fails=1&limit=100"
+        request = f"https://osu.ppy.sh/api/v2/users/{os.environ['PLAYER_ID']}/scores/recent?include_fails=1&limit=10"
     except KeyError:
         print('No Player ID')
         return
@@ -487,6 +524,8 @@ def check_location(ctx, score):
                     if location_id in ctx.missing_locations:
                         message = [{"cmd": 'LocationChecks', "locations": [int(location_id)]}]
                         asyncio.create_task(ctx.send_msgs(message))
+                        if ctx.auto_download:
+                            asyncio.create_task(download_next_beatmapset_silent(ctx))
 
 
 async def game_watcher(ctx: APosuContext):
