@@ -435,9 +435,9 @@ async def get_token(ctx):
         return
 
 
-async def download_next_beatmapset_silent(ctx):
-    #change to a wait for
-    await asyncio.sleep(0.1)
+async def download_next_beatmapset_silent(ctx, task):
+    await task
+    await asyncio.sleep(0.2) # Delay to get the reply
     if len(get_available_ids(ctx)) <= 0:
         return
     beatmapset = ctx.pairs[list(ctx.pairs.keys())[get_available_ids(ctx)[0]]]
@@ -518,14 +518,17 @@ def check_location(ctx, score):
             if not count_item(ctx, 727000000 + list(ctx.pairs.keys()).index(song)):
                 print("You don't have this song unlocked")
                 return
+            locations = []
             for i in range(2):
                 location_id = 727000000 + (2 * list(ctx.pairs.keys()).index(song)) + i
                 if location_id in ctx.missing_locations:
                     if location_id in ctx.missing_locations:
-                        message = [{"cmd": 'LocationChecks', "locations": [int(location_id)]}]
-                        asyncio.create_task(ctx.send_msgs(message))
-                        if ctx.auto_download:
-                            asyncio.create_task(download_next_beatmapset_silent(ctx))
+                        locations.append(int(location_id))
+            if locations:
+                message = [{"cmd": 'LocationChecks', "locations": locations}]
+                task = asyncio.create_task(ctx.send_msgs(message))
+                if ctx.auto_download:
+                    asyncio.create_task(download_next_beatmapset_silent(ctx, task))
 
 
 async def game_watcher(ctx: APosuContext):
