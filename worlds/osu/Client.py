@@ -339,7 +339,7 @@ class APosuContext(CommonContext):
         self.last_scores: list = []
         self.auto_modes: list[str] = []
         self.auto_download: bool = False
-        self.download_type: str = 'direct'
+        self.download_type: str = 'mirror'
         self.token: str = ''
         self.disable_difficulty_reduction: bool = False
         self.all_locations: list[int] = []
