@@ -253,7 +253,25 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         try:
             async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
                 content_length = req.headers.get('Content-Length')
-
+                req_status = req.status
+                if(req_status != 200):
+                    # The library doesn't have a built-in way to get the status name in our version of aiohttp, so we have to do it manually sadly
+                    # I have only included the most likely status codes to be returned by beatconnect
+                    HTTP_STATUS_NAMES = {
+                        400: 'Bad Request',
+                        401: 'Unauthorized',
+                        403: 'Forbidden',
+                        404: 'Not Found',
+                        408: 'Request Timeout',
+                        429: 'Too Many Requests',
+                        500: 'Internal Server Error',
+                        502: 'Bad Gateway',
+                        503: 'Service Unavailable',
+                        504: 'Gateway Timeout',
+                    }
+                    self.output(f'Error Downloading {beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz')
+                    self.output(f'Please Manually Add the Map or Try Again Later. ({req_status} - {HTTP_STATUS_NAMES.get(req_status, "Unknown Error")})')
+                    return
                 # With beatconnect we always know the total size of the download, so this is always true
                 if content_length is not None:
                     total_bytes = int(content_length)
@@ -286,10 +304,6 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                 
                 # Combine all the chunks into one just like req.read() would do
                 content = b"".join(downloaded_content)
-            if len(content) < 400:
-                self.output(f'Error Downloading {beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz')
-                self.output('Please Manually Add the Map or Try Again Later.')
-                return
             f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
             filename = "".join(i for i in f if i not in "\/:*?<>|\"")
             path = os.path.join(self.ctx.game_communication_path, 'config')
