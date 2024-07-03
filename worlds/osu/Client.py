@@ -24,6 +24,7 @@ from CommonClient import gui_enabled, logger, get_base_parser, ClientCommandProc
 
 class APosuClientCommandProcessor(ClientCommandProcessor):
     def __init__(self, ctx: APosuContext):
+        super().__init__(ctx)
         self.ctx = ctx
         self.mode_names = {'fruits': 'fruits',
                            'catch': 'fruits',
@@ -37,6 +38,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                            'standard': 'osu',
                            'taiko': 'taiko',
                            '': ''}
+        self.download_types = {'mirror': 'mirror',
+                               'direct': 'direct'}
 
     # def _cmd_slot_data(self):
     #    """Show Slot Data, For Debug Purposes. Probably don't run this"""
@@ -168,8 +171,14 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             self.output("Use the Song Numbers in '/songs' (Not the IDs)")
             return
         beatmapset = self.ctx.pairs[song]
-        self.output(f"Downloading {song}: {beatmapset['title']} (ID: {beatmapset['id']}) as '{beatmapset['id']} {beatmapset['artist']} - {beatmapset['title']}.osz'")
-        asyncio.create_task(self.download_beatmapset(beatmapset))
+        if self.ctx.download_type == 'mirror':
+            self.output(f"Downloading {song}: {beatmapset['title']} (ID: {beatmapset['id']}) as '{beatmapset['id']} {beatmapset['artist']} - {beatmapset['title']}.osz'")
+            asyncio.create_task(self.download_beatmapset(beatmapset))
+            return
+        if self.ctx.download_type == 'direct':
+            self.output(f"Opening {song}: {beatmapset['title']} (ID: {beatmapset['id']}) in osu!Direct")
+            asyncio.create_task(open_set_in_direct(self.ctx, beatmapset['id']))
+
 
     def _cmd_auto_track(self, mode=''):
         """Toggles Auto Tracking for the Given Mode (or "All"). Supports Multiple Modes."""
@@ -322,6 +331,7 @@ class APosuContext(CommonContext):
         self.last_scores: list = []
         self.auto_modes: list[str] = []
         self.auto_download: bool = False
+        self.download_type: str = 'direct'
         self.token: str = ''
         self.disable_difficulty_reduction: bool = False
         self.all_locations: list[int] = []
@@ -435,12 +445,27 @@ async def get_token(ctx):
         return
 
 
+async def open_set_in_direct(ctx, set_id: int) -> None:
+    if not ctx.token:
+        await get_token(ctx)
+    url = f"https://osu.ppy.sh/api/v2/beatmapsets/{set_id}"
+    headers = {"Accept": "application/json", "Content-Type": "application/json",
+               "Authorization": f"Bearer {ctx.token}"}
+    async with aiohttp.request("GET", url, headers=headers) as conversion:
+        beatmapset = await conversion.json()
+        print(beatmapset)
+    webbrowser.open(f"osu://b/{beatmapset['beatmaps'][0]['id']}")
+
+
 async def download_next_beatmapset_silent(ctx, task):
     await task
-    await asyncio.sleep(0.2) # Delay to get the reply
+    await asyncio.sleep(0.2)  # Delay to get the reply
     if len(get_available_ids(ctx)) <= 0:
         return
     beatmapset = ctx.pairs[list(ctx.pairs.keys())[get_available_ids(ctx)[0]]]
+    if ctx.download_type == 'direct':
+        asyncio.create_task(open_set_in_direct(ctx, beatmapset['id']))
+        return
     print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
     try:
         async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
