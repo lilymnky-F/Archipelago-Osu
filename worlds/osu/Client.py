@@ -271,10 +271,10 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
                 content_length = req.headers.get('Content-Length')
                 req_status = req.status
-                if(req_status != 200):
+                if req_status != 200:
                     # The library doesn't have a built-in way to get the status name in our version of aiohttp, so we have to do it manually sadly
                     # I have only included the most likely status codes to be returned by beatconnect
-                    HTTP_STATUS_NAMES = {
+                    http_status_names = {
                         400: 'Bad Request',
                         401: 'Unauthorized',
                         403: 'Forbidden',
@@ -287,7 +287,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                         504: 'Gateway Timeout',
                     }
                     self.output(f'Error Downloading {beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz')
-                    self.output(f'Please Manually Add the Map or Try Again Later. ({req_status} - {HTTP_STATUS_NAMES.get(req_status, "Unknown Error")})')
+                    self.output(f'Please Manually Add the Map or Try Again Later. ({req_status} - {http_status_names.get(req_status, "Unknown Error")})')
                     return
                 # With beatconnect we always know the total size of the download, so this is always true
                 if content_length is not None:
@@ -492,7 +492,8 @@ async def download_next_beatmapset_silent(ctx, task):
     try:
         async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
             content = await req.read()
-        if len(content) < 400:
+        req_status = req.status
+        if req_status != 200:
             return
         f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
         filename = "".join(i for i in f if i not in "\/:*?<>|\"")
