@@ -209,6 +209,14 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         self.output('Toggled Auto Downloading Off')
 
+    def _cmd_download_type(self, download_type=''):
+        """Sets Download type. Valid Options are 'Direct' and 'Mirror'"""
+        if download_type.lower() in self.download_types:
+            self.ctx.download_type = self.download_types[download_type.lower()]
+            self.output(f'Download type set to "{self.ctx.download_type.capitalize()}"')
+            return
+        self.output('Please Use Ethier "Direct" or "Mirror"')
+
     def get_played_ids(self):
         # Gets the Index of each Song the player has played
         played_items = []
