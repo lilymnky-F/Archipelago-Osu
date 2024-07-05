@@ -105,50 +105,11 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         for song in self.ctx.pairs:
             beatmapset = self.ctx.pairs[song]
             self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']}) {'(passed)' if song in played_songs else ''}")
-
+    
     def _cmd_update(self, mode=''):
         """Gets the player's last score, in a given gamemode or their set default"""
-        # Requests a token using the user's Client ID and Secret
-        try:
-            authreq = requests.post("https://osu.ppy.sh/oauth/token",
-                                    headers={"Accept": "application/json",
-                                             "Content-Type": "application/x-www-form-urlencoded"},
-                                    data=f"client_id={os.environ['CLIENT_ID']}&client_secret={os.environ['API_KEY']}&grant_type=client_credentials&scope=public")
-            token = authreq.json()["access_token"]
-        except KeyError:
-            self.output("Please set an API Key and Client ID.")
-            return
-        # Make URl for the request
-        try:
-            request = f"https://osu.ppy.sh/api/v2/users/{os.environ['PLAYER_ID']}/scores/recent?include_fails=1&limit=100"
-        except KeyError:
-            self.output("Please set a Player ID.")
-            return
-        # Add Mode to request, otherwise it will use the user's default
-        if mode and mode.lower() in self.mode_names.keys():
-            request += f"&mode={self.mode_names[mode.lower()]}"
-        scores = requests.get(request, headers={"Accept": "application/json", "Content-Type": "application/json",
-                                                "Authorization": f"Bearer {token}"})
-        # Get Scores with Token
-        try:
-            score_list = scores.json()
-        except (KeyError, IndexError):
-            self.output("Error Retrieving plays, Check your API Key.")
-            return
-        if not score_list:
-            self.output("No Plays Found. Check the Gamemode")
-            return
-        found = False
-        for score in score_list:
-            if score['created_at'] in self.ctx.last_scores:
-                if not found:
-                    self.output("No New Plays Found.")
-                return
-            found = True
-            self.ctx.last_scores.append(score['created_at'])
-            if len(self.ctx.last_scores) > 20:
-                self.ctx.last_scores.pop(0)
-            self.check_location(score)
+        asyncio.create_task(get_last_scores(self, mode))
+        
 
     def _cmd_download(self, number=''):
         """Downloads the given song number in '/songs'. Also Accepts "Next" and "Victory"."""
@@ -226,6 +187,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         self.output('Please Use Ethier "Direct" or "Mirror"')
 
+
     def get_played_ids(self):
         # Gets the Index of each Song the player has played
         played_items = []
@@ -268,11 +230,17 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                 if not count_item(self.ctx, 727000000 + list(self.ctx.pairs.keys()).index(song)):
                     self.output("You don't have this song unlocked")
                     return
+                locations = []
                 for i in range(2):
                     location_id = 727000000 + (2 * list(self.ctx.pairs.keys()).index(song)) + i
                     if location_id in self.ctx.missing_locations:
-                        message = [{"cmd": 'LocationChecks', "locations": [int(location_id)]}]
-                        asyncio.create_task(self.ctx.send_msgs(message))
+                        if location_id in self.ctx.missing_locations:
+                            locations.append(int(location_id))
+                if locations:
+                    message = [{"cmd": 'LocationChecks', "locations": locations}]
+                    task = asyncio.create_task(self.ctx.send_msgs(message))
+                    if self.ctx.auto_download:
+                        asyncio.create_task(download_next_beatmapset(self, task))
 
     async def download_beatmapset(self, beatmapset):
         print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
@@ -520,6 +488,39 @@ async def download_next_beatmapset_silent(ctx, task):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+async def download_next_beatmapset(self, task):
+    await task
+    await asyncio.sleep(0.2)  # Delay to get the reply
+    if len(get_available_ids(self.ctx)) <= 0:
+        return
+    beatmapset = self.ctx.pairs[list(self.ctx.pairs.keys())[get_available_ids(self.ctx)[0]]]
+    if self.ctx.download_type == 'direct':
+        self.output(f'Opening {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]}) in osu!Direct')
+        asyncio.create_task(open_set_in_direct(self.ctx, beatmapset['id']))
+        return
+    self.output(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
+    try:
+        async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
+            content = await req.read()
+            req_status = req.status
+        if req_status != 200:
+            self.output(f'Download Failed, Status Code: {req_status}')
+            return
+        f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
+        filename = "".join(i for i in f if i not in "\/:*?<>|\"")
+        path = os.path.join(self.ctx.game_communication_path, 'config')
+
+        if not os.path.exists(path):
+            os.makedirs(path)
+
+        file_path = os.path.join(path, filename)
+        with open(file_path, 'wb') as f:
+            f.write(content)
+
+        webbrowser.open(file_path)
+    except Exception as e:
+        self.output(f"An error occurred: {e}")
+
 
 async def auto_get_last_scores(ctx, mode=''):
     # Make URl for the request
@@ -558,6 +559,40 @@ async def auto_get_last_scores(ctx, mode=''):
             ctx.last_scores.pop(0)
         check_location(ctx, score)
 
+async def get_last_scores(self, mode=''):
+    # Make URl for the request
+    try:
+        request = f"https://osu.ppy.sh/api/v2/users/{os.environ['PLAYER_ID']}/scores/recent?include_fails=1&limit=100"
+    except KeyError:
+        self.output('No Player ID')
+        return
+    # Add Mode to request, otherwise it will use the user's default
+    if mode:
+        request += f"&mode={mode}"
+    if not self.ctx.token:
+        await get_token(self.ctx)
+    headers = {"Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {self.ctx.token}"}
+    async with aiohttp.request("GET", request, headers=headers) as scores:
+        try:
+            score_list = await scores.json()
+        except (KeyError, IndexError):
+            await get_token(self.ctx)
+            self.output("Error Retrieving plays, Check your API Key.")
+            return
+    if not score_list:
+        self.output("No Plays Found. Check the Gamemode")
+        return
+    found = False
+    for score in score_list:
+        if score['created_at'] in self.ctx.last_scores:
+            if not found:
+                self.output("No New Plays Found.")
+            return
+        found = True
+        self.ctx.last_scores.append(score['created_at'])
+        if len(self.ctx.last_scores) > 100:
+            self.ctx.last_scores.pop(0)
+        self.check_location(score)
 
 def check_location(ctx, score):
     if not score['passed']:
