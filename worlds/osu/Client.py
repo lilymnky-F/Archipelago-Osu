@@ -179,7 +179,6 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             self.output(f"Opening {song}: {beatmapset['title']} (ID: {beatmapset['id']}) in osu!Direct")
             asyncio.create_task(open_set_in_direct(self.ctx, beatmapset['id']))
 
-
     def _cmd_auto_track(self, mode=''):
         """Toggles Auto Tracking for the Given Mode (or "All"). Supports Multiple Modes."""
         try:
@@ -211,6 +210,11 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_download_type(self, download_type=''):
         """Sets Download type. Valid Options are 'Direct' and 'Mirror'"""
+        try:
+            [os.environ['API_KEY'], os.environ['CLIENT_ID']]
+        except KeyError:
+            self.output('Please set your Client ID, and Client Secret')
+            return
         if download_type.lower() in self.download_types:
             self.ctx.download_type = self.download_types[download_type.lower()]
             self.output(f'Download type set to "{self.ctx.download_type.capitalize()}"')
@@ -492,8 +496,9 @@ async def download_next_beatmapset_silent(ctx, task):
     try:
         async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
             content = await req.read()
-        req_status = req.status
+            req_status = req.status
         if req_status != 200:
+            print(f'Download Failed, Status Code: {req_status}')
             return
         f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
         filename = "".join(i for i in f if i not in "\/:*?<>|\"")
