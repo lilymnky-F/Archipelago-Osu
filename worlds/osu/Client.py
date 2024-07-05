@@ -105,11 +105,10 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         for song in self.ctx.pairs:
             beatmapset = self.ctx.pairs[song]
             self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']}) {'(passed)' if song in played_songs else ''}")
-    
+
     def _cmd_update(self, mode=''):
         """Gets the player's last score, in a given gamemode or their set default"""
         asyncio.create_task(get_last_scores(self, mode))
-        
 
     def _cmd_download(self, number=''):
         """Downloads the given song number in '/songs'. Also Accepts "Next" and "Victory"."""
@@ -455,7 +454,7 @@ async def open_set_in_direct(ctx, set_id: int) -> None:
         print(beatmapset)
     webbrowser.open(f"osu://b/{beatmapset['beatmaps'][0]['id']}")
 
-
+# This is the silent version of the function below where this one is used in game watcher
 async def download_next_beatmapset_silent(ctx, task):
     await task
     await asyncio.sleep(0.2)  # Delay to get the reply
@@ -488,6 +487,7 @@ async def download_next_beatmapset_silent(ctx, task):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+# This is the non-silent version of the function above where this one is used in the update command
 async def download_next_beatmapset(self, task):
     await task
     await asyncio.sleep(0.2)  # Delay to get the reply
@@ -521,7 +521,7 @@ async def download_next_beatmapset(self, task):
     except Exception as e:
         self.output(f"An error occurred: {e}")
 
-
+# This is the silent version of the function below where this one is used in game watcher
 async def auto_get_last_scores(ctx, mode=''):
     # Make URl for the request
     try:
@@ -559,6 +559,7 @@ async def auto_get_last_scores(ctx, mode=''):
             ctx.last_scores.pop(0)
         check_location(ctx, score)
 
+# This is the non-silent version of the function above where this one is used in the update command
 async def get_last_scores(self, mode=''):
     # Make URl for the request
     try:
