@@ -202,6 +202,11 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_auto_download(self):
         """Toggles Auto Downloads when Auto Tracking"""
+        try:
+            [os.environ['API_KEY'], os.environ['CLIENT_ID']]
+        except KeyError:
+            self.output('Please set your Client ID, and Client Secret')
+            return
         self.ctx.auto_download = not self.ctx.auto_download
         if self.ctx.auto_download:
             self.output('Toggled Auto Downloading On')
