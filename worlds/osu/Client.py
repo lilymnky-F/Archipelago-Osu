@@ -565,11 +565,11 @@ async def get_last_scores(self, mode=''):
     try:
         request = f"https://osu.ppy.sh/api/v2/users/{os.environ['PLAYER_ID']}/scores/recent?include_fails=1&limit=100"
     except KeyError:
-        self.output('No Player ID')
+        self.output('Set a Player ID')
         return
     # Add Mode to request, otherwise it will use the user's default
-    if mode:
-        request += f"&mode={mode}"
+    if mode and mode.lower() in self.mode_names.keys():
+        request += f"&mode={self.mode_names[mode.lower()]}"
     if not self.ctx.token:
         await get_token(self.ctx)
     headers = {"Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {self.ctx.token}"}
