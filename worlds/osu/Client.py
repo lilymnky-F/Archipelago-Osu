@@ -100,7 +100,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_all_songs(self):
         """Displays all songs included in current generation."""
-        played_songs = self.get_played_songs()
+        played_songs = get_played_songs(self.ctx)
         self.output(f"You have played {len(played_songs)}/{len(self.ctx.pairs)-1} songs")
         for song in self.ctx.pairs:
             beatmapset = self.ctx.pairs[song]
@@ -185,27 +185,6 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             self.output(f'Download type set to "{self.ctx.download_type.capitalize()}"')
             return
         self.output('Please Use Ethier "Direct" or "Mirror"')
-
-
-    def get_played_ids(self):
-        # Gets the Index of each Song the player has played
-        played_items = []
-        for item in self.ctx.items_received:
-            song_index = item.item-727000000
-            location_id = (song_index*2)+727000000
-            if location_id < 727000000: continue
-            if (location_id not in self.ctx.missing_locations and location_id+1 not in self.ctx.missing_locations) and song_index not in played_items:
-                played_items.append(song_index)
-        played_items.sort()
-        return played_items
-    
-    def get_played_songs(self):
-        # Gets the Song value of each Song the player has played
-        played_ids = self.get_played_ids()
-        played_songs = []
-        for played in played_ids:
-            played_songs.append(list(self.ctx.pairs.keys())[played])
-        return played_songs
 
     def check_location(self, score):
         self.output(score['beatmapset']['title'] + " " + score['beatmap']['version'] + f' Passed: {score["passed"]}')
@@ -594,6 +573,26 @@ async def get_last_scores(self, mode=''):
         if len(self.ctx.last_scores) > 100:
             self.ctx.last_scores.pop(0)
         self.check_location(score)
+
+def get_played_ids(ctx):
+    # Gets the Index of each Song the player has played
+    played_items = []
+    for item in ctx.items_received:
+        song_index = item.item-727000000
+        location_id = (song_index*2)+727000000
+        if location_id < 727000000: continue
+        if (location_id not in ctx.missing_locations and location_id+1 not in ctx.missing_locations) and song_index not in played_items:
+            played_items.append(song_index)
+    played_items.sort()
+    return played_items
+
+def get_played_songs(ctx):
+    # Gets the Song value of each Song the player has played
+    played_ids = get_played_ids(ctx)
+    played_songs = []
+    for played in played_ids:
+        played_songs.append(list(ctx.pairs.keys())[played])
+    return played_songs
 
 def check_location(ctx, score):
     if not score['passed']:
