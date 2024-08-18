@@ -436,7 +436,7 @@ async def open_set_in_direct(ctx, set_id: int) -> None:
 # This is the silent version of the function below where this one is used in game watcher
 async def download_next_beatmapset_silent(ctx, task):
     await task
-    await asyncio.sleep(0.2)  # Delay to get the reply
+    await asyncio.sleep(1)  # Delay to get the reply
     if len(get_available_ids(ctx)) <= 0:
         return
     beatmapset = ctx.pairs[list(ctx.pairs.keys())[get_available_ids(ctx)[0]]]
