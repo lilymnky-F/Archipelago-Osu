@@ -184,7 +184,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             self.ctx.download_type = self.download_types[download_type.lower()]
             self.output(f'Download type set to "{self.ctx.download_type.capitalize()}"')
             return
-        self.output('Please Use Ethier "Direct" or "Mirror"')
+        self.output('Please Use Either "Direct" or "Mirror"')
 
     def check_location(self, score):
         self.output(score['beatmapset']['title'] + " " + score['beatmap']['version'] + f' Passed: {score["passed"]}')
@@ -192,7 +192,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         if not score['passed']:
             # self.output("You cannot check a location without passing the song")
             return
-        if self.ctx.disable_difficulty_reduction and any(x in score['mods'] for x in ['NF', 'EZ', 'HT']):
+        if self.ctx.disable_difficulty_reduction and any(mod['acronym'] in ['NF', 'EZ', 'HT', 'DC'] for mod in score['mods']):
             self.output("Your current settings do not allow difficulty reduction mods.")
             return
         for song in self.ctx.pairs:
@@ -513,7 +513,7 @@ async def auto_get_last_scores(ctx, mode=''):
         request += f"&mode={mode}"
     if not ctx.token:
         await get_token(ctx)
-    headers = {"Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {ctx.token}"}
+    headers = {"Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {ctx.token}", "x-api-version" : "20240529"}
     async with aiohttp.request("GET", request, headers=headers) as scores:
         try:
             score_list = await scores.json()
@@ -528,12 +528,12 @@ async def auto_get_last_scores(ctx, mode=''):
         return
     found = False
     for score in score_list:
-        if score['created_at'] in ctx.last_scores:
+        if score['ended_at'] in ctx.last_scores:
             if not found:
                 print("No New Plays Found.")
             return
         found = True
-        ctx.last_scores.append(score['created_at'])
+        ctx.last_scores.append(score['ended_at'])
         if len(ctx.last_scores) > 100:
             ctx.last_scores.pop(0)
         check_location(ctx, score)
@@ -551,7 +551,7 @@ async def get_last_scores(self, mode=''):
         request += f"&mode={self.mode_names[mode.lower()]}"
     if not self.ctx.token:
         await get_token(self.ctx)
-    headers = {"Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {self.ctx.token}"}
+    headers = {"Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {self.ctx.token}", "x-api-version" : "20240529"}
     async with aiohttp.request("GET", request, headers=headers) as scores:
         try:
             score_list = await scores.json()
@@ -564,16 +564,62 @@ async def get_last_scores(self, mode=''):
         return
     found = False
     for score in score_list:
-        if score['created_at'] in self.ctx.last_scores:
+        if score['ended_at'] in self.ctx.last_scores:
             if not found:
                 self.output("No New Plays Found.")
             return
         found = True
-        self.ctx.last_scores.append(score['created_at'])
+        self.ctx.last_scores.append(score['ended_at'])
         if len(self.ctx.last_scores) > 100:
             self.ctx.last_scores.pop(0)
         self.check_location(score)
 
+# calculates the grade of a stable score
+def calculate_stable_grade(score):
+    acc = float(score['accuracy'])
+    gamemode = int(score['ruleset_id'])
+
+    # if the score has 100% accuracy, then it is an SS no matter gamemode or grading system
+    # skip the rest of the checks
+    if(acc == 1): return 'SS'
+
+    # if this score has the Classic mod enabled, then we assume it is a stable score
+    elif(any(mod['acronym'] == 'CL' for mod in score['mods'])):
+        if(gamemode == 0 or gamemode == 1): # osu!standard or osu!taiko
+
+            # for some reason these statistics are missing if you get 0 of any of these
+            miss_count = int(score['statistics'].get('miss', 0) or 0)
+            num_300s = int(score['statistics'].get('great', 0) or 0)
+            num_100s = int(score['statistics'].get('ok', 0) or 0)
+            num_50s = int(score['statistics'].get('meh', 0) or 0)
+            total_hits = miss_count + num_300s + num_100s + num_50s
+            percent_300s = num_300s / total_hits
+            precent_50s = num_50s / (num_300s + num_100s + num_50s)
+            if(miss_count == 0 and precent_50s <= 0.01):
+               if(percent_300s > 0.9): return 'S'
+               if(percent_300s > 0.8): return 'A'
+               if(percent_300s > 0.7): return 'B'
+               if(percent_300s > 0.6): return 'C'
+               return 'D'
+            else:
+               if(percent_300s > 0.9): return 'A'
+               if(percent_300s > 0.8): return 'B'
+               if(percent_300s > 0.6): return 'C'
+               return 'D'
+        elif(gamemode == 2): # osu!catch
+            if(acc > 0.98): return 'S'
+            if(acc > 0.94): return 'A'
+            if(acc > 0.9): return 'B'
+            if(acc > 0.85): return 'C'
+            return 'D'
+        elif(gamemode == 3): # osu!mania
+            if(acc > 0.95): return 'S'
+            if(acc > 0.9): return 'A'
+            if(acc > 0.8): return 'B'
+            if(acc > 0.7): return 'C'
+            return 'D'
+           
+           
 def get_played_ids(ctx):
     # Gets the Index of each Song the player has played
     played_items = []
@@ -597,7 +643,7 @@ def get_played_songs(ctx):
 def check_location(ctx, score):
     if not score['passed']:
         return
-    if ctx.disable_difficulty_reduction and any(x in score['mods'] for x in ['NF', 'EZ', 'HT']):
+    if ctx.disable_difficulty_reduction and any(mod['acronym'] in ['NF', 'EZ', 'HT', 'DC'] for mod in score['mods']):
         return
     for song in ctx.pairs:
         if ctx.pairs[song]['id'] == score['beatmapset']['id']:
@@ -606,7 +652,7 @@ def check_location(ctx, score):
                 if count_item(ctx, 726999999) >= ctx.preformance_points_needed:
                     asyncio.create_task(ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}]))
                     return
-                print("You don't have enough preformance points")
+                print("You don't have enough performance points")
                 return
             if not count_item(ctx, 727000000 + list(ctx.pairs.keys()).index(song)):
                 print("You don't have this song unlocked")
