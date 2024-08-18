@@ -36,6 +36,24 @@ class DisableDifficultyReduction(Toggle):
     display_name = "Disable Difficulty Reduction"
 
 
+class DifficultySync(Choice):
+    """Changes what difficulties of each selected song send checks
+    Off - Any difficulty of each Beatmapset will send a check.
+    Strict_Any - Only difficulties that fall in your difficulty ranges will send checks
+    Strict_Random - A randomly chosen difficulty within your range has to be played. /check will tell you the diff.
+    """
+    display_name = "Strict Difficulty Sync"
+    option_Off = 0
+    option_Strict_Any = 1
+    option_Strict_Random = 2
+    default = 0
+
+
+class DisallowConverts(Toggle):
+    """Prevents Converts from sending checks. Reccomended if using strict difficulty Sync."""
+    display_name = "Disallow Converts"
+
+
 class DisableStandard(Toggle):
     """Ignores Standard Difficultys when Generating."""
     display_name = "Exclude Standard"
