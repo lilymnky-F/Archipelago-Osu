@@ -3,7 +3,6 @@ import os
 import sys
 import asyncio
 import shutil
-import requests
 import aiohttp
 import webbrowser
 import time
