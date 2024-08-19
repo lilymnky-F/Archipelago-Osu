@@ -633,6 +633,7 @@ def get_played_ids(ctx):
     played_items.sort()
     return played_items
 
+
 def get_played_songs(ctx):
     # Gets the Song value of each Song the player has played
     played_ids = get_played_ids(ctx)
@@ -640,6 +641,7 @@ def get_played_songs(ctx):
     for played in played_ids:
         played_songs.append(list(ctx.pairs.keys())[played])
     return played_songs
+
 
 def check_location(ctx, score):
     if not score['passed']:
