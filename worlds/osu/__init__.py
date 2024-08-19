@@ -128,6 +128,7 @@ class OsuWorld(World):
             self.song_data.remove(beatmapset)
 
     def check_eligibility(self, beatmapset):
+        # first check each of the settings to see if the song could be included
         if str(beatmapset["id"]) in self.options.include_songs.value.union(self.options.exclude_songs.value):
             return False
         if beatmapset["length"] > self.options.maximum_length:
@@ -136,11 +137,13 @@ class OsuWorld(World):
             return False
         if beatmapset["status"] == 'loved' and (not self.options.enable_loved):
             return False
+        # If the song is legal, start looking for difficulties
+        found_difficulties = []
         for difficulty in beatmapset["beatmaps"]:
             mode = self.modes[difficulty['mode']]
             if mode.minimum_difficulty <= difficulty['sr']*100 <= mode.maximum_difficulty:
-                return True
-        return False
+                found_difficulties.append(difficulty['id'])
+        return found_difficulties
 
     def create_item(self, name: str) -> OsuItem:
         return OsuItem(name, item_data_table[name].type, item_data_table[name].code, self.player)
