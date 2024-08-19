@@ -37,7 +37,7 @@ class DisableDifficultyReduction(Toggle):
 
 
 class DifficultySync(Choice):
-    """Changes what difficulties of each selected song send checks
+    """Changes which difficulties of each beatmapset are able to send checks
     Off - Any difficulty of each Beatmapset will send a check.
     Strict_Any - Only difficulties that fall in your difficulty ranges will send checks
     Strict_Random - A randomly chosen difficulty within your range has to be played. /check will tell you the diff.
