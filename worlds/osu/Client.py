@@ -573,6 +573,7 @@ async def get_last_scores(self, mode=''):
             self.ctx.last_scores.pop(0)
         self.check_location(score)
 
+
 # calculates the grade of a stable score
 def calculate_stable_grade(score):
     acc = float(score['accuracy'])
@@ -580,11 +581,12 @@ def calculate_stable_grade(score):
 
     # if the score has 100% accuracy, then it is an SS no matter gamemode or grading system
     # skip the rest of the checks
-    if(acc == 1): return 'SS'
+    if acc == 1:
+        return 'SS'
 
     # if this score has the Classic mod enabled, then we assume it is a stable score
-    elif(any(mod['acronym'] == 'CL' for mod in score['mods'])):
-        if(gamemode == 0 or gamemode == 1): # osu!standard or osu!taiko
+    elif any(mod['acronym'] == 'CL' for mod in score['mods']):
+        if gamemode == 0 or gamemode == 1: # osu!standard or osu!taiko
 
             # for some reason these statistics are missing if you get 0 of any of these
             miss_count = int(score['statistics'].get('miss', 0) or 0)
@@ -594,28 +596,28 @@ def calculate_stable_grade(score):
             total_hits = miss_count + num_300s + num_100s + num_50s
             percent_300s = num_300s / total_hits
             precent_50s = num_50s / (num_300s + num_100s + num_50s)
-            if(miss_count == 0 and precent_50s <= 0.01):
-               if(percent_300s > 0.9): return 'S'
-               if(percent_300s > 0.8): return 'A'
-               if(percent_300s > 0.7): return 'B'
-               if(percent_300s > 0.6): return 'C'
-               return 'D'
+            if miss_count == 0 and precent_50s <= 0.01:
+                if percent_300s > 0.9: return 'S'
+                if percent_300s > 0.8: return 'A'
+                if percent_300s > 0.7: return 'B'
+                if percent_300s > 0.6: return 'C'
+                return 'D'
             else:
-               if(percent_300s > 0.9): return 'A'
-               if(percent_300s > 0.8): return 'B'
-               if(percent_300s > 0.6): return 'C'
-               return 'D'
-        elif(gamemode == 2): # osu!catch
-            if(acc > 0.98): return 'S'
-            if(acc > 0.94): return 'A'
-            if(acc > 0.9): return 'B'
-            if(acc > 0.85): return 'C'
+                if percent_300s > 0.9: return 'A'
+                if percent_300s > 0.8: return 'B'
+                if percent_300s > 0.6: return 'C'
+                return 'D'
+        elif gamemode == 2:  # osu!catch
+            if acc > 0.98: return 'S'
+            if acc > 0.94: return 'A'
+            if acc > 0.9: return 'B'
+            if acc > 0.85: return 'C'
             return 'D'
-        elif(gamemode == 3): # osu!mania
-            if(acc > 0.95): return 'S'
-            if(acc > 0.9): return 'A'
-            if(acc > 0.8): return 'B'
-            if(acc > 0.7): return 'C'
+        elif gamemode == 3:  # osu!mania
+            if acc > 0.95: return 'S'
+            if acc > 0.9: return 'A'
+            if acc > 0.8: return 'B'
+            if acc > 0.7: return 'C'
             return 'D'
            
            
