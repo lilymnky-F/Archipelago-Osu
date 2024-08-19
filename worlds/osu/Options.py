@@ -245,6 +245,8 @@ class OsuOptions(PerGameCommonOptions):
     additional_songs: AdditionalSongs
     additional_item_percentage: AdditionalItemPercentage
     disable_difficulty_reduction: DisableDifficultyReduction
+    difficulty_sync: DifficultySync
+    disallow_converts: DisallowConverts
     maximum_length: MaximumLength
     exclude_standard: DisableStandard
     minimum_difficulty_standard: StandardMinimumDifficulty

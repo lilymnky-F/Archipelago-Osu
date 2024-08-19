@@ -121,8 +121,14 @@ class OsuWorld(World):
     def get_eligible_songs(self) -> None:
         marked_for_removal = []
         for beatmapset in self.song_data:
-            if not self.check_eligibility(beatmapset):
+            eligibile_diffs = self.check_eligibility(beatmapset)
+            if not eligibile_diffs:
                 marked_for_removal.append(beatmapset)
+                continue
+            # 2 = Strict_random
+            if self.options.difficulty_sync.value == 2:
+                eligibile_diffs = [eligibile_diffs[0]]
+            beatmapset['diffs'] = eligibile_diffs
 
         for beatmapset in marked_for_removal:
             self.song_data.remove(beatmapset)
@@ -226,5 +232,7 @@ class OsuWorld(World):
         return {
             "Pairs": self.pairs,
             "PreformancePointsNeeded": self.get_music_sheet_win_count(),
-            "DisableDifficultyReduction": self.disable_difficulty_reduction
+            "DisableDifficultyReduction": self.disable_difficulty_reduction,
+            "DifficultySync": self.options.difficulty_sync.value,
+            "DisallowConverts": self.options.disallow_converts.value
         }
