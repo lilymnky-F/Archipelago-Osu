@@ -365,7 +365,7 @@ class APosuContext(CommonContext):
             slot_data = args.get('slot_data', None)
             if slot_data:
                 self.pairs = slot_data.get('Pairs', {})
-                self.preformance_points_needed = slot_data.get('PreformancePointsNeeded', 0)
+                self.preformance_points_needed = slot_data.get('PreformancePointsNeeded', 9999)
                 self.disable_difficulty_reduction = slot_data.get('DisableDifficultyReduction', False)
             if not os.path.exists(self.game_communication_path):
                 os.makedirs(self.game_communication_path)
