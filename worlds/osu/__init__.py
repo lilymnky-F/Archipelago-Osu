@@ -127,7 +127,7 @@ class OsuWorld(World):
                 continue
             # 2 = Strict_random
             if self.options.difficulty_sync.value == 2:
-                eligibile_diffs = [eligibile_diffs[0]]
+                eligibile_diffs = [self.random.choice(eligibile_diffs)]
             beatmapset['diffs'] = eligibile_diffs
 
         for beatmapset in marked_for_removal:
