@@ -199,15 +199,17 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                 self.output(f'Play Matches {song}')
                 # check for the correct diff
                 if self.ctx.difficulty_sync and score['beatmap_id'] not in self.ctx.pairs[song]['diffs']:
-                    print('The incorrect difficulty was played')
+                    self.output('The incorrect difficulty was played')
+                    self.output(f'The correct difficulty(ies) is: {self.ctx.pairs[song]["diffs"]}')
                     return
                 # check for converts
                 if self.ctx.disallow_converts:
                     # Find the diff that was played
                     for beatmap in self.ctx.pairs[song]['beatmaps']:
                         if beatmap['id'] == score['beatmap_id']:
+                            # Only Standard maps can be converted
                             if score['ruleset_id'] != 0 and beatmap['mode'] == 'osu':
-                                print('Your settings do not allow converts')
+                                self.output('Your settings do not allow converts')
                                 return
                 if song == "Victory":
                     if count_item(self.ctx, 726999999) >= self.ctx.preformance_points_needed:
