@@ -185,6 +185,34 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         self.output('Please Use Either "Direct" or "Mirror"')
 
+    def _cmd_check_diff(self, number=''):
+        """Downloads the given song number in '/songs'. Also Accepts "Next" and "Victory"."""
+        if number.lower() == 'next':
+            if len(get_available_ids(self.ctx)) > 0:
+                number = get_available_ids(self.ctx)[0]+1
+            else:
+                self.output("You have no songs to download")
+                return
+        try:
+            song_number = int(number)-1
+        except ValueError:
+            if not (number.lower().capitalize() == 'Victory'):
+                self.output("Please Give a Number, 'next' or 'Victory'")
+                return
+            song_number = -1
+        try:
+            song = list(self.ctx.pairs.keys())[song_number]
+        except IndexError:
+            self.output("Use the Song Numbers in '/songs' (Not the IDs)")
+            return
+        beatmapset = self.ctx.pairs[song]
+        asyncio.create_task(self.get_diff_name(beatmapset))
+
+    async def get_diff_name(self, beatmapset):
+        for i in beatmapset['diffs']:
+            # call api and get the name of the diff thats in logic and tell the player
+            pass
+
     def check_location(self, score):
         self.output(score['beatmapset']['title'] + " " + score['beatmap']['version'] + f' Passed: {score["passed"]}')
         # Check if the score is a pass, then check if it's in the AP
@@ -304,6 +332,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             webbrowser.open(file_path)
         except Exception as e:
             self.output(f"An error occurred: {repr(e)}")
+
+
         
 
 class APosuContext(CommonContext):
