@@ -148,7 +148,7 @@ class OsuWorld(World):
         for difficulty in beatmapset["beatmaps"]:
             mode = self.modes[difficulty['mode']]
             if mode.minimum_difficulty <= difficulty['sr']*100 <= mode.maximum_difficulty:
-                found_difficulties.append(difficulty)
+                found_difficulties.append(difficulty['id'])
         if found_difficulties:
             return found_difficulties
         return False
