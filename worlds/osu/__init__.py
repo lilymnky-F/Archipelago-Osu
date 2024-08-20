@@ -149,7 +149,9 @@ class OsuWorld(World):
             mode = self.modes[difficulty['mode']]
             if mode.minimum_difficulty <= difficulty['sr']*100 <= mode.maximum_difficulty:
                 found_difficulties.append(difficulty)
-        return found_difficulties
+        if found_difficulties:
+            return found_difficulties
+        return False
 
     def create_item(self, name: str) -> OsuItem:
         return OsuItem(name, item_data_table[name].type, item_data_table[name].code, self.player)
