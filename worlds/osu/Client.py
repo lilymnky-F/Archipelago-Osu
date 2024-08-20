@@ -197,6 +197,10 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         for song in self.ctx.pairs:
             if self.ctx.pairs[song]['id'] == score['beatmapset']['id']:
                 self.output(f'Play Matches {song}')
+                # check for convert
+                if self.ctx.disallow_converts and int(score['ruleset_id']) != 0 and self.ctx.pairs[song]['mode'] == 'osu':
+                    print('Converts are disallowed')
+                    return
                 if song == "Victory":
                     if count_item(self.ctx, 726999999) >= self.ctx.preformance_points_needed:
                         message = [{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}]
@@ -659,6 +663,10 @@ def check_location(ctx, score):
     for song in ctx.pairs:
         if ctx.pairs[song]['id'] == score['beatmapset']['id']:
             print(f'Play Matches {song}')
+            # check for convert
+            if ctx.disallow_converts and int(score['ruleset_id']) != 0 and ctx.pairs[song]['mode'] == 'osu':
+                print('Converts are disallowed')
+                return
             if song == "Victory":
                 if count_item(ctx, 726999999) >= ctx.preformance_points_needed:
                     asyncio.create_task(ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}]))
