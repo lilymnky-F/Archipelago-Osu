@@ -197,6 +197,18 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         for song in self.ctx.pairs:
             if self.ctx.pairs[song]['id'] == score['beatmapset']['id']:
                 self.output(f'Play Matches {song}')
+                # check for the correct diff
+                if self.ctx.difficulty_sync and score['beatmap_id'] not in self.ctx.pairs[song]['diffs']:
+                    print('The incorrect difficulty was played')
+                    return
+                # check for converts
+                if self.ctx.disallow_converts:
+                    # Find the diff that was played
+                    for beatmap in self.ctx.pairs[song]['beatmaps']:
+                        if beatmap['id'] == score['beatmap_id']:
+                            if score['ruleset_id'] != 0 and beatmap['mode'] == 'osu':
+                                print('Your settings do not allow converts')
+                                return
                 if song == "Victory":
                     if count_item(self.ctx, 726999999) >= self.ctx.preformance_points_needed:
                         message = [{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}]
@@ -659,6 +671,18 @@ def check_location(ctx, score):
     for song in ctx.pairs:
         if ctx.pairs[song]['id'] == score['beatmapset']['id']:
             print(f'Play Matches {song}')
+            # check for the correct diff
+            if ctx.difficulty_sync and score['beatmap_id'] not in ctx.pairs[song]['diffs']:
+                print('The incorrect difficulty was played')
+                return
+            # check for converts
+            if ctx.disallow_converts:
+                # Find the diff that was played
+                for beatmap in ctx.pairs[song]['beatmaps']:
+                    if beatmap['id'] == score['beatmap_id']:
+                        if score['ruleset_id'] != 0 and beatmap['mode'] == 'osu':
+                            print('Your settings do not allow converts')
+                            return
             if song == "Victory":
                 if count_item(ctx, 726999999) >= ctx.preformance_points_needed:
                     asyncio.create_task(ctx.send_msgs([{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}]))
