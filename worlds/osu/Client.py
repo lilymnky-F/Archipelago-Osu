@@ -578,8 +578,8 @@ async def get_last_scores(self, mode=''):
         self.check_location(score)
 
 
-# calculates the grade of a stable score
-def calculate_stable_grade(score):
+# calculates the grade of a score with the ability to differentiate between stable and lazer scores
+def calculate_grade(score):
     acc = float(score['accuracy'])
     gamemode = int(score['ruleset_id'])
 
@@ -588,17 +588,18 @@ def calculate_stable_grade(score):
     if acc == 1:
         return 'SS'
 
-    # if this score has the Classic mod enabled, then we assume it is a stable score
-    elif any(mod['acronym'] == 'CL' for mod in score['mods']):
+    # if this score has the Classic mod enabled or if it has a legacy id, then we assume it is a stable score
+    elif any(mod['acronym'] == 'CL' for mod in score['mods']) or score['legacy_score_id']:
         if gamemode == 0 or gamemode == 1: # osu!standard or osu!taiko
 
             # for some reason these statistics are missing if you get 0 of any of these
+            # so we have to check if they exist before we try to get them
             miss_count = int(score['statistics'].get('miss', 0) or 0)
             num_300s = int(score['statistics'].get('great', 0) or 0)
             num_100s = int(score['statistics'].get('ok', 0) or 0)
             num_50s = int(score['statistics'].get('meh', 0) or 0)
-            total_hits = miss_count + num_300s + num_100s + num_50s
-            percent_300s = num_300s / total_hits
+            total_judgements = miss_count + num_300s + num_100s + num_50s
+            percent_300s = num_300s / total_judgements
             precent_50s = num_50s / (num_300s + num_100s + num_50s)
             if miss_count == 0 and precent_50s <= 0.01:
                 if percent_300s > 0.9: return 'S'
@@ -623,6 +624,9 @@ def calculate_stable_grade(score):
             if acc > 0.8: return 'B'
             if acc > 0.7: return 'C'
             return 'D'
+    # if it is a lazer score, then the API did all the work for us
+    else:
+        return score['rank']
            
            
 def get_played_ids(ctx):
