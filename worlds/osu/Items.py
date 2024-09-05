@@ -17,7 +17,13 @@ class OsuItemData(NamedTuple):
     type: ItemClassification = ItemClassification.filler
 
 
+SONG_DATA_CACHE = None
 def get_song_data() -> list[dict]:
+    global SONG_DATA_CACHE
+
+    if SONG_DATA_CACHE is not None:
+        return SONG_DATA_CACHE
+
     OsuSongData = load_text_file("OsuSongData.json")
     packs = json.loads(OsuSongData)
     beatmapsets = []
@@ -25,7 +31,9 @@ def get_song_data() -> list[dict]:
         for beatmapset in pack["beatmapsets"]:
             if beatmapset not in beatmapsets:
                 beatmapsets.append(beatmapset)
-    return beatmapsets
+    SONG_DATA_CACHE = beatmapsets
+
+    return SONG_DATA_CACHE
 
 
 def find_beatmapset(id) -> dict:
