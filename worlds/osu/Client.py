@@ -45,10 +45,6 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     #    self.output(f"Data: {str(self.ctx.pairs)}")
     #    pass
 
-    def _cmd_resync(self):
-        """Manually trigger a resync. Usually Shouldn't be needed"""
-        self.output(f"Syncing items.")
-        self.ctx.syncing = True
 
     def _cmd_set_api_key(self, key=""):
         """Sets the Client Secret, generated in the "OAuth" Section of Account Settings"""
@@ -345,8 +341,6 @@ class APosuContext(CommonContext):
     def __init__(self, server_address, password):
         super(APosuContext, self).__init__(server_address, password)
         self.send_index: int = 0
-        self.syncing = False
-        self.awaiting_bridge = False
         self.pairs: dict = {}
         self.last_scores: list = []
         self.auto_modes: list[str] = []
@@ -415,6 +409,9 @@ class APosuContext(CommonContext):
                 self.disable_difficulty_reduction = slot_data.get('DisableDifficultyReduction', False)
                 self.difficulty_sync = slot_data.get('DifficultySync', 0)
                 self.disallow_converts = slot_data.get('DisallowConverts', False)
+                version = slot_data.get('VersionNumber', None)
+                if version is None:
+                    pass
             if not os.path.exists(self.game_communication_path):
                 os.makedirs(self.game_communication_path)
 

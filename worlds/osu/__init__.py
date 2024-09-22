@@ -236,5 +236,6 @@ class OsuWorld(World):
             "PreformancePointsNeeded": self.get_music_sheet_win_count(),
             "DisableDifficultyReduction": self.disable_difficulty_reduction,
             "DifficultySync": self.options.difficulty_sync.value,
-            "DisallowConverts": self.options.disallow_converts.value
+            "DisallowConverts": self.options.disallow_converts.value,
+            "VersionNumber": "1.1b"
         }
