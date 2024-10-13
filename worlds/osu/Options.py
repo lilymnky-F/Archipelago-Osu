@@ -225,7 +225,7 @@ class PerformancePointsWinCountPercentage(Range):
 
 
 class IncludeSongs(OptionSet):
-    """List of Beatmapset IDs to include. Will add songs in ascending order by ID after the starting songs.
+    """List of Beatmapset IDs to include, each replacing a Rando song. Will add songs in ascending order by ID after the starting songs.
     IE: If you have 5 starting songs, the first ID will be song 6.
     """
     display_name = "Include Songs"
