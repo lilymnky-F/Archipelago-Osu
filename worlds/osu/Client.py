@@ -627,7 +627,7 @@ def calculate_grade(score):
     # if the score has 100% accuracy, then it is an SS no matter gamemode or grading system
     # skip the rest of the checks
     if acc == 1:
-        return 'SS'
+        return 'X'
 
     # if this score has the Classic mod enabled or if it has a legacy id, then we assume it is a stable score
     elif any(mod['acronym'] == 'CL' for mod in score['mods']) or score['legacy_score_id']:
@@ -667,7 +667,7 @@ def calculate_grade(score):
             return 'D'
     # if it is a lazer score, then the API did all the work for us
     else:
-        return score['rank']
+        return score['rank'].replace('XH', 'X').replace('SH', 'S') # remove hidden and flashlight from the grade
            
            
 def get_played_ids(ctx):
