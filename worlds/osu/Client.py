@@ -668,7 +668,12 @@ def calculate_grade(score):
     # if it is a lazer score, then the API did all the work for us
     else:
         return score['rank'].replace('XH', 'X').replace('SH', 'S') # remove hidden and flashlight from the grade
-           
+
+# compares two grades and returns the difference between them
+# the difference is positive if grade1 is better than grade2
+def compare_grades(grade1, grade2):
+    grades = ['X', 'S', 'A', 'B', 'C', 'D']
+    return grades.index(grade1) - grades.index(grade2)
            
 def get_played_ids(ctx):
     # Gets the Index of each Song the player has played
