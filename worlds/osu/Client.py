@@ -187,7 +187,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         self.output('Please Use Either "Direct" or "Mirror"')
 
     def _cmd_check_diff(self, number=''):
-        """Downloads the given song number in '/songs'. Also Accepts "Next" and "Victory"."""
+        """Outputs the difficulties of a given song number that are in logic. Only Applies for Difficulty Sync."""
         if number.lower() == 'next':
             if len(get_available_ids(self.ctx)) > 0:
                 number = get_available_ids(self.ctx)[0]+1
@@ -209,10 +209,17 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         beatmapset = self.ctx.pairs[song]
         asyncio.create_task(self.get_diff_name(beatmapset))
 
-    async def get_diff_name(self, beatmapset):
-        for i in beatmapset['diffs']:
-            # call api and get the name of the diff thats in logic and tell the player
-            pass
+    async def get_diff_name(self, song):
+        if not self.ctx.token:
+            await get_token(self.ctx)
+        url = f"https://osu.ppy.sh/api/v2/beatmapsets/{song['id']}"
+        headers = {"Accept": "application/json", "Content-Type": "application/json",
+                   "Authorization": f"Bearer {self.ctx.token}"}
+        async with aiohttp.request("GET", url, headers=headers) as request:
+            beatmapset = await request.json()
+        for i in beatmapset['beatmaps']:
+            if i['id'] in song['diffs']:
+                self.output(f'{i["version"]} - {i["difficulty_rating"]}*')
 
     def check_location(self, score):
         self.output(score['beatmapset']['title'] + " " + score['beatmap']['version'] + f' Passed: {score["passed"]}')
