@@ -49,6 +49,19 @@ class DifficultySync(Choice):
     default = 0
 
 
+class MinimumGrade(Choice):
+    """If Enbaled, only send checks for plays with a grade above this value.
+    """
+    display_name = "Minimum Grade"
+    option_Off = 0
+    option_SS = 1
+    option_S = 2
+    option_A = 3
+    option_B = 4
+    option_C = 5
+    default = 0
+
+
 class DisallowConverts(Toggle):
     """Prevents Converts from sending checks. Reccomended if using strict difficulty Sync."""
     display_name = "Disallow Converts"
@@ -245,6 +258,7 @@ class OsuOptions(PerGameCommonOptions):
     additional_songs: AdditionalSongs
     additional_item_percentage: AdditionalItemPercentage
     disable_difficulty_reduction: DisableDifficultyReduction
+    minimum_grade: MinimumGrade
     difficulty_sync: DifficultySync
     disallow_converts: DisallowConverts
     maximum_length: MaximumLength

@@ -237,5 +237,6 @@ class OsuWorld(World):
             "DisableDifficultyReduction": self.disable_difficulty_reduction,
             "DifficultySync": self.options.difficulty_sync.value,
             "DisallowConverts": self.options.disallow_converts.value,
+            "MinimumGrade": self.options.minimum_grade.value,
             "VersionNumber": "1.1b"
         }
