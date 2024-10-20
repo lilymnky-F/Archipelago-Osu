@@ -787,6 +787,10 @@ def check_location(ctx, score):
         return
     if ctx.disable_difficulty_reduction and any(mod['acronym'] in ['NF', 'EZ', 'HT', 'DC'] for mod in score['mods']):
         return
+    if ctx.minimum_grade:
+        grade = calculate_grade(score)
+        if ['X', 'S', 'A', 'B', 'C', 'D'].index(grade) >= ctx.minimum_grade:
+            return
     for song in ctx.pairs:
         if ctx.pairs[song]['id'] == score['beatmapset']['id']:
             print(f'Play Matches {song}')
