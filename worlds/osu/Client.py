@@ -132,7 +132,11 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         if self.ctx.download_type == 'direct':
             self.output(f"Opening {song}: {beatmapset['title']} (ID: {beatmapset['id']}) in osu!Direct")
-            asyncio.create_task(open_set_in_direct(self.ctx, beatmapset['id']))
+            try:
+                asyncio.create_task(open_set_in_direct(self.ctx, beatmapset['diffs'][0]))
+            except KeyError:
+                self.output("No Difficulty ID found, attempting fallback")
+                asyncio.create_task(open_set_in_direct(self.ctx, beatmapset['id'], True))
 
     def _cmd_auto_track(self, mode=''):
         """Toggles Auto Tracking for the Given Mode (or "All"). Supports Multiple Modes."""
@@ -468,16 +472,20 @@ async def get_token(ctx):
         return
 
 
-async def open_set_in_direct(ctx, set_id: int) -> None:
-    if not ctx.token:
-        await get_token(ctx)
-    url = f"https://osu.ppy.sh/api/v2/beatmapsets/{set_id}"
-    headers = {"Accept": "application/json", "Content-Type": "application/json",
-               "Authorization": f"Bearer {ctx.token}"}
-    async with aiohttp.request("GET", url, headers=headers) as conversion:
-        beatmapset = await conversion.json()
-        print(beatmapset)
-    webbrowser.open(f"osu://b/{beatmapset['beatmaps'][0]['id']}")
+async def open_set_in_direct(ctx, diff_id: int, fallback: bool = False) -> None:
+    if fallback:
+        set_id = diff_id
+        if not ctx.token:
+            await get_token(ctx)
+        url = f"https://osu.ppy.sh/api/v2/beatmapsets/{set_id}"
+        headers = {"Accept": "application/json", "Content-Type": "application/json",
+                   "Authorization": f"Bearer {ctx.token}"}
+        async with aiohttp.request("GET", url, headers=headers) as conversion:
+            beatmapset = await conversion.json()
+            print(beatmapset)
+        webbrowser.open(f"osu://b/{beatmapset['beatmaps'][0]['id']}")
+        return
+    webbrowser.open(f"osu://b/{diff_id}")
 
 # This is the silent version of the function below where this one is used in game watcher
 async def download_next_beatmapset_silent(ctx, task):
