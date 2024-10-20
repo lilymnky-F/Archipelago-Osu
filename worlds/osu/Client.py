@@ -132,6 +132,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         if self.ctx.download_type == 'direct':
             self.output(f"Opening {song}: {beatmapset['title']} (ID: {beatmapset['id']}) in osu!Direct")
+            # Newer versions of this APworld have difficulty IDs, older ones do not
             try:
                 asyncio.create_task(open_set_in_direct(self.ctx, beatmapset['diffs'][0]))
             except KeyError:
@@ -473,6 +474,7 @@ async def get_token(ctx):
 
 
 async def open_set_in_direct(ctx, diff_id: int, fallback: bool = False) -> None:
+    # If the beatmapset has no difficulty ID, we have to fallback to the beatmap ID as done in previous versions
     if fallback:
         set_id = diff_id
         if not ctx.token:
@@ -485,6 +487,7 @@ async def open_set_in_direct(ctx, diff_id: int, fallback: bool = False) -> None:
             print(beatmapset)
         webbrowser.open(f"osu://b/{beatmapset['beatmaps'][0]['id']}")
         return
+    # otherwise we can just open the first diff directly
     webbrowser.open(f"osu://b/{diff_id}")
 
 # This is the silent version of the function below where this one is used in game watcher
