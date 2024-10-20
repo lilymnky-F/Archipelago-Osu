@@ -350,6 +350,7 @@ class APosuContext(CommonContext):
         self.disable_difficulty_reduction: bool = False
         self.all_locations: list[int] = []
         self.difficulty_sync = 0
+        self.minimum_grade = 0
         self.disallow_converts = False
         self.preformance_points_needed = 9999  # High Enough to never accidently trigger if the slot data fails
         # self.game_communication_path: files go in this path to pass data between us and the actual game
@@ -408,6 +409,7 @@ class APosuContext(CommonContext):
                 self.preformance_points_needed = slot_data.get('PreformancePointsNeeded', 9999)
                 self.disable_difficulty_reduction = slot_data.get('DisableDifficultyReduction', False)
                 self.difficulty_sync = slot_data.get('DifficultySync', 0)
+                self.minimum_grade = slot_data.get('MinimumGrade', 0)
                 self.disallow_converts = slot_data.get('DisallowConverts', False)
                 version = slot_data.get('VersionNumber', None)
                 if version is None:
