@@ -71,7 +71,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             for info in [os.environ['API_KEY'], os.environ['CLIENT_ID'], os.environ['PLAYER_ID']]:
                 f.write(info)
                 f.write(" ")
-        self.output("Saved Current Data")
+        self.output("Saved Current Keys")
 
     def _cmd_load_keys(self):
         """loads the player's previously saved IDs"""
@@ -79,9 +79,69 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         path = self.ctx.game_communication_path+' config'
         with open(os.path.join(path, filename), 'r') as f:
             data = f.read()
+        d = data.split(" ")
+        os.environ['API_KEY'], os.environ['CLIENT_ID'], os.environ['PLAYER_ID'] = d[0], d[1], d[2],
+        self.output("Loaded Previous Keys")
+
+    def _cmd_save_settings(self):
+        """Saves the player's current settings. Doesn't include API keys or IDs."""
+        filename = "settings"
+        path = self.ctx.game_communication_path+' config'
+        if not os.path.exists(path):
+            os.makedirs(path)
+        with open(os.path.join(path, filename), 'w') as f:
+            for info in [self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type]:
+                f.write(info)
+                f.write(" ")
+        self.output("Saved Auto Tracking, Auto Download, and Download Type Settings.")
+
+    def _cmd_load_settings(self):
+        """Loads the player's previously saved settings. Doesn't include API keys or IDs."""
+        filename = "settings"
+        path = self.ctx.game_communication_path+' config'
+        with open(os.path.join(path, filename), 'r') as f:
+            data = f.read()
+        d = data.split(" ")
+        self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = d[0], d[1], d[2],
+        self.output("Loaded Previous Settings")
+
+    def _cmd_save_all(self):
+        """Saves both the player's current IDs, and their settings."""
+        filename = "config"
+        path = self.ctx.game_communication_path+' config'
+        if not os.path.exists(path):
+            os.makedirs(path)
+        with open(os.path.join(path, filename), 'w') as f:
+            for info in [os.environ['API_KEY'], os.environ['CLIENT_ID'], os.environ['PLAYER_ID']]:
+                f.write(info)
+                f.write(" ")
+        self.output("Saved Current Keys")
+        filename = "settings"
+        path = self.ctx.game_communication_path + ' config'
+        if not os.path.exists(path):
+            os.makedirs(path)
+        with open(os.path.join(path, filename), 'w') as f:
+            for info in [self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type]:
+                f.write(info)
+                f.write(" ")
+        self.output("Saved Auto Tracking, Auto Download, and Download Type Settings.")
+
+    def _cmd_load_all(self):
+        """loads the player's previously saved IDs, and their settings."""
+        filename = "config"
+        path = self.ctx.game_communication_path+' config'
+        with open(os.path.join(path, filename), 'r') as f:
+            data = f.read()
             d = data.split(" ")
             os.environ['API_KEY'], os.environ['CLIENT_ID'], os.environ['PLAYER_ID'] = d[0], d[1], d[2],
-            self.output("Loaded Previous Data")
+            self.output("Loaded Previous Keys")
+        filename = "settings"
+        path = self.ctx.game_communication_path + ' config'
+        with open(os.path.join(path, filename), 'r') as f:
+            data = f.read()
+        d = data.split(" ")
+        self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = d[0], d[1], d[2],
+        self.output("Loaded Previous Settings")
 
     def _cmd_songs(self):
         """Display all songs in logic."""
