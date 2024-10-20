@@ -50,7 +50,7 @@ class DifficultySync(Choice):
 
 
 class MinimumGrade(Choice):
-    """If Enbaled, only send checks for plays with a grade above this value.
+    """If Enabled, only send checks for plays with a grade above this value.
     """
     display_name = "Minimum Grade"
     option_Off = 0
