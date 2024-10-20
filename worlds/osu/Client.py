@@ -290,6 +290,11 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         if self.ctx.disable_difficulty_reduction and any(mod['acronym'] in ['NF', 'EZ', 'HT', 'DC'] for mod in score['mods']):
             self.output("Your current settings do not allow difficulty reduction mods.")
             return
+        if self.ctx.minimum_grade:
+            grade = calculate_grade(score)
+            if ['X', 'S', 'A', 'B', 'C', 'D'].index(grade) >= self.ctx.minimum_grade:
+                self.output("You did not get a high enough grade.")
+                return
         for song in self.ctx.pairs:
             if self.ctx.pairs[song]['id'] == score['beatmapset']['id']:
                 self.output(f'Play Matches {song}')
@@ -541,7 +546,7 @@ async def get_token(ctx):
 
 
 async def open_set_in_direct(ctx, diff_id: int, fallback: bool = False) -> None:
-    # If the beatmapset has no difficulty ID, we have to fallback to the beatmap ID as done in previous versions
+    # If the beatmapset has no difficulty ID, we have to fall back to the beatmap ID as done in previous versions
     if fallback:
         set_id = diff_id
         if not ctx.token:
