@@ -1,3 +1,5 @@
+import copy
+
 from BaseClasses import Region, Tutorial
 from worlds.AutoWorld import WebWorld, World
 from .Items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool, find_beatmapset
@@ -72,7 +74,7 @@ class OsuWorld(World):
     def generate_early(self):
         self.pairs = {}
         self.song_pool = osu_song_pool.copy()
-        self.song_data = osu_song_data.copy()
+        self.song_data = copy.deepcopy(osu_song_data)
         self.modes = {}
         self.starting_songs = []
         self.included_songs = []
