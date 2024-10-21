@@ -297,8 +297,9 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         if self.ctx.minimum_grade:
             grade = calculate_grade(score)
-            if ['X', 'S', 'A', 'B', 'C', 'D'].index(grade) >= self.ctx.minimum_grade:
-                self.output("You did not get a high enough grade.")
+            grades = ['X', 'S', 'A', 'B', 'C', 'D']
+            if grades.index(grade) >= self.ctx.minimum_grade:
+                self.output(f"You did not get a high enough grade. You need atleast a(n) {grades[self.ctx.minimum_grade-1]}")
                 return
         for song in self.ctx.pairs:
             if self.ctx.pairs[song]['id'] == score['beatmapset']['id']:
