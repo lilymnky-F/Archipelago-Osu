@@ -692,7 +692,7 @@ async def get_last_scores(self, mode=''):
         request += f"&mode={self.mode_names[mode.lower()]}"
     if not self.ctx.token:
         await get_token(self.ctx)
-    headers = {"Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {self.ctx.token}", "x-api-version" : "20240529"}
+    headers = {"Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {self.ctx.token}", "x-api-version": "20240529"}
     async with aiohttp.request("GET", request, headers=headers) as scores:
         try:
             score_list = await scores.json()
