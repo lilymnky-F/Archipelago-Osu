@@ -6,6 +6,7 @@ import shutil
 import aiohttp
 import webbrowser
 import time
+import ast
 
 import ModuleUpdate
 
@@ -44,7 +45,6 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     #    """Show Slot Data, For Debug Purposes. Probably don't run this"""
     #    self.output(f"Data: {str(self.ctx.pairs)}")
     #    pass
-
 
     def _cmd_set_api_key(self, key=""):
         """Sets the Client Secret, generated in the "OAuth" Section of Account Settings"""
@@ -91,8 +91,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             os.makedirs(path)
         with open(os.path.join(path, filename), 'w') as f:
             for info in [self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type]:
-                f.write(info)
-                f.write(" ")
+                f.write(str(info))
+                f.write("\t")
         self.output("Saved Auto Tracking, Auto Download, and Download Type Settings.")
 
     def _cmd_load_settings(self):
@@ -101,8 +101,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         path = self.ctx.game_communication_path+' config'
         with open(os.path.join(path, filename), 'r') as f:
             data = f.read()
-        d = data.split(" ")
-        self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = d[0], d[1], d[2],
+        d = data.split("\t")
+        self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = ast.literal_eval(d[0]), ast.literal_eval(d[1]), d[2],
         self.output("Loaded Previous Settings")
 
     def _cmd_save_all(self):
@@ -122,8 +122,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             os.makedirs(path)
         with open(os.path.join(path, filename), 'w') as f:
             for info in [self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type]:
-                f.write(info)
-                f.write(" ")
+                f.write(str(info))
+                f.write("\t")
         self.output("Saved Auto Tracking, Auto Download, and Download Type Settings.")
 
     def _cmd_load_all(self):
@@ -139,8 +139,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         path = self.ctx.game_communication_path + ' config'
         with open(os.path.join(path, filename), 'r') as f:
             data = f.read()
-        d = data.split(" ")
-        self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = d[0], d[1], d[2],
+        d = data.split("\t")
+        self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = ast.literal_eval(d[0]), ast.literal_eval(d[1]), d[2],
         self.output("Loaded Previous Settings")
 
     def _cmd_songs(self):
@@ -248,6 +248,11 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_check_diff(self, number=''):
         """Outputs the difficulties of a given song number that are in logic. Only Applies for Difficulty Sync."""
+        try:
+            [os.environ['API_KEY'], os.environ['CLIENT_ID']]
+        except KeyError:
+            self.output('Please set your Client ID, and Client Secret')
+            return
         if number.lower() == 'next':
             if len(get_available_ids(self.ctx)) > 0:
                 number = get_available_ids(self.ctx)[0]+1
@@ -363,8 +368,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                     total_bytes = int(content_length)
                     total_mb = total_bytes / (1024 ** 2)
                     # Beatconnect is slow to respond, so this message will appear when the download starts unlike when you run the command
-                    self.output(f"Starting download of beatmapset ({total_mb:.2f}MB)") 
-                
+                    self.output(f"Starting download of beatmapset ({total_mb:.2f}MB)")
+
                 downloaded_content = []
                 downloaded_bytes = 0
                 last_print_time = time.time()
@@ -383,31 +388,31 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                         if current_time - last_print_time >= 0.5 or downloaded_bytes == total_bytes:
                             self.output(f"Downloaded: {downloaded_mb:.2f}MB / {total_mb:.2f}MB ({progress}%)")
                             last_print_time = current_time
-                    
+
                     # If we don't know the total size, just print the downloaded amount
                     else:
                         self.output(f"Downloaded: {downloaded_mb:.2f}MB")
-                
+
                 # Combine all the chunks into one just like req.read() would do
                 content = b"".join(downloaded_content)
             f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
             filename = "".join(i for i in f if i not in "\/:*?<>|\"")
             path = os.path.join(self.ctx.game_communication_path, 'config')
-            
+
             if not os.path.exists(path):
                 os.makedirs(path)
-            
+
             file_path = os.path.join(path, filename)
             with open(file_path, 'wb') as f:
                 f.write(content)
-            
+
             self.output(f'Opening {filename}...')  # More feedback to the user
             webbrowser.open(file_path)
         except Exception as e:
             self.output(f"An error occurred: {repr(e)}")
 
 
-        
+
 
 class APosuContext(CommonContext):
     command_processor: int = APosuClientCommandProcessor
@@ -570,7 +575,10 @@ async def download_next_beatmapset_silent(ctx, task):
         return
     beatmapset = ctx.pairs[list(ctx.pairs.keys())[get_available_ids(ctx)[0]]]
     if ctx.download_type == 'direct':
-        asyncio.create_task(open_set_in_direct(ctx, beatmapset['id']))
+        try:
+            asyncio.create_task(open_set_in_direct(ctx, beatmapset['diffs'][0]))
+        except KeyError:
+            asyncio.create_task(open_set_in_direct(ctx, beatmapset['id'], True))
         return
     print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
     try:
@@ -604,7 +612,11 @@ async def download_next_beatmapset(self, task):
     beatmapset = self.ctx.pairs[list(self.ctx.pairs.keys())[get_available_ids(self.ctx)[0]]]
     if self.ctx.download_type == 'direct':
         self.output(f'Opening {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]}) in osu!Direct')
-        asyncio.create_task(open_set_in_direct(self.ctx, beatmapset['id']))
+        try:
+            asyncio.create_task(open_set_in_direct(self.ctx, beatmapset['diffs'][0]))
+        except KeyError:
+            self.output("No Difficulty ID found, attempting fallback")
+            asyncio.create_task(open_set_in_direct(self.ctx, beatmapset['id'], True))
         return
     self.output(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
     try:
@@ -752,14 +764,14 @@ def calculate_grade(score):
             return 'D'
     # if it is a lazer score, then the API did all the work for us
     else:
-        return score['rank'].replace('XH', 'X').replace('SH', 'S') # remove hidden and flashlight from the grade
+        return score['rank'].replace('XH', 'X').replace('SH', 'S')  # remove hidden and flashlight from the grade
 
 # compares two grades and returns the difference between them
 # the difference is positive if grade1 is better than grade2
 def compare_grades(grade1, grade2):
     grades = ['X', 'S', 'A', 'B', 'C', 'D']
     return grades.index(grade1) - grades.index(grade2)
-           
+
 def get_played_ids(ctx):
     # Gets the Index of each Song the player has played
     played_items = []
