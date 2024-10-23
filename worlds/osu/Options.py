@@ -51,6 +51,7 @@ class DifficultySync(Choice):
 
 class MinimumGrade(Choice):
     """If Enabled, only send checks for plays with a grade above this value.
+    If using "CL" mod on Laser, will use Stable's Grading calculation.
     """
     display_name = "Minimum Grade"
     option_Off = 0
