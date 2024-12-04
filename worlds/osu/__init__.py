@@ -104,12 +104,6 @@ class OsuWorld(World):
 
         include_list = []
         # Handle Included Songs
-        
-
-        
-
-        
-
         if self.options.shuffle_included_songs:
             for beatmapset in sorted(self.options.include_songs.value, key=int, reverse=True):
                 # First get the song data entry for the ID
@@ -124,16 +118,12 @@ class OsuWorld(World):
                     for i in song_entry["beatmaps"]:
                         eligibile_diffs.append(i['id'])
                 song_entry['diffs'] = eligibile_diffs
-                include_list.insert(0,song_entry)
-
-        
+                include_list.insert(0, song_entry)
 
             while len(include_list) < song_count + 1:
                 include_list.insert(0, song_data_raw.pop())
             self.random.shuffle(include_list)
 
-            
-        
         else:
             include_list = deepcopy(song_data_raw)
             for beatmapset in sorted(self.options.include_songs.value, key=int, reverse=True):
@@ -150,7 +140,6 @@ class OsuWorld(World):
                         eligibile_diffs.append(i['id'])
                 song_entry['diffs'] = eligibile_diffs
                 include_list.insert(self.options.starting_songs, song_entry)
-            
 
         song_data = deepcopy(include_list)
 
