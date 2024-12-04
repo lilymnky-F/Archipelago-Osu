@@ -119,7 +119,7 @@ class DisableTaiko(Toggle):
 
 
 class TaikoMinimumDifficulty(Range):
-    """Minimum Difficulty for 4-Key Mania. Star Ratings are multipled by 100."""
+    """Minimum Difficulty for Taiko. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 0
@@ -238,10 +238,16 @@ class PerformancePointsWinCountPercentage(Range):
     display_name = "Percentage of Performace Points Needed"
 
 
+class ShuffleIncludedSongs(Toggle):
+    """Shuffles the songs in "Include Songs" to be randomly placed anywhere in the Rando.
+    If Disabled, included songs will be added in ascending order by ID after the starting songs.
+    IE: If you have 5 starting songs, the first ID will be song 6, the next will be song 6, etc."""
+    display_name = "Shuffle Include Songs"
+
+
 class IncludeSongs(OptionSet):
-    """List of Beatmapset IDs to include, each replacing a Rando song. Will add songs in ascending order by ID after the starting songs.
-    IE: If you have 5 starting songs, the first ID will be song 6.
-    """
+    """List of Beatmapset IDs to include, each replacing a Rando song.
+    If Shuffle Included songs is disabled, songs can't appear as your starting songs."""
     display_name = "Include Songs"
     valid_keys = {str(beatmapset['id']) for beatmapset in get_song_data()}
 
@@ -285,5 +291,6 @@ class OsuOptions(PerGameCommonOptions):
     performance_points_win_count_percentage: PerformancePointsWinCountPercentage
     explicit_lyrics: EnableExplicitLyrics
     enable_loved: EnableLoved
+    shuffle_included_songs: ShuffleIncludedSongs
     include_songs: IncludeSongs
     exclude_songs: ExcludeSongs

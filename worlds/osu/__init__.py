@@ -102,20 +102,21 @@ class OsuWorld(World):
         self.random.shuffle(self.song_data)
 
         # Handle Included Songs
-        for beatmapset in sorted(self.options.include_songs.value, key=int, reverse=True):
-            # First get the song data entry for the ID
-            song_entry = deepcopy(find_beatmapset(int(beatmapset)))
-            # Get the eligibile_diffs, if there are any
-            eligibile_diffs = self.check_difficulties(song_entry)
-            if eligibile_diffs and self.options.difficulty_sync.value == 2:
-                eligibile_diffs = [self.random.choice(eligibile_diffs)]
-            # if there are none, make all of them eligibile.
-            if not eligibile_diffs:
-                eligibile_diffs = []
-                for i in song_entry["beatmaps"]:
-                    eligibile_diffs.append(i['id'])
-            song_entry['diffs'] = eligibile_diffs
-            self.song_data.insert(self.options.starting_songs, song_entry)
+        if not self.options.shuffle_included_songs:
+            for beatmapset in sorted(self.options.include_songs.value, key=int, reverse=True):
+                # First get the song data entry for the ID
+                song_entry = deepcopy(find_beatmapset(int(beatmapset)))
+                # Get the eligibile_diffs, if there are any
+                eligibile_diffs = self.check_difficulties(song_entry)
+                if eligibile_diffs and self.options.difficulty_sync.value == 2:
+                    eligibile_diffs = [self.random.choice(eligibile_diffs)]
+                # if there are none, make all of them eligibile.
+                if not eligibile_diffs:
+                    eligibile_diffs = []
+                    for i in song_entry["beatmaps"]:
+                        eligibile_diffs.append(i['id'])
+                song_entry['diffs'] = eligibile_diffs
+                self.song_data.insert(self.options.starting_songs, song_entry)
 
         if len(self.song_data) < len(self.starting_songs + self.included_songs + ["Victory"]):
             raise Exception(f"Player {self.player}'s settings cannot generate enough songs, their settings only allow "
