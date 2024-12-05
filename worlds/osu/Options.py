@@ -243,7 +243,7 @@ class ShuffleIncludedSongs(Toggle):
     IF Enabled, included songs can appear as starting or goal songs.
     If Disabled, included songs will be added in ascending order by ID after the starting songs.
     IE: If you have 5 starting songs, the first ID will be song 6, the next will be song 6, etc."""
-    display_name = "Shuffle Include Songs"
+    display_name = "Shuffle Included Songs"
 
 
 class IncludeSongs(OptionSet):
