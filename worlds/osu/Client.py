@@ -760,10 +760,18 @@ def calculate_grade(score):
             if acc > 0.85: return 'C'
             return 'D'
         elif gamemode == 3:  # osu!mania
-            if acc > 0.95: return 'S'
-            if acc > 0.9: return 'A'
-            if acc > 0.8: return 'B'
-            if acc > 0.7: return 'C'
+            # Mania's Accuracy with classic mod is different from stable, so we have to do it manually
+            mania_total = 300 * score['statistics'].get('perfect', 0) # Perfects are worth 305 with classic mod
+            mania_total += 300 * score['statistics'].get('great', 0)
+            mania_total += 200 * score['statistics'].get('good', 0)
+            mania_total += 100 * score['statistics'].get('ok', 0)
+            mania_total += 50 * score['statistics'].get('meh', 0)
+            mania_total += 0 * score['statistics'].get('miss', 0)
+            mania_acc = mania_total / (sum(score['statistics'].values()) * 300)
+            if mania_acc > 0.95: return 'S'
+            if mania_acc > 0.9: return 'A'
+            if mania_acc > 0.8: return 'B'
+            if mania_acc > 0.7: return 'C'
             return 'D'
     # if it is a lazer score, then the API did all the work for us
     else:
