@@ -7,7 +7,7 @@ from typing import ClassVar               # where the "Type" Import below breaks
 from .Options import OsuOptions
 from .Regions import region_data_table
 from math import floor
-from copy import deepcopy
+from copy import deepcopy, copy
 from multiprocessing import Process
 from ..LauncherComponents import Component, components, Type
 
@@ -102,6 +102,11 @@ class OsuWorld(World):
         song_data_raw = self.get_eligible_songs()
         self.random.shuffle(song_data_raw)
 
+        if len(song_data_raw)+len(self.options.include_songs.value) < (song_count + 1):
+            raise Exception(f"Player {self.player}'s settings cannot generate enough songs, their settings only allow "
+                            f"{len(song_data_raw)+len(self.options.include_songs.value)} out of {song_count+1} " 
+                            f"required songs.")
+
         include_list = []
         # Handle Included Songs
         if self.options.shuffle_included_songs:
@@ -143,9 +148,7 @@ class OsuWorld(World):
 
         song_data = deepcopy(include_list)
 
-        if len(song_data) < (song_count + 1):
-            raise Exception(f"Player {self.player}'s settings cannot generate enough songs, their settings only allow "
-                            f"{len(song_data)} out of {song_count+1} required songs.")
+
 
         for generic_song, osu_song in zip((self.starting_songs + self.additional_songs + ["Victory"]), song_data):
             self.pairs[generic_song] = osu_song
@@ -165,13 +168,14 @@ class OsuWorld(World):
         song_list = []
         for beatmapset in osu_song_data:
             eligibile_diffs = self.check_eligibility(beatmapset)
-            if eligibile_diffs:
-                song_list.append(beatmapset)
+            if not eligibile_diffs:
                 continue
-            # 2 = Strict_random
-            if self.options.difficulty_sync.value == 2:
+
+            eligibile_beatmapset = copy(beatmapset)
+            if self.options.difficulty_sync.value == 2:  # 2 = Strict_random
                 eligibile_diffs = [self.random.choice(eligibile_diffs)]
-            beatmapset['diffs'] = eligibile_diffs
+            eligibile_beatmapset['diffs'] = eligibile_diffs
+            song_list.append(eligibile_beatmapset)
 
         return song_list
 
