@@ -69,12 +69,12 @@ class DisallowConverts(Toggle):
 
 
 class DisableStandard(Toggle):
-    """Ignores Standard Difficultys when Generating."""
+    """Ignores Standard beatmaps when Generating."""
     display_name = "Exclude Standard"
 
 
 class StandardMinimumDifficulty(Range):
-    """Atleast 1 difficulty of each included Beatmapset will have a difficulty between the Maximum and Minimum for an included Mode.
+    """Atleast 1 beatmap of each included Beatmapset will have a difficulty between the Maximum and Minimum for an included Mode.
     Star Ratings are multipled by 100, ie: a Star Rating of 1.23 will be 123.
     Has No Effect if the given mode is Excluded.
     """
@@ -85,7 +85,7 @@ class StandardMinimumDifficulty(Range):
 
 
 class StandardMaximumDifficulty(Range):
-    """Maximum Difficulty for Standard. Star Ratings are multipled by 100."""
+    """Maximum Difficulty for Standard beatmaps. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 1000
@@ -93,12 +93,12 @@ class StandardMaximumDifficulty(Range):
 
 
 class DisableCatch(Toggle):
-    """Ignores Catch The Beat Difficultys when Generating."""
+    """Ignores Catch The Beat beatmaps when Generating."""
     display_name = "Exclude Catch The Beat"
 
 
 class CatchMinimumDifficulty(Range):
-    """Minimum Difficulty for Catch the Beat. Star Ratings are multipled by 100."""
+    """Minimum Difficulty for Catch the Beat beatmaps. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 0
@@ -106,7 +106,7 @@ class CatchMinimumDifficulty(Range):
 
 
 class CatchMaximumDifficulty(Range):
-    """Maximum Difficulty for Catch the Beat. Star Ratings are multipled by 100."""
+    """Maximum Difficulty for Catch the Beat beatmaps. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 1000
@@ -114,12 +114,12 @@ class CatchMaximumDifficulty(Range):
 
 
 class DisableTaiko(Toggle):
-    """Ignores Taiko Difficultys when Generating."""
+    """Ignores Taiko beatmaps when Generating."""
     display_name = "Exclude Taiko"
 
 
 class TaikoMinimumDifficulty(Range):
-    """Minimum Difficulty for Taiko. Star Ratings are multipled by 100."""
+    """Minimum Difficulty for Taiko beatmaps. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 0
@@ -127,7 +127,7 @@ class TaikoMinimumDifficulty(Range):
 
 
 class TaikoMaximumDifficulty(Range):
-    """Maximum Difficulty for Taiko. Star Ratings are multipled by 100."""
+    """Maximum Difficulty for Taiko beatmaps. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 1000
@@ -135,12 +135,12 @@ class TaikoMaximumDifficulty(Range):
 
 
 class Disable4k(Toggle):
-    """Ignores 4-Key Mania Difficultys when Generating."""
+    """Ignores 4-Key Mania beatmaps when Generating."""
     display_name = "Exclude 4k"
 
 
 class FourKeyMinimumDifficulty(Range):
-    """Minimum Difficulty for 4-Key Mania. Star Ratings are multipled by 100."""
+    """Minimum Difficulty for 4-Key Mania beatmaps. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 0
@@ -148,7 +148,7 @@ class FourKeyMinimumDifficulty(Range):
 
 
 class FourKeyMaximumDifficulty(Range):
-    """Maximum Difficulty for 4-Key Mania. Star Ratings are multipled by 100."""
+    """Maximum Difficulty for 4-Key Mania beatmaps. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 1000
@@ -156,12 +156,12 @@ class FourKeyMaximumDifficulty(Range):
 
 
 class Disable7k(Toggle):
-    """Ignores 7-Key Mania Difficultys when Generating."""
+    """Ignores 7-Key Mania beatmaps when Generating."""
     display_name = "Exclude 7k"
 
 
 class SevenKeyMinimumDifficulty(Range):
-    """Minimum Difficulty for 7-Key Mania. Star Ratings are multipled by 100."""
+    """Minimum Difficulty for 7-Key Mania beatmaps. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 0
@@ -169,7 +169,7 @@ class SevenKeyMinimumDifficulty(Range):
 
 
 class SevenKeyMaximumDifficulty(Range):
-    """Maximum Difficulty for 7-Key Mania. Star Ratings are multipled by 100."""
+    """Maximum Difficulty for 7-Key Mania beatmaps. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 1000
@@ -177,12 +177,12 @@ class SevenKeyMaximumDifficulty(Range):
 
 
 class DisableMiscKeymodes(Toggle):
-    """Ignores Mania Difficultys of Key Counts other than 4 and 7 when Generating."""
+    """Ignores Mania beatmaps of Key Counts other than 4 and 7 when Generating."""
     display_name = "Exclude Miscellaneous Key Counts"
 
 
 class MiscKeyMinimumDifficulty(Range):
-    """Minimum Difficulty for Key Counts other than 4 and 7. Star Ratings are multipled by 100."""
+    """Minimum Difficulty for beatmaps of Key Counts other than 4 and 7. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 0
@@ -190,7 +190,7 @@ class MiscKeyMinimumDifficulty(Range):
 
 
 class MiscKeyMaximumDifficulty(Range):
-    """Maximum Difficulty for Key Counts other than 4 and 7. Star Ratings are multipled by 100."""
+    """Maximum Difficulty for beatmaps of Key Counts other than 4 and 7. Star Ratings are multipled by 100."""
     range_start = 0
     range_end = 1000
     default = 1000
