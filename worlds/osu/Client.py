@@ -257,7 +257,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             if len(get_available_ids(self.ctx)) > 0:
                 number = get_available_ids(self.ctx)[0]+1
             else:
-                self.output("You have no songs to download")
+                self.output("You have no songs in logic")
                 return
         try:
             song_number = int(number)-1
@@ -270,6 +270,9 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             song = list(self.ctx.pairs.keys())[song_number]
         except IndexError:
             self.output("Use the Song Numbers in '/songs' (Not the IDs)")
+            return
+        if not self.ctx.difficulty_sync:
+            self.output("You aren't using difficulty sync.")
             return
         beatmapset = self.ctx.pairs[song]
         asyncio.create_task(self.get_diff_name(beatmapset))
