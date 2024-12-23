@@ -50,7 +50,7 @@ osu_song_pool = []
 item_data_table: Dict[str, OsuItemData] = {
     "Performance Points": OsuItemData(
         code=726999999,
-        type=ItemClassification.progression,
+        type=ItemClassification.progression_skip_balancing,
     ),
     "Circle": OsuItemData(
         code=726999998,
