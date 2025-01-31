@@ -745,8 +745,8 @@ def calculate_grade(score):
             total_judgements = miss_count + num_300s + num_100s + num_50s
             percent_300s = num_300s / total_judgements
             precent_50s = num_50s / (num_300s + num_100s + num_50s)
-            if miss_count == 0 and precent_50s <= 0.01:
-                if percent_300s > 0.9: return 'S'
+            if miss_count == 0:
+                if percent_300s > 0.9 and precent_50s <= 0.01: return 'S'
                 if percent_300s > 0.8: return 'A'
                 if percent_300s > 0.7: return 'B'
                 if percent_300s > 0.6: return 'C'
