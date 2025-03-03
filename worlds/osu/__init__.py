@@ -4,7 +4,7 @@ from worlds.AutoWorld import WebWorld, World
 from .Items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool, find_beatmapset
 from .Locations import OsuLocation, location_table, location_data_table
 from Options import PerGameCommonOptions  # Muse Dash uses this for a type (where I don't) but I'm having an error
-from typing import ClassVar               # where the "Type" Import below breaks if I remove this, so I'm ignoring it!
+from typing import ClassVar               # where the "Type" Import below breaks if I remove this, so I'm leaving it
 from .Options import OsuOptions
 from .Regions import region_data_table
 from math import floor
@@ -189,9 +189,9 @@ class OsuWorld(World):
         return song_list
 
     def check_eligibility(self, beatmapset):
-        # first check each of the settings to see if the song could be included
+        # Check each of the settings to see if the song cannot be included
         if str(beatmapset["id"]) in self.options.include_songs.value.union(self.options.exclude_songs.value):
-            return False # Special case, these songs are auto-processed and we want to not have them in the standard pool
+            return False  # Included Songs are handled elsewhere, and we don't want duplicates
         if beatmapset["length"] > self.options.maximum_length:
             return False
         if (not self.options.explicit_lyrics) and beatmapset["nsfw"]:
@@ -203,6 +203,7 @@ class OsuWorld(World):
 
     def check_difficulties(self, beatmapset):
         found_difficulties = []
+        # Check each beatmap of the set individually
         for difficulty in beatmapset["beatmaps"]:
             mode = self.modes[difficulty['mode']]
             # excluded modes will have -1 for both
