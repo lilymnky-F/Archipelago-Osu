@@ -10,6 +10,8 @@ import ast
 
 import ModuleUpdate
 
+osu_base_id = 727000000
+
 ModuleUpdate.update()
 
 import Utils
@@ -173,13 +175,13 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             else:
                 self.output("You have no songs to download")
                 return
+        if number.lower() == 'victory':
+            song_number = 0
         try:
             song_number = int(number)-1
         except ValueError:
-            if not (number.lower().capitalize() == 'Victory'):
-                self.output("Please Give a Number, 'next' or 'Victory'")
-                return
-            song_number = -1
+            self.output("Please Give a Number, 'next' or 'Victory'")
+            return
         try:
             song = list(self.ctx.pairs.keys())[song_number]
         except IndexError:
@@ -324,18 +326,18 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                                 self.output('Your settings do not allow converts')
                                 return
                 if song == "Victory":
-                    if count_item(self.ctx, 726999999) >= self.ctx.preformance_points_needed:
+                    if count_item(self.ctx, osu_base_id - 1) >= self.ctx.preformance_points_needed:
                         message = [{"cmd": "StatusUpdate", "status": ClientStatus.CLIENT_GOAL}]
                         asyncio.create_task(self.ctx.send_msgs(message))
                         return
                     self.output("You don't have enough preformance points")
                     return
-                if not count_item(self.ctx, 727000000 + list(self.ctx.pairs.keys()).index(song)):
+                if not count_item(self.ctx, osu_base_id + list(self.ctx.pairs.keys()).index(song)):
                     self.output("You don't have this song unlocked")
                     return
                 locations = []
                 for i in range(2):
-                    location_id = 727000000 + (2 * list(self.ctx.pairs.keys()).index(song)) + i
+                    location_id = osu_base_id + (2 * list(self.ctx.pairs.keys()).index(song)) + i
                     if location_id in self.ctx.missing_locations:
                         if location_id in self.ctx.missing_locations:
                             locations.append(int(location_id))
@@ -531,8 +533,8 @@ def get_available_ids(ctx):
     # Gets the Index of each Song the player has but has not played
     incomplete_items = []
     for item in ctx.items_received:
-        song_index = item.item-727000000
-        location_id = (song_index*2)+727000000
+        song_index = item.item - osu_base_id
+        location_id = (song_index*2) + osu_base_id
         if (location_id in ctx.missing_locations or location_id+1 in ctx.missing_locations) and song_index not in incomplete_items:
             incomplete_items.append(song_index)
     if count_item(ctx, 726999999) >= ctx.preformance_points_needed:
@@ -784,9 +786,9 @@ def get_played_ids(ctx):
     # Gets the Index of each Song the player has played
     played_items = []
     for item in ctx.items_received:
-        song_index = item.item-727000000
-        location_id = (song_index*2)+727000000
-        if location_id < 727000000: continue
+        song_index = item.item - osu_base_id
+        location_id = (song_index*2) + osu_base_id
+        if location_id < osu_base_id: continue
         if (location_id not in ctx.missing_locations and location_id+1 not in ctx.missing_locations) and song_index not in played_items:
             played_items.append(song_index)
     played_items.sort()
@@ -832,12 +834,12 @@ def check_location(ctx, score):
                     return
                 print("You don't have enough performance points")
                 return
-            if not count_item(ctx, 727000000 + list(ctx.pairs.keys()).index(song)):
+            if not count_item(ctx, osu_base_id + list(ctx.pairs.keys()).index(song)):
                 print("You don't have this song unlocked")
                 return
             locations = []
             for i in range(2):
-                location_id = 727000000 + (2 * list(ctx.pairs.keys()).index(song)) + i
+                location_id = osu_base_id + (2 * list(ctx.pairs.keys()).index(song)) + i
                 if location_id in ctx.missing_locations:
                     if location_id in ctx.missing_locations:
                         locations.append(int(location_id))
