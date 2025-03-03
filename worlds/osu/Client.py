@@ -7,14 +7,13 @@ import aiohttp
 import webbrowser
 import time
 import ast
-
+import Utils
 import ModuleUpdate
 
 osu_base_id = 727000000
 
 ModuleUpdate.update()
 
-import Utils
 
 if __name__ == "__main__":
     Utils.init_logging("osu!Client", exception_logger="Client")
@@ -53,15 +52,15 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         os.environ['API_KEY'] = key
         self.output(f"Set to ##################")
 
-    def _cmd_set_client_id(self, id=""):
+    def _cmd_set_client_id(self, client_id=""):
         """Sets the Client ID, generated in the "OAuth" Section of Account Settings"""
-        os.environ['CLIENT_ID'] = id
-        self.output(f"Set to {id}")
+        os.environ['CLIENT_ID'] = client_id
+        self.output(f"Set to {client_id}")
 
-    def _cmd_set_player_id(self, id=""):
+    def _cmd_set_player_id(self, player_id=""):
         """Sets the player's user ID, found in the URL of their profile"""
-        os.environ['PLAYER_ID'] = id
-        self.output(f"Set to {id}")
+        os.environ['PLAYER_ID'] = player_id
+        self.output(f"Set to {player_id}")
 
     def _cmd_save_keys(self):
         """Saves the player's current IDs"""
@@ -104,7 +103,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         with open(os.path.join(path, filename), 'r') as f:
             data = f.read()
         d = data.split("\t")
-        self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = ast.literal_eval(d[0]), ast.literal_eval(d[1]), d[2],
+        self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = ast.literal_eval(d[0]), \
+            ast.literal_eval(d[1]), d[2],
         self.output("Loaded Previous Settings")
 
     def _cmd_save_all(self):
@@ -142,13 +142,15 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         with open(os.path.join(path, filename), 'r') as f:
             data = f.read()
         d = data.split("\t")
-        self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = ast.literal_eval(d[0]), ast.literal_eval(d[1]), d[2],
+        self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = ast.literal_eval(d[0]), \
+            ast.literal_eval(d[1]), d[2],
         self.output("Loaded Previous Settings")
 
     def _cmd_songs(self):
         """Display all songs in logic."""
         indexes = get_available_ids(self.ctx)
-        self.output(f"You Have {count_item(self.ctx, 726999999)} Performance Points, you need {self.ctx.preformance_points_needed} to unlock your goal.")
+        self.output(f"You Have {count_item(self.ctx, 726999999)} Performance Points, "
+                    f"you need {self.ctx.preformance_points_needed} to unlock your goal.")
         self.output(f"You currently have {len(indexes)} songs in Logic")
         for i in indexes:
             song = list(self.ctx.pairs.keys())[i]
@@ -161,7 +163,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         self.output(f"You have played {len(played_songs)}/{len(self.ctx.pairs)-1} songs")
         for song in self.ctx.pairs:
             beatmapset = self.ctx.pairs[song]
-            self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']}) {'(passed)' if song in played_songs else ''}")
+            self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']}) "
+                        f"{'(passed)' if song in played_songs else ''}")
 
     def _cmd_update(self, mode=''):
         """Gets the player's last score, in a given gamemode or their set default"""
@@ -170,13 +173,14 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     def _cmd_download(self, number=''):
         """Downloads the given song number in '/songs'. Also Accepts "Next" and "Victory"."""
         if number.lower() == 'next':
-            if len(get_available_ids(self.ctx)) > 0:
-                number = get_available_ids(self.ctx)[0]+1
+            in_logic = get_available_ids(self.ctx)
+            if len(in_logic) > 0:
+                number = in_logic[0]+1
             else:
                 self.output("You have no songs to download")
                 return
         if number.lower() == 'victory':
-            song_number = 0
+            number = 0
         try:
             song_number = int(number)-1
         except ValueError:
@@ -189,7 +193,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             return
         beatmapset = self.ctx.pairs[song]
         if self.ctx.download_type == 'mirror':
-            self.output(f"Downloading {song}: {beatmapset['title']} (ID: {beatmapset['id']}) as '{beatmapset['id']} {beatmapset['artist']} - {beatmapset['title']}.osz'")
+            self.output(f"Downloading {song}: {beatmapset['title']} (ID: {beatmapset['id']}) as "
+                        f"'{beatmapset['id']} {beatmapset['artist']} - {beatmapset['title']}.osz'")
             asyncio.create_task(self.download_beatmapset(beatmapset))
             return
         if self.ctx.download_type == 'direct':
@@ -354,7 +359,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                 content_length = req.headers.get('Content-Length')
                 req_status = req.status
                 if req_status != 200:
-                    # The library doesn't have a built-in way to get the status name in our version of aiohttp, so we have to do it manually sadly
+                    # The library doesn't have a built-in way to get the status name in our version of aiohttp
                     # I have only included the most likely status codes to be returned by beatconnect
                     http_status_names = {
                         400: 'Bad Request',
@@ -375,7 +380,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                 if content_length is not None:
                     total_bytes = int(content_length)
                     total_mb = total_bytes / (1024 ** 2)
-                    # Beatconnect is slow to respond, so this message will appear when the download starts unlike when you run the command
+                    # Beatconnect is slow to respond, so this message will appear when the download starts
                     self.output(f"Starting download of beatmapset ({total_mb:.2f}MB)")
 
                 downloaded_content = []
@@ -738,7 +743,7 @@ def calculate_grade(score):
     elif any(mod['acronym'] == 'CL' for mod in score['mods']) or score['legacy_score_id']:
         if gamemode == 0 or gamemode == 1: # osu!standard or osu!taiko
 
-            # for some reason these statistics are missing if you get 0 of any of these
+            # for some reason these statistics are missing if you get 0 of any of these,
             # so we have to check if they exist before we try to get them
             miss_count = int(score['statistics'].get('miss', 0) or 0)
             num_300s = int(score['statistics'].get('great', 0) or 0)
@@ -781,6 +786,7 @@ def calculate_grade(score):
     # if it is a lazer score, then the API did all the work for us
     else:
         return score['rank'].replace('XH', 'X').replace('SH', 'S')  # remove hidden and flashlight from the grade
+
 
 def get_played_ids(ctx):
     # Gets the Index of each Song the player has played
