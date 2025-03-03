@@ -49,7 +49,7 @@ class OsuMode:
 class OsuWorld(World):
     """
     osu! is a free to play rhythm game featuring 4 modes, an online ranking system/statistics,
-    and songs downloadable from its website.
+    with user submitted songs downloadable from its website.
     """
 
     # Lots of code is taken from Mushdash, Clique, and various other APworlds
@@ -71,12 +71,10 @@ class OsuWorld(World):
     def generate_early(self):
         self.pairs = {}
         song_pool = osu_song_pool.copy()
-        song_data = []
         self.modes = {}
         self.starting_songs = []
         self.additional_songs = []
         self.disable_difficulty_reduction = bool(self.options.disable_difficulty_reduction.value)
-        shuffle_included_songs = self.options.shuffle_included_songs
         self.modes['osu'] = OsuMode(self.options.minimum_difficulty_standard.value,
                                     self.options.maximum_difficulty_standard.value, self.options.exclude_standard.value)
         self.modes['fruits'] = OsuMode(self.options.minimum_difficulty_catch.value,
@@ -88,7 +86,8 @@ class OsuWorld(World):
         self.modes['7k'] = OsuMode(self.options.minimum_difficulty_7k.value,
                                    self.options.maximum_difficulty_7k.value, self.options.exclude_7k.value)
         self.modes['other'] = OsuMode(self.options.minimum_difficulty_other.value,
-                                      self.options.maximum_difficulty_other.value, self.options.exclude_other_keys.value)
+                                      self.options.maximum_difficulty_other.value,
+                                      self.options.exclude_other_keys.value)
         starting_song_count = self.options.starting_songs
         additional_song_count = self.options.additional_songs
         song_count = additional_song_count+starting_song_count
@@ -102,15 +101,14 @@ class OsuWorld(World):
         if potiental_song_count < (song_count + 1):
             # If we don't have atleast 16 more than the requesting starting amount, we can't lower it enough.
             if potiental_song_count < starting_song_count+16:
-                raise Exception(f"Player {self.player}'s settings cannot generate enough songs, their settings only allow "
-                                f"{len(song_data_raw)+len(self.options.include_songs.value)} out of {song_count+1} " 
-                                f"requested songs, or the {starting_song_count+16} minimum songs.")
+                raise Exception(f"Player {self.player}'s settings cannot generate enough songs, their settings only "
+                                f"allow {len(song_data_raw)+len(self.options.include_songs.value)} out of " 
+                                f"{song_count+1} requested songs, or the {starting_song_count+16} minimum songs.")
             else:
                 # Otherwise, we can lower the song count such that we have enough songs.
                 song_count = len(song_data_raw)+len(self.options.include_songs.value)-1
                 logging.warning(f"Player {self.player}'s settings cannot generate enough songs. Lowering Song count to"
                                 f" {song_count+1}.")
-
 
         # Put generic songs into the list
         for song in song_pool[:starting_song_count]:

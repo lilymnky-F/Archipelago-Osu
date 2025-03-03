@@ -40,7 +40,7 @@ class DifficultySync(Choice):
     """Changes which difficulties of each beatmapset are able to send checks
     Off - Any difficulty of each Beatmapset will send a check.
     Strict_Any - Only difficulties that fall in your difficulty ranges will send checks
-    Strict_Random - A randomly chosen difficulty within your range has to be played. /check will tell you the diff.
+    Strict_Random - A randomly chosen difficulty within your range has to be played. To be used with /check_diff.
     """
     display_name = "Strict Difficulty Sync"
     option_Off = 0
@@ -247,8 +247,7 @@ class ShuffleIncludedSongs(Toggle):
 
 
 class IncludeSongs(OptionSet):
-    """List of Beatmapset IDs to include, each replacing a Rando song.
-    If Shuffle Included songs is disabled, songs can't appear as your starting songs."""
+    """List of Beatmapset IDs to include, each replacing a Rando song."""
     display_name = "Include Songs"
     valid_keys = {str(beatmapset['id']) for beatmapset in get_song_data()}
 
