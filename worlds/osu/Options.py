@@ -31,6 +31,24 @@ class MaximumLength(Range):
     display_name = "Maximum Length"
 
 
+class MinimumAge(Range):
+    """The newest year to pick beatmapsets from.
+    """
+    range_start = 2007
+    range_end = 2025
+    default = 2025
+    display_name = "Minimum Age"
+
+
+class MaximumAge(Range):
+    """The oldest year to pick beatmapsets from.
+    """
+    range_start = 2007
+    range_end = 2025
+    default = 2007
+    display_name = "Maximum Age"
+
+
 class DisableDifficultyReduction(Toggle):
     """Prevents plays using difficulty reduction mods from sending checks."""
     display_name = "Disable Difficulty Reduction"
@@ -269,6 +287,8 @@ class OsuOptions(PerGameCommonOptions):
     difficulty_sync: DifficultySync
     disallow_converts: DisallowConverts
     maximum_length: MaximumLength
+    minimum_age: MinimumAge
+    maximum_age: MaximumAge
     exclude_standard: DisableStandard
     minimum_difficulty_standard: StandardMinimumDifficulty
     maximum_difficulty_standard: StandardMaximumDifficulty
