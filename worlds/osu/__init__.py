@@ -196,8 +196,6 @@ class OsuWorld(World):
             return False
         if beatmapset["status"] == 'loved' and (not self.options.enable_loved):
             return False
-        if beatmapset["ranked_date"] == 2018:
-            pass
         if not (self.options.minimum_age >= beatmapset["ranked_date"] >= self.options.maximum_age):
             return False
         # If the song is legal, start looking for difficulties
