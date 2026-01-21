@@ -5,7 +5,7 @@ from .Items import get_song_data
 
 class StartingSongs(Range):
     """The number of songs that will be automatically unlocked at the start of a run."""
-    range_start = 3
+    range_start = 1
     range_end = 10
     default = 5
     display_name = "Starting Song Count"
