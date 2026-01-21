@@ -30,6 +30,14 @@ class MaximumLength(Range):
     default = 300
     display_name = "Maximum Length"
 
+class MinimumLength(Range):
+    """Minimum Length a Song can be, in seconds.
+    """
+    range_start = 0
+    range_end = 2200
+    default = 30
+    display_name = "Minimum Length"
+
 
 class MinimumAge(Range):
     """The newest year to pick beatmapsets from.
@@ -287,6 +295,7 @@ class OsuOptions(PerGameCommonOptions):
     difficulty_sync: DifficultySync
     disallow_converts: DisallowConverts
     maximum_length: MaximumLength
+    minimum_length: MinimumLength
     minimum_age: MinimumAge
     maximum_age: MaximumAge
     exclude_standard: DisableStandard
