@@ -170,14 +170,16 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']}) "
                         f"{'(passed)' if song in played_songs else ''}")
 
-    def _cmd_update(self, mode=''):
+        def _cmd_update(self, mode=''):
         """Gets the player's last score, in a given gamemode or their set default"""
         if mode:
             if mode.lower() in self.mode_names.keys():
-                request += f"&mode={self.mode_names[mode.lower()]}"
+                mode = self.mode_names[mode.lower]
             else:
                 self.output('Please input a valid mode. Valid modes are Standard, Catch, Taiko, and Mania.')
+                return
         asyncio.create_task(get_last_scores(self.ctx, mode, self.output))
+
 
     def _cmd_download(self, number=''):
         """Downloads the given song number in '/songs'. Also Accepts "Next" and "Victory"."""
