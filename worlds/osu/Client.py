@@ -174,7 +174,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         """Gets the player's last score, in a given gamemode or their set default"""
         if mode:
             if mode.lower() in self.mode_names.keys():
-                mode = self.mode_names[mode.lower]
+                mode = self.mode_names[mode.lower()]
             else:
                 self.output('Please input a valid mode. Valid modes are Standard, Catch, Taiko, and Mania.')
                 return
