@@ -170,7 +170,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             self.output(f"{song}: {beatmapset['title']} (ID: {beatmapset['id']}) "
                         f"{'(passed)' if song in played_songs else ''}")
 
-        def _cmd_update(self, mode=''):
+    def _cmd_update(self, mode=''):
         """Gets the player's last score, in a given gamemode or their set default"""
         if mode:
             if mode.lower() in self.mode_names.keys():
