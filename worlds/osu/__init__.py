@@ -1,10 +1,9 @@
 import logging
 from BaseClasses import Region, Tutorial
+from Options import OptionError
 from worlds.AutoWorld import WebWorld, World
 from .Items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool, find_beatmapset
 from .Locations import OsuLocation, location_table, location_data_table
-from Options import PerGameCommonOptions  # Muse Dash uses this for a type (where I don't) but I'm having an error
-from typing import ClassVar               # where the "Type" Import below breaks if I remove this, so I'm leaving it
 from .Options import OsuOptions
 from .Regions import region_data_table
 from math import floor
@@ -101,7 +100,7 @@ class OsuWorld(World):
         if potiental_song_count < (song_count + 1):
             # If we don't have atleast 16 more than the requesting starting amount, we can't lower it enough.
             if potiental_song_count < starting_song_count+16:
-                raise Exception(f"Player {self.player}'s settings cannot generate enough songs, their settings only "
+                raise OptionError(f"Player {self.player}'s settings cannot generate enough songs, their settings only "
                                 f"allow {len(song_data_raw)+len(self.options.include_songs.value)} out of " 
                                 f"{song_count+1} requested songs, or the {starting_song_count+16} minimum songs.")
             else:
