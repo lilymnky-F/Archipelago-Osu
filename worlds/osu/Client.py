@@ -9,8 +9,13 @@ import time
 import ast
 import Utils
 import ModuleUpdate
+import platform
+import ssl
+import certifi
 
 osu_base_id = 727000000
+
+ssl_context = ssl.create_default_context(cafile=certifi.where())
 
 ModuleUpdate.update()
 
@@ -300,70 +305,72 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         url = f"https://osu.ppy.sh/api/v2/beatmapsets/{song['id']}"
         headers = {"Accept": "application/json", "Content-Type": "application/json",
                    "Authorization": f"Bearer {self.ctx.token}"}
-        async with aiohttp.request("GET", url, headers=headers) as request:
-            beatmapset = await request.json()
-        for i in beatmapset['beatmaps']:
-            if i['id'] in song['diffs']:
-                self.output(f'{i["version"]} - {i["difficulty_rating"]}*')
+        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=ssl_context)) as session:
+            async with session.get(url, headers=headers) as request:
+                beatmapset = await request.json()
+            for i in beatmapset['beatmaps']:
+                if i['id'] in song['diffs']:
+                    self.output(f'{i["version"]} - {i["difficulty_rating"]}*')
 
     async def download_beatmapset(self, beatmapset):
         print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
         try:
-            async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
-                content_length = req.headers.get('Content-Length')
-                req_status = req.status
-                if req_status != 200:
-                    # The library doesn't have a built-in way to get the status name in our version of aiohttp
-                    # I have only included the most likely status codes to be returned by beatconnect
-                    http_status_names = {
-                        400: 'Bad Request',
-                        401: 'Unauthorized',
-                        403: 'Forbidden',
-                        404: 'Not Found',
-                        408: 'Request Timeout',
-                        429: 'Too Many Requests',
-                        500: 'Internal Server Error',
-                        502: 'Bad Gateway',
-                        503: 'Service Unavailable',
-                        504: 'Gateway Timeout',
-                    }
-                    self.output(
-                        f'Error Downloading {beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz')
-                    self.output(
-                        f'Please Manually Add the Map or Try Again Later. ({req_status} - {http_status_names.get(req_status, "Unknown Error")})')
-                    return
-                # With beatconnect we always know the total size of the download, so this is always true
-                if content_length is not None:
-                    total_bytes = int(content_length)
-                    total_mb = total_bytes / (1024 ** 2)
-                    # Beatconnect is slow to respond, so this message will appear when the download starts
-                    self.output(f"Starting download of beatmapset ({total_mb:.2f}MB)")
-
-                downloaded_content = []
-                downloaded_bytes = 0
-                last_print_time = time.time()
-                async for chunk in req.content.iter_any():
-                    downloaded_content.append(chunk)
-                    downloaded_bytes += len(chunk)
-                    downloaded_mb = downloaded_bytes / (1024 ** 2)
-
-                    # If we know the total size, calculate the progress
+            async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=ssl_context)) as session:
+                async with session.get(f"https://beatconnect.io/b/{beatmapset['id']}") as req:
+                    content_length = req.headers.get('Content-Length')
+                    req_status = req.status
+                    if req_status != 200:
+                        # The library doesn't have a built-in way to get the status name in our version of aiohttp
+                        # I have only included the most likely status codes to be returned by beatconnect
+                        http_status_names = {
+                            400: 'Bad Request',
+                            401: 'Unauthorized',
+                            403: 'Forbidden',
+                            404: 'Not Found',
+                            408: 'Request Timeout',
+                            429: 'Too Many Requests',
+                            500: 'Internal Server Error',
+                            502: 'Bad Gateway',
+                            503: 'Service Unavailable',
+                            504: 'Gateway Timeout',
+                        }
+                        self.output(
+                            f'Error Downloading {beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz')
+                        self.output(
+                            f'Please Manually Add the Map or Try Again Later. ({req_status} - {http_status_names.get(req_status, "Unknown Error")})')
+                        return
+                    # With beatconnect we always know the total size of the download, so this is always true
                     if content_length is not None:
-                        progress = min(100, int(downloaded_bytes / total_bytes * 100))
+                        total_bytes = int(content_length)
+                        total_mb = total_bytes / (1024 ** 2)
+                        # Beatconnect is slow to respond, so this message will appear when the download starts
+                        self.output(f"Starting download of beatmapset ({total_mb:.2f}MB)")
 
-                        # Check if at least half a second has passed since last print or if the download is done
-                        # Filesizes are small enough that we can do half a second intervals instead of 1 second
-                        current_time = time.time()
-                        if current_time - last_print_time >= 0.5 or downloaded_bytes == total_bytes:
-                            self.output(f"Downloaded: {downloaded_mb:.2f}MB / {total_mb:.2f}MB ({progress}%)")
-                            last_print_time = current_time
+                    downloaded_content = []
+                    downloaded_bytes = 0
+                    last_print_time = time.time()
+                    async for chunk in req.content.iter_any():
+                        downloaded_content.append(chunk)
+                        downloaded_bytes += len(chunk)
+                        downloaded_mb = downloaded_bytes / (1024 ** 2)
 
-                    # If we don't know the total size, just print the downloaded amount
-                    else:
-                        self.output(f"Downloaded: {downloaded_mb:.2f}MB")
+                        # If we know the total size, calculate the progress
+                        if content_length is not None:
+                            progress = min(100, int(downloaded_bytes / total_bytes * 100))
 
-                # Combine all the chunks into one just like req.read() would do
-                content = b"".join(downloaded_content)
+                            # Check if at least half a second has passed since last print or if the download is done
+                            # Filesizes are small enough that we can do half a second intervals instead of 1 second
+                            current_time = time.time()
+                            if current_time - last_print_time >= 0.5 or downloaded_bytes == total_bytes:
+                                self.output(f"Downloaded: {downloaded_mb:.2f}MB / {total_mb:.2f}MB ({progress}%)")
+                                last_print_time = current_time
+
+                        # If we don't know the total size, just print the downloaded amount
+                        else:
+                            self.output(f"Downloaded: {downloaded_mb:.2f}MB")
+
+                    # Combine all the chunks into one just like req.read() would do
+                    content = b"".join(downloaded_content)
             f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
             filename = "".join(i for i in f if i not in "\/:*?<>|\"")
             path = os.path.join(self.ctx.game_communication_path, 'config')
@@ -405,22 +412,15 @@ class APosuContext(CommonContext):
         # self.game_communication_path: files go in this path to pass data between us and the actual game
         if "localappdata" in os.environ:
             self.game_communication_path = os.path.expandvars(r"%localappdata%/APosu")
+        elif platform.system() == "Linux":
+            self.game_communication_path = os.path.expanduser("~/.local/share/APosu")
+        elif platform.system() == "Darwin":
+            self.game_communication_path = os.path.expanduser("~/Library/Application Support/APosu")
         else:
-            # not windows. game is an exe so let's see if wine might be around to run it
-            if "WINEPREFIX" in os.environ:
-                wineprefix = os.environ["WINEPREFIX"]
-            elif shutil.which("wine") or shutil.which("wine-stable"):
-                wineprefix = os.path.expanduser(
-                    "~/.wine")  # default root of wine system data, deep in which is app data
-            else:
-                msg = "APosuClient couldn't detect system type. Unable to infer required game_communication_path"
-                logger.error("Error: " + msg)
-                Utils.messagebox("Error", msg, error=True)
-                sys.exit(1)
-            self.game_communication_path = os.path.join(
-                wineprefix,
-                "drive_c",
-                os.path.expandvars("users/$USER/Local Settings/Application Data/APosu"))
+            msg = "APosuClient couldn't detect system type. Unable to infer required game_communication_path"
+            logger.error("Error: " + msg)
+            Utils.messagebox("Error", msg, error=True)
+            sys.exit(1)
 
     async def server_auth(self, password_requested: bool = False):
         if password_requested and not self.password:
@@ -505,15 +505,16 @@ def get_available_ids(ctx):
 
 async def get_token(ctx, output_function=print):
     try:
-        async with aiohttp.request("POST", "https://osu.ppy.sh/oauth/token",
+        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=ssl_context)) as session:
+            async with session.post("https://osu.ppy.sh/oauth/token",
                                    headers={"Accept": "application/json",
                                             "Content-Type": "application/x-www-form-urlencoded"},
                                    data=f"client_id={os.environ['CLIENT_ID']}&client_secret={os.environ['API_KEY']}"
                                         f"&grant_type=client_credentials&scope=public") as authreq:
-            tokenjson = await authreq.json()
-            print(tokenjson)
-            ctx.token = tokenjson['access_token']
-            return tokenjson['access_token']
+                tokenjson = await authreq.json()
+                print(tokenjson)
+                ctx.token = tokenjson['access_token']
+                return tokenjson['access_token']
     except KeyError:
         output_function("Error accessing osu! servers. Check your Client id, Client Secret, and Player id.")
 
@@ -527,9 +528,10 @@ async def open_set_in_direct(ctx, diff_id: int, fallback: bool = False, output_f
         url = f"https://osu.ppy.sh/api/v2/beatmapsets/{set_id}"
         headers = {"Accept": "application/json", "Content-Type": "application/json",
                    "Authorization": f"Bearer {ctx.token}"}
-        async with aiohttp.request("GET", url, headers=headers) as conversion:
-            beatmapset = await conversion.json()
-            print(beatmapset)
+        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=ssl_context)) as session:
+            async with session.get(url, headers=headers) as conversion:
+                beatmapset = await conversion.json()
+                print(beatmapset)
         webbrowser.open(f"osu://b/{beatmapset['beatmaps'][0]['id']}")
         return
     # otherwise we can just open the first diff directly
@@ -552,9 +554,10 @@ async def download_next_beatmapset(ctx, task, output_function=print):
         return
     output_function(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
     try:
-        async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
-            content = await req.read()
-            req_status = req.status
+        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=ssl_context)) as session:
+            async with session.get(f"https://beatconnect.io/b/{beatmapset['id']}") as req:
+                content = await req.read()
+                req_status = req.status
         if req_status != 200:
             output_function(f'Download Failed, Status Code: {req_status}')
             return
@@ -590,15 +593,16 @@ async def get_last_scores(ctx, mode='', output_function=print):
             return
     headers = {"Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {ctx.token}",
                "x-api-version": "20240529"}
-    async with aiohttp.request("GET", request, headers=headers) as scores:
-        try:
-            score_list = await scores.json()
-            print(score_list, "a")
-            print(scores)
-        except (KeyError, IndexError):
-            await get_token(ctx, output_function)
-            output_function("Error Retrieving plays, Check your Client id, Client Secret, and player id.")
-            return
+    async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=ssl_context)) as session:
+        async with session.get(request, headers=headers) as scores:
+            try:
+                score_list = await scores.json()
+                print(score_list, "a")
+                print(scores)
+            except (KeyError, IndexError):
+                await get_token(ctx, output_function)
+                output_function("Error Retrieving plays, Check your Client id, Client Secret, and player id.")
+                return
     if not score_list:
         output_function("No Plays Found. Check the Gamemode")
         return
