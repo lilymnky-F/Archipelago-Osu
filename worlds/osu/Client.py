@@ -152,6 +152,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_songs(self, mode=''):
         """Display all songs in logic. Opionally filter for a mode"""
+        if mode and mode.lower() in self.mode_names.keys():
+            mode = self.mode_names[mode.lower()]
         indexes = get_available_ids(self.ctx, mode)
         self.output(f"You Have {count_item(self.ctx, 726999999)} Performance Points, "
                     f"you need {self.ctx.preformance_points_needed} to unlock your goal.")
