@@ -273,7 +273,8 @@ class ShuffleIncludedSongs(Toggle):
 
 
 class IncludeSongs(OptionSet):
-    """List of Beatmapset IDs to include, each replacing a Rando song."""
+    """Force a list of Beatmapsets to appear, each replacing a Random song. This setting is optional, overrides other settings, and only supports Featured Artist songs.
+    Usage: ['123', '234', '345'], where each number is the id for the set."""
     display_name = "Include Songs"
     valid_keys = {str(beatmapset['id']) for beatmapset in get_song_data()}
 
