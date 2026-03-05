@@ -150,12 +150,12 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
             ast.literal_eval(d[1]), d[2],
         self.output("Loaded Previous Settings")
 
-    def _cmd_songs(self):
-        """Display all songs in logic."""
-        indexes = get_available_ids(self.ctx)
+    def _cmd_songs(self, mode=''):
+        """Display all songs in logic. Opionally filter for a mode"""
+        indexes = get_available_ids(self.ctx, mode)
         self.output(f"You Have {count_item(self.ctx, 726999999)} Performance Points, "
                     f"you need {self.ctx.preformance_points_needed} to unlock your goal.")
-        self.output(f"You currently have {len(indexes)} songs in Logic")
+        self.output(f"You currently have {len(indexes)} {mode+' ' if mode else ''}songs in Logic")
         for i in indexes:
             song = list(self.ctx.pairs.keys())[i]
             beatmapset = self.ctx.pairs[song]
@@ -182,13 +182,21 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
 
     def _cmd_download(self, number=''):
-        """Downloads the given song number in '/songs'. Also Accepts "Next" and "Victory"."""
+        """Downloads the given song number in '/songs'. Also Accepts "Next", "Victory", and any mode."""
         if number.lower() == 'next':
             in_logic = get_available_ids(self.ctx)
             if len(in_logic) > 0:
                 number = in_logic[0] + 1
             else:
                 self.output("You have no songs to download")
+                return
+        elif number.lower() in self.mode_names.keys():
+            mode = self.mode_names[number.lower()]
+            in_logic = get_available_ids(self.ctx, mode)
+            if len(in_logic) > 0:
+                number = in_logic[0] + 1
+            else:
+                self.output(f"You have no {mode} songs to download")
                 return
         elif number.lower() == 'victory':
             number = 0
@@ -488,20 +496,27 @@ def count_item(ctx, code) -> int:
     return current
 
 
-def get_available_ids(ctx):
+def get_available_ids(ctx, mode=''):
     # Gets the Index of each Song the player has but has not played
     incomplete_items = []
     for item in ctx.items_received:
         song_index = item.item - osu_base_id
         location_id = (song_index * 2) + osu_base_id
-        if (
-                location_id in ctx.missing_locations or location_id + 1 in ctx.missing_locations) and song_index not in incomplete_items:
+        if (location_id in ctx.missing_locations or location_id + 1 in ctx.missing_locations) and song_index not in incomplete_items:
             incomplete_items.append(song_index)
     if count_item(ctx, 726999999) >= ctx.preformance_points_needed:
         incomplete_items.append(-1)
     incomplete_items.sort()
-    return incomplete_items
 
+    if not mode:
+        return incomplete_items
+    return [beatmapset for beatmapset in incomplete_items if check_for_mode(ctx, beatmapset, mode)]
+
+def check_for_mode(ctx, beatmapset, mode):
+    for beatmap in ctx.pairs[list(ctx.pairs.keys())[beatmapset]]['beatmaps']:
+        if beatmap['mode'] == mode:
+            return True
+    return False
 
 async def get_token(ctx, output_function=print):
     try:
