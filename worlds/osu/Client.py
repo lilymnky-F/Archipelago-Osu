@@ -4,13 +4,20 @@ import sys
 import asyncio
 import shutil
 import aiohttp
+import ssl
 import webbrowser
 import time
 import ast
 import Utils
 import ModuleUpdate
 
+try:
+    import certifi
+except ImportError:
+    certifi = None
+
 osu_base_id = 727000000
+REQUEST_SSL = ssl.create_default_context(cafile=certifi.where()) if certifi else True
 
 ModuleUpdate.update()
 
@@ -310,7 +317,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         url = f"https://osu.ppy.sh/api/v2/beatmapsets/{song['id']}"
         headers = {"Accept": "application/json", "Content-Type": "application/json",
                    "Authorization": f"Bearer {self.ctx.token}"}
-        async with aiohttp.request("GET", url, headers=headers) as request:
+        async with aiohttp.request("GET", url, headers=headers, ssl=REQUEST_SSL) as request:
             beatmapset = await request.json()
         for i in beatmapset['beatmaps']:
             if i['id'] in song['diffs']:
@@ -319,7 +326,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     async def download_beatmapset(self, beatmapset):
         print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
         try:
-            async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
+            async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}", ssl=REQUEST_SSL) as req:
                 content_length = req.headers.get('Content-Length')
                 req_status = req.status
                 if req_status != 200:
@@ -375,7 +382,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                 # Combine all the chunks into one just like req.read() would do
                 content = b"".join(downloaded_content)
             f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
-            filename = "".join(i for i in f if i not in "\/:*?<>|\"")
+            filename = "".join(i for i in f if i not in "\\/:*?<>|\"")
             path = os.path.join(self.ctx.game_communication_path, 'config')
 
             if not os.path.exists(path):
@@ -523,6 +530,7 @@ def check_for_mode(ctx, beatmapset, mode):
 async def get_token(ctx, output_function=print):
     try:
         async with aiohttp.request("POST", "https://osu.ppy.sh/oauth/token",
+                                   ssl=REQUEST_SSL,
                                    headers={"Accept": "application/json",
                                             "Content-Type": "application/x-www-form-urlencoded"},
                                    data=f"client_id={os.environ['CLIENT_ID']}&client_secret={os.environ['API_KEY']}"
@@ -544,7 +552,7 @@ async def open_set_in_direct(ctx, diff_id: int, fallback: bool = False, output_f
         url = f"https://osu.ppy.sh/api/v2/beatmapsets/{set_id}"
         headers = {"Accept": "application/json", "Content-Type": "application/json",
                    "Authorization": f"Bearer {ctx.token}"}
-        async with aiohttp.request("GET", url, headers=headers) as conversion:
+        async with aiohttp.request("GET", url, headers=headers, ssl=REQUEST_SSL) as conversion:
             beatmapset = await conversion.json()
             print(beatmapset)
         webbrowser.open(f"osu://b/{beatmapset['beatmaps'][0]['id']}")
@@ -569,14 +577,14 @@ async def download_next_beatmapset(ctx, task, output_function=print):
         return
     output_function(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
     try:
-        async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}") as req:
+        async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}", ssl=REQUEST_SSL) as req:
             content = await req.read()
             req_status = req.status
         if req_status != 200:
             output_function(f'Download Failed, Status Code: {req_status}')
             return
         f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
-        filename = "".join(i for i in f if i not in "\/:*?<>|\"")
+        filename = "".join(i for i in f if i not in "\\/:*?<>|\"")
         path = os.path.join(ctx.game_communication_path, 'config')
 
         if not os.path.exists(path):
@@ -607,7 +615,7 @@ async def get_last_scores(ctx, mode='', output_function=print):
             return
     headers = {"Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {ctx.token}",
                "x-api-version": "20240529"}
-    async with aiohttp.request("GET", request, headers=headers) as scores:
+    async with aiohttp.request("GET", request, headers=headers, ssl=REQUEST_SSL) as scores:
         try:
             score_list = await scores.json()
             print(score_list, "a")
