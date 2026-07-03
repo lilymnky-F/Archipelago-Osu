@@ -26,6 +26,7 @@ def _generate_local_inner(games: Iterable[str],
         with TemporaryDirectory() as players_dir:
             with TemporaryDirectory() as output_dir:
                 import Generate
+                import Main
 
                 for n, game in enumerate(games, 1):
                     player_path = Path(players_dir) / f"{n}.yaml"
@@ -33,7 +34,7 @@ def _generate_local_inner(games: Iterable[str],
                         f.write(json.dumps({
                             "name": f"Player{n}",
                             "game": game,
-                            game: {"hard_mode": "true"},
+                            game: {},
                             "description": f"generate_local slot {n} ('Player{n}'): {game}",
                         }))
 
@@ -42,7 +43,7 @@ def _generate_local_inner(games: Iterable[str],
                 sys.argv = [sys.argv[0], "--seed", str(hash(tuple(games))),
                             "--player_files_path", players_dir,
                             "--outputpath", output_dir]
-                Generate.main()
+                Main.main(*Generate.main())
                 output_files = list(Path(output_dir).glob('*.zip'))
                 assert len(output_files) == 1
                 final_file = dest / output_files[0].name

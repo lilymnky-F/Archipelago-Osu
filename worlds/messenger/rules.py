@@ -1,7 +1,7 @@
-from typing import Dict, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
-from BaseClasses import CollectionState
-from worlds.generic.Rules import CollectionRule, add_rule, allow_self_locking_items
+from BaseClasses import CollectionState, CollectionRule, Region
+from worlds.generic.Rules import add_rule, allow_self_locking_items
 from .constants import NOTES, PHOBEKINS
 from .options import MessengerAccessibility
 
@@ -12,9 +12,10 @@ if TYPE_CHECKING:
 class MessengerRules:
     player: int
     world: "MessengerWorld"
-    connection_rules: Dict[str, CollectionRule]
-    region_rules: Dict[str, CollectionRule]
-    location_rules: Dict[str, CollectionRule]
+    connection_rules: dict[str, CollectionRule]
+    indirect_conditions: dict[str, list[Region]]
+    region_rules: dict[str, CollectionRule]
+    location_rules: dict[str, CollectionRule]
     maximum_price: int
     required_seals: int
 
@@ -26,15 +27,15 @@ class MessengerRules:
         maximum_price = (world.multiworld.get_location("The Shop - Demon's Bane", self.player).cost +
                          world.multiworld.get_location("The Shop - Focused Power Sense", self.player).cost)
         self.maximum_price = min(maximum_price, world.total_shards)
-        self.required_seals = max(1, world.required_seals)
+        self.required_seals = world.required_seals
 
         # dict of connection names and requirements to traverse the exit
         self.connection_rules = {
             # from ToTHQ
             "Artificer's Portal":
-                lambda state: state.has_all({"Demon King Crown", "Magic Firefly"}, self.player),
+                lambda state: state.has("Demon King Crown", self.player),
             "Shrink Down":
-                lambda state: state.has_all(NOTES, self.player) or self.has_enough_seals(state),
+                lambda state: state.has_all(NOTES, self.player),
             # the shop
             "Money Sink":
                 lambda state: state.has("Money Wrench", self.player) and self.can_shop(state),
@@ -108,17 +109,18 @@ class MessengerRules:
             "Searing Crags - Right -> Searing Crags - Portal":
                 lambda state: self.has_tabi(state) and self.has_wingsuit(state),
             "Searing Crags - Colossuses Shop -> Searing Crags - Key of Strength Shop":
-                lambda state: state.has("Power Thistle", self.player)
-                              and (self.has_dart(state)
-                                   or (self.has_wingsuit(state)
-                                       and self.can_destroy_projectiles(state))),
+                lambda state: state.has("Power Thistle", self.player),
+            "Searing Crags - Key of Strength Shop -> Searing Crags - Key of Strength Room":
+                lambda state: self.has_dart(state)
+                              or (self.has_wingsuit(state)
+                                  and self.can_destroy_projectiles(state)),
             "Searing Crags - Falling Rocks Shop -> Searing Crags - Searing Mega Shard Shop":
                 self.has_dart,
             "Searing Crags - Searing Mega Shard Shop -> Searing Crags - Before Final Climb Shop":
                 lambda state: self.has_dart(state) or self.can_destroy_projectiles(state),
             "Searing Crags - Searing Mega Shard Shop -> Searing Crags - Falling Rocks Shop":
                 self.has_dart,
-            "Searing Crags - Searing Mega Shard Shop -> Searing Crags - Key of Strength Shop":
+            "Searing Crags - Searing Mega Shard Shop -> Searing Crags - Key of Strength Room":
                 self.false,
             "Searing Crags - Before Final Climb Shop -> Searing Crags - Colossuses Shop":
                 self.has_dart,
@@ -192,7 +194,7 @@ class MessengerRules:
                               or (self.has_dart(state) and self.has_wingsuit(state)),
             # Dark Cave
             "Dark Cave - Right -> Dark Cave - Left":
-                lambda state: state.has("Candle", self.player) and self.has_dart(state),
+                lambda state: state.has("Candle", self.player) and self.has_dart(state) and self.has_wingsuit(state),
             # Riviere Turquoise
             "Riviere Turquoise - Waterfall Shop -> Riviere Turquoise - Flower Flight Checkpoint":
                 lambda state: self.has_dart(state) or (
@@ -219,7 +221,19 @@ class MessengerRules:
                 lambda state: self.can_dboost(state) or self.has_dart(state),
         }
 
+        # dict of connection names and the regions checked in the requirements to traverse the exit
+        self.indirect_conditions = {
+            "Howling Grotto - Breezy Crushers Checkpoint -> Howling Grotto - Crushing Pits Shop": [
+                self.world.get_region("Howling Grotto - Emerald Golem Shop")
+            ],
+            "Glacial Peak - Left -> Elemental Skylands - Air Shmup": [
+                self.world.get_location("Quillshroom Marsh - Queen of Quills").parent_region
+            ],
+        }
+
         self.location_rules = {
+            # hq
+            "Money Wrench": self.can_shop,
             # ninja village
             "Ninja Village Seal - Tree House":
                 self.has_dart,
@@ -231,6 +245,8 @@ class MessengerRules:
                 self.is_aerobatic,
             "Autumn Hills Seal - Trip Saws":
                 self.has_wingsuit,
+            "Autumn Hills Seal - Double Swing Saws":
+                self.has_vertical,
             # forlorn temple
             "Forlorn Temple Seal - Rocket Maze":
                 self.has_vertical,
@@ -263,6 +279,8 @@ class MessengerRules:
             # tower of time
             "Tower of Time Seal - Time Waster":
                 self.has_dart,
+            # corrupted future
+            "Corrupted Future - Key of Courage": lambda state: state.has("Magic Firefly", self.player),
             # cloud ruins
             "Time Warp Mega Shard":
                 lambda state: self.has_vertical(state) or self.can_dboost(state),
@@ -310,6 +328,9 @@ class MessengerRules:
                 self.has_dart,
         }
 
+        if self.required_seals:
+            self.connection_rules["Shrink Down"] = self.has_enough_seals
+
     def has_wingsuit(self, state: CollectionState) -> bool:
         return state.has("Wingsuit", self.player)
 
@@ -355,6 +376,8 @@ class MessengerRules:
         for entrance_name, rule in self.connection_rules.items():
             entrance = multiworld.get_entrance(entrance_name, self.player)
             entrance.access_rule = rule
+            for region in self.indirect_conditions.get(entrance_name, ()):
+                multiworld.register_indirect_condition(region, entrance)
         for loc in multiworld.get_locations(self.player):
             if loc.name in self.location_rules:
                 loc.access_rule = self.location_rules[loc.name]
@@ -363,7 +386,7 @@ class MessengerRules:
             add_rule(multiworld.get_entrance("Shrink Down", self.player), self.has_dart)
         multiworld.completion_condition[self.player] = lambda state: state.has("Do the Thing!", self.player)
         if self.world.options.accessibility:  # not locations accessibility
-            set_self_locking_items(self.world, self.player)
+            set_self_locking_items(self.world)
 
 
 class MessengerHardRules(MessengerRules):
@@ -397,7 +420,7 @@ class MessengerHardRules(MessengerRules):
                     lambda state: self.has_dart(state) or
                                   (self.can_destroy_projectiles(state) and
                                    (self.has_wingsuit(state) or self.can_dboost(state))),
-                "Searing Crags - Searing Mega Shard Shop -> Searing Crags - Key of Strength Shop":
+                "Searing Crags - Searing Mega Shard Shop -> Searing Crags - Key of Strength Room":
                     lambda state: self.can_leash(state) or self.has_windmill(state),
                 "Searing Crags - Before Final Climb Shop -> Searing Crags - Colossuses Shop":
                     self.true,
@@ -430,6 +453,8 @@ class MessengerHardRules(MessengerRules):
             {
                 "Autumn Hills Seal - Spike Ball Darts":
                     lambda state: self.has_vertical(state) and self.has_windmill(state) or self.is_aerobatic(state),
+                "Autumn Hills Seal - Double Swing Saws":
+                    lambda state: self.has_vertical(state) or self.can_destroy_projectiles(state),
                 "Bamboo Creek - Claustro":
                     self.has_wingsuit,
                 "Bamboo Creek Seal - Spike Ball Pits":
@@ -501,7 +526,6 @@ class MessengerOOBRules(MessengerRules):
 
         self.location_rules = {
             "Bamboo Creek - Claustro": self.has_wingsuit,
-            "Searing Crags - Key of Strength": self.has_wingsuit,
             "Sunken Shrine - Key of Love": lambda state: state.has_all({"Sun Crest", "Moon Crest"}, self.player),
             "Searing Crags - Pyro": self.has_tabi,
             "Underworld - Key of Chaos": self.has_tabi,
@@ -521,9 +545,11 @@ class MessengerOOBRules(MessengerRules):
         self.world.options.accessibility.value = MessengerAccessibility.option_minimal
 
 
-def set_self_locking_items(world: "MessengerWorld", player: int) -> None:
+def set_self_locking_items(world: "MessengerWorld") -> None:
     # locations where these placements are always valid
     allow_self_locking_items(world.get_location("Searing Crags - Key of Strength").parent_region, "Power Thistle")
     allow_self_locking_items(world.get_location("Sunken Shrine - Key of Love"), "Sun Crest", "Moon Crest")
-    allow_self_locking_items(world.get_location("Corrupted Future - Key of Courage").parent_region, "Demon King Crown")
     allow_self_locking_items(world.get_location("Elemental Skylands Seal - Water"), "Currents Master")
+    if not world.options.shuffle_transitions:
+        allow_self_locking_items(world.get_location("Corrupted Future - Key of Courage").parent_region,
+                                 "Demon King Crown")
