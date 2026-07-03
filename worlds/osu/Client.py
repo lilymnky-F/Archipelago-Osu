@@ -30,9 +30,10 @@ from CommonClient import gui_enabled, logger, get_base_parser, ClientCommandProc
 
 
 class APosuClientCommandProcessor(ClientCommandProcessor):
+    ctx: APosuContext
+
     def __init__(self, ctx: APosuContext):
         super().__init__(ctx)
-        self.ctx = ctx
         self.mode_names = {'fruits': 'fruits',
                            'catch': 'fruits',
                            'ctb': 'fruits',
@@ -75,11 +76,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_save_keys(self):
         """Saves the player's current IDs"""
-        filename = "config"
-        path = self.ctx.game_communication_path + ' config'
-        if not os.path.exists(path):
-            os.makedirs(path)
-        with open(os.path.join(path, filename), 'w') as f:
+        with open(self.ctx.config_path, 'w') as f:
             for info in [os.environ['API_KEY'], os.environ['CLIENT_ID'], os.environ['PLAYER_ID']]:
                 f.write(info)
                 f.write(" ")
@@ -87,9 +84,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_load_keys(self):
         """loads the player's previously saved IDs"""
-        filename = "config"
-        path = self.ctx.game_communication_path + ' config'
-        with open(os.path.join(path, filename), 'r') as f:
+        with open(self.ctx.config_path, 'r') as f:
             data = f.read()
         d = data.split(" ")
         os.environ['API_KEY'], os.environ['CLIENT_ID'], os.environ['PLAYER_ID'] = d[0], d[1], d[2],
@@ -97,11 +92,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_save_settings(self):
         """Saves the player's current settings. Doesn't include API keys or IDs."""
-        filename = "settings"
-        path = self.ctx.game_communication_path + ' config'
-        if not os.path.exists(path):
-            os.makedirs(path)
-        with open(os.path.join(path, filename), 'w') as f:
+        with open(self.ctx.settings_path, 'w') as f:
             for info in [self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type]:
                 f.write(str(info))
                 f.write("\t")
@@ -109,9 +100,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_load_settings(self):
         """Loads the player's previously saved settings. Doesn't include API keys or IDs."""
-        filename = "settings"
-        path = self.ctx.game_communication_path + ' config'
-        with open(os.path.join(path, filename), 'r') as f:
+        with open(self.ctx.settings_path, 'r') as f:
             data = f.read()
         d = data.split("\t")
         self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = ast.literal_eval(d[0]), \
@@ -120,20 +109,12 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_save_all(self):
         """Saves both the player's current IDs, and their settings."""
-        filename = "config"
-        path = self.ctx.game_communication_path + ' config'
-        if not os.path.exists(path):
-            os.makedirs(path)
-        with open(os.path.join(path, filename), 'w') as f:
+        with open(self.ctx.config_path, 'w') as f:
             for info in [os.environ['API_KEY'], os.environ['CLIENT_ID'], os.environ['PLAYER_ID']]:
                 f.write(info)
                 f.write(" ")
         self.output("Saved Current Keys")
-        filename = "settings"
-        path = self.ctx.game_communication_path + ' config'
-        if not os.path.exists(path):
-            os.makedirs(path)
-        with open(os.path.join(path, filename), 'w') as f:
+        with open(self.ctx.settings_path, 'w') as f:
             for info in [self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type]:
                 f.write(str(info))
                 f.write("\t")
@@ -141,16 +122,12 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
 
     def _cmd_load_all(self):
         """loads the player's previously saved IDs, and their settings."""
-        filename = "config"
-        path = self.ctx.game_communication_path + ' config'
-        with open(os.path.join(path, filename), 'r') as f:
+        with open(self.ctx.config_path, 'r') as f:
             data = f.read()
             d = data.split(" ")
             os.environ['API_KEY'], os.environ['CLIENT_ID'], os.environ['PLAYER_ID'] = d[0], d[1], d[2],
             self.output("Loaded Previous Keys")
-        filename = "settings"
-        path = self.ctx.game_communication_path + ' config'
-        with open(os.path.join(path, filename), 'r') as f:
+        with open(self.ctx.settings_path, 'r') as f:
             data = f.read()
         d = data.split("\t")
         self.ctx.auto_modes, self.ctx.auto_download, self.ctx.download_type = ast.literal_eval(d[0]), \
@@ -383,12 +360,8 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                 content = b"".join(downloaded_content)
             f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
             filename = "".join(i for i in f if i not in "\\/:*?<>|\"")
-            path = os.path.join(self.ctx.game_communication_path, 'config')
 
-            if not os.path.exists(path):
-                os.makedirs(path)
-
-            file_path = os.path.join(path, filename)
+            file_path = self.ctx.ensure_path(filename)
             with open(file_path, 'wb') as f:
                 f.write(content)
 
@@ -418,26 +391,22 @@ class APosuContext(CommonContext):
         self.difficulty_sync = 0
         self.minimum_grade = 0
         self.disallow_converts = False
-        self.preformance_points_needed = 9999  # High Enough to never accidently trigger if the slot data fails
-        # self.game_communication_path: files go in this path to pass data between us and the actual game
-        if "localappdata" in os.environ:
-            self.game_communication_path = os.path.expandvars(r"%localappdata%/APosu")
-        else:
-            # not windows. game is an exe so let's see if wine might be around to run it
-            if "WINEPREFIX" in os.environ:
-                wineprefix = os.environ["WINEPREFIX"]
-            elif shutil.which("wine") or shutil.which("wine-stable"):
-                wineprefix = os.path.expanduser(
-                    "~/.wine")  # default root of wine system data, deep in which is app data
-            else:
-                msg = "APosuClient couldn't detect system type. Unable to infer required game_communication_path"
-                logger.error("Error: " + msg)
-                Utils.messagebox("Error", msg, error=True)
-                sys.exit(1)
-            self.game_communication_path = os.path.join(
-                wineprefix,
-                "drive_c",
-                os.path.expandvars("users/$USER/Local Settings/Application Data/APosu"))
+        self.preformance_points_needed = 9999
+
+        self.config_path = self.ensure_path("config")
+        self.settings_path = self.ensure_path("settings")
+
+    def ensure_path(self, *segments: str):
+        """
+        Resolves a file path in the Archipelago user data directory (guaranteed
+        to be writable), recursively creating any missing intermediate
+        directories if needed.
+        """
+        target_dir = Utils.user_path("APosu", *segments[:-1])
+        os.makedirs(target_dir, exist_ok=True)
+
+        return os.path.join(target_dir, segments[-1])
+
 
     async def server_auth(self, password_requested: bool = False):
         if password_requested and not self.password:
@@ -445,26 +414,12 @@ class APosuContext(CommonContext):
         await self.get_username()
         await self.send_connect()
 
-    async def connection_closed(self):
-        await super(APosuContext, self).connection_closed()
-        for root, dirs, files in os.walk(self.game_communication_path):
-            for file in files:
-                if file.find("obtain") <= -1:
-                    os.remove(root + "/" + file)
-
     @property
     def endpoints(self):
         if self.server:
             return [self.server]
         else:
             return []
-
-    async def shutdown(self):
-        await super(APosuContext, self).shutdown()
-        for root, dirs, files in os.walk(self.game_communication_path):
-            for file in files:
-                if file.find("obtain") <= -1:
-                    os.remove(root + "/" + file)
 
     def on_package(self, cmd: str, args: dict):
         if cmd in {"Connected"}:
@@ -480,8 +435,6 @@ class APosuContext(CommonContext):
                 version = slot_data.get('VersionNumber', None)
                 if version is None:
                     pass
-            if not os.path.exists(self.game_communication_path):
-                os.makedirs(self.game_communication_path)
 
     def run_gui(self):
         """Import kivy UI system and start running it as self.ui_task."""
@@ -561,7 +514,7 @@ async def open_set_in_direct(ctx, diff_id: int, fallback: bool = False, output_f
     webbrowser.open(f"osu://b/{diff_id}")
 
 
-async def download_next_beatmapset(ctx, task, output_function=print):
+async def download_next_beatmapset(ctx: APosuContext, task, output_function=print):
     await task
     await asyncio.sleep(1)  # Delay to get the reply
     if len(get_available_ids(ctx)) <= 0:
@@ -585,12 +538,8 @@ async def download_next_beatmapset(ctx, task, output_function=print):
             return
         f = f'{beatmapset["id"]} {beatmapset["artist"]} - {beatmapset["title"]}.osz'
         filename = "".join(i for i in f if i not in "\\/:*?<>|\"")
-        path = os.path.join(ctx.game_communication_path, 'config')
 
-        if not os.path.exists(path):
-            os.makedirs(path)
-
-        file_path = os.path.join(path, filename)
+        file_path = ctx.ensure_path(filename)
         with open(file_path, 'wb') as f:
             f.write(content)
 
