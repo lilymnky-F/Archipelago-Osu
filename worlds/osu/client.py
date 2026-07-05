@@ -294,7 +294,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
         url = f"https://osu.ppy.sh/api/v2/beatmapsets/{song['id']}"
         headers = {"Accept": "application/json", "Content-Type": "application/json",
                    "Authorization": f"Bearer {self.ctx.token}"}
-        async with aiohttp.request("GET", url, headers=headers, ssl=REQUEST_SSL) as request:
+        async with self.ctx.http_session.get(url, headers=headers) as request:
             beatmapset = await request.json()
         for i in beatmapset['beatmaps']:
             if i['id'] in song['diffs']:
@@ -303,7 +303,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
     async def download_beatmapset(self, beatmapset):
         print(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
         try:
-            async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}", ssl=REQUEST_SSL) as req:
+            async with self.ctx.http_session.get(f"https://beatconnect.io/b/{beatmapset['id']}") as req:
                 content_length = req.headers.get('Content-Length')
                 req_status = req.status
                 if req_status != 200:
@@ -393,8 +393,15 @@ class APosuContext(CommonContext):
         self.disallow_converts = False
         self.preformance_points_needed = 9999
 
+        http_connector = aiohttp.TCPConnector(ssl=REQUEST_SSL)
+        self.http_session = aiohttp.ClientSession(connector=http_connector)
+
         self.config_path = self.ensure_path("config")
         self.settings_path = self.ensure_path("settings")
+
+    async def shutdown(self):
+        await super().shutdown()
+        await self.http_session.close()
 
     def ensure_path(self, *segments: str):
         """
@@ -480,10 +487,9 @@ def check_for_mode(ctx, beatmapset, mode):
             return True
     return False
 
-async def get_token(ctx, output_function=print):
+async def get_token(ctx: APosuContext, output_function=print):
     try:
-        async with aiohttp.request("POST", "https://osu.ppy.sh/oauth/token",
-                                   ssl=REQUEST_SSL,
+        async with ctx.http_session.post("https://osu.ppy.sh/oauth/token",
                                    headers={"Accept": "application/json",
                                             "Content-Type": "application/x-www-form-urlencoded"},
                                    data=f"client_id={os.environ['CLIENT_ID']}&client_secret={os.environ['API_KEY']}"
@@ -496,7 +502,7 @@ async def get_token(ctx, output_function=print):
         output_function("Error accessing osu! servers. Check your Client id, Client Secret, and Player id.")
 
 
-async def open_set_in_direct(ctx, diff_id: int, fallback: bool = False, output_function = print):
+async def open_set_in_direct(ctx: APosuContext, diff_id: int, fallback: bool = False, output_function = print):
     # If the beatmapset has no difficulty ID, we have to fall back to the beatmap ID as done in previous versions
     if fallback:
         set_id = diff_id
@@ -505,7 +511,7 @@ async def open_set_in_direct(ctx, diff_id: int, fallback: bool = False, output_f
         url = f"https://osu.ppy.sh/api/v2/beatmapsets/{set_id}"
         headers = {"Accept": "application/json", "Content-Type": "application/json",
                    "Authorization": f"Bearer {ctx.token}"}
-        async with aiohttp.request("GET", url, headers=headers, ssl=REQUEST_SSL) as conversion:
+        async with ctx.http_session.get(url, headers=headers) as conversion:
             beatmapset = await conversion.json()
             print(beatmapset)
         webbrowser.open(f"osu://b/{beatmapset['beatmaps'][0]['id']}")
@@ -530,7 +536,7 @@ async def download_next_beatmapset(ctx: APosuContext, task, output_function=prin
         return
     output_function(f'Downloading {beatmapset["artist"]} - {beatmapset["title"]} ({beatmapset["id"]})')
     try:
-        async with aiohttp.request("GET", f"https://beatconnect.io/b/{beatmapset['id']}", ssl=REQUEST_SSL) as req:
+        async with ctx.http_session.get(f"https://beatconnect.io/b/{beatmapset['id']}") as req:
             content = await req.read()
             req_status = req.status
         if req_status != 200:
@@ -548,7 +554,7 @@ async def download_next_beatmapset(ctx: APosuContext, task, output_function=prin
         output_function(f"An error occurred: {e}")
 
 
-async def get_last_scores(ctx, mode='', output_function=print):
+async def get_last_scores(ctx: APosuContext, mode='', output_function=print):
     # Make URl for the request
     try:
         request = f"https://osu.ppy.sh/api/v2/users/{os.environ['PLAYER_ID']}/scores/recent?include_fails=1&limit=10"
@@ -564,7 +570,7 @@ async def get_last_scores(ctx, mode='', output_function=print):
             return
     headers = {"Accept": "application/json", "Content-Type": "application/json", "Authorization": f"Bearer {ctx.token}",
                "x-api-version": "20240529"}
-    async with aiohttp.request("GET", request, headers=headers, ssl=REQUEST_SSL) as scores:
+    async with ctx.http_session.get(request, headers=headers) as scores:
         try:
             score_list = await scores.json()
             print(score_list, "a")
