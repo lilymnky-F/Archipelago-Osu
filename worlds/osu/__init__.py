@@ -59,8 +59,8 @@ class OsuWorld(World):
 
     location_name_to_id = location_table
     item_name_to_id = item_table
-    modes: {str: OsuMode}
-    pairs = dict
+    modes: dict[str, OsuMode]
+    pairs: dict
     starting_songs: list
     additional_songs: list
     location_count: int
