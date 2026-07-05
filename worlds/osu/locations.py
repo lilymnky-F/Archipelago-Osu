@@ -1,8 +1,8 @@
-from typing import Callable, Dict, NamedTuple, Optional
+from typing import NamedTuple
 
 from BaseClasses import Location, MultiWorld
 
-from .Items import osu_song_max
+from .items import osu_song_max
 
 
 class OsuLocation(Location):
@@ -10,11 +10,11 @@ class OsuLocation(Location):
 
 
 class OsuLocationData(NamedTuple):
-    address: Optional[int] = None
-    locked_item: Optional[str] = None
+    address: int | None = None
+    locked_item: str | None = None
 
 
-location_data_table: Dict[str, OsuLocationData] = {
+location_data_table: dict[str, OsuLocationData] = {
 }
 
 for i in range(osu_song_max):

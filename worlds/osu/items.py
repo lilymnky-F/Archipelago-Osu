@@ -1,4 +1,4 @@
-from typing import Dict, NamedTuple, Optional
+from typing import NamedTuple
 
 from BaseClasses import Item, ItemClassification
 
@@ -13,7 +13,7 @@ class OsuItem(Item):
 
 
 class OsuItemData(NamedTuple):
-    code: Optional[int] = None
+    code: int | None = None
     type: ItemClassification = ItemClassification.filler
 
 
@@ -46,7 +46,7 @@ osu_song_data = get_song_data()
 osu_song_max = 520
 osu_song_pool = []
 
-item_data_table: Dict[str, OsuItemData] = {
+item_data_table: dict[str, OsuItemData] = {
     "Performance Points": OsuItemData(
         code=726999999,
         type=ItemClassification.progression_skip_balancing,

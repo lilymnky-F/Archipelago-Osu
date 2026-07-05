@@ -2,20 +2,19 @@ import logging
 from BaseClasses import Region, Tutorial
 from Options import OptionError
 from worlds.AutoWorld import WebWorld, World
-from .Items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool, find_beatmapset
-from .Locations import OsuLocation, location_table, location_data_table
-from .Options import OsuOptions
-from .Regions import region_data_table
+from .items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool, find_beatmapset
+from .locations import OsuLocation, location_table, location_data_table
+from .options import OsuOptions
 from math import floor
 from copy import deepcopy, copy
-from multiprocessing import Process
-from ..LauncherComponents import Component, components, Type
+from worlds.LauncherComponents import Component, components, Type
 
 
 def run_client():
-    from worlds.osu.Client import main
-    p = Process(target=main)
-    p.start()
+    from worlds.LauncherComponents import launch
+
+    from .client import main
+    launch(main, "osu!Client")
 
 
 components.append(Component("osu!Client", func=run_client, component_type=Type.CLIENT))
@@ -60,8 +59,8 @@ class OsuWorld(World):
 
     location_name_to_id = location_table
     item_name_to_id = item_table
-    modes: {str: OsuMode}
-    pairs = dict
+    modes: dict[str, OsuMode]
+    pairs: dict
     starting_songs: list
     additional_songs: list
     location_count: int
