@@ -2,7 +2,7 @@ from typing import NamedTuple
 
 from BaseClasses import Location, MultiWorld
 
-from .Items import osu_song_max
+from .items import osu_song_max
 
 
 class OsuLocation(Location):

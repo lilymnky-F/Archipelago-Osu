@@ -2,17 +2,17 @@ import logging
 from BaseClasses import Region, Tutorial
 from Options import OptionError
 from worlds.AutoWorld import WebWorld, World
-from .Items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool, find_beatmapset
-from .Locations import OsuLocation, location_table, location_data_table
-from .Options import OsuOptions
+from .items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool, find_beatmapset
+from .locations import OsuLocation, location_table, location_data_table
+from .options import OsuOptions
 from math import floor
 from copy import deepcopy, copy
 from multiprocessing import Process
-from ..LauncherComponents import Component, components, Type
+from worlds.LauncherComponents import Component, components, Type
 
 
 def run_client():
-    from worlds.osu.Client import main
+    from .client import main
     p = Process(target=main)
     p.start()
 

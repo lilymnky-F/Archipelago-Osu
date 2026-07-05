@@ -1,6 +1,6 @@
 from Options import Toggle, Option, Range, Choice, DeathLink, ItemSet, OptionSet, PerGameCommonOptions
 from dataclasses import dataclass
-from .Items import get_song_data
+from .items import get_song_data
 
 
 class StartingSongs(Range):
