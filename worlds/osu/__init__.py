@@ -7,14 +7,14 @@ from .locations import OsuLocation, location_table, location_data_table
 from .options import OsuOptions
 from math import floor
 from copy import deepcopy, copy
-from multiprocessing import Process
 from worlds.LauncherComponents import Component, components, Type
 
 
 def run_client():
+    from worlds.LauncherComponents import launch
+
     from .client import main
-    p = Process(target=main)
-    p.start()
+    launch(main, "osu!Client")
 
 
 components.append(Component("osu!Client", func=run_client, component_type=Type.CLIENT))
