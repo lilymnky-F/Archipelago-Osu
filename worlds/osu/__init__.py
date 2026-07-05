@@ -5,7 +5,6 @@ from worlds.AutoWorld import WebWorld, World
 from .Items import OsuItem, item_data_table, item_table, osu_song_data, osu_song_pool, find_beatmapset
 from .Locations import OsuLocation, location_table, location_data_table
 from .Options import OsuOptions
-from .Regions import region_data_table
 from math import floor
 from copy import deepcopy, copy
 from multiprocessing import Process
