@@ -2,7 +2,8 @@ from typing import Dict, NamedTuple, Optional
 
 from BaseClasses import Item, ItemClassification
 
-import json
+import functools
+import orjson
 
 def load_text_file(name: str) -> str:
     import pkgutil
@@ -17,23 +18,10 @@ class OsuItemData(NamedTuple):
     type: ItemClassification = ItemClassification.filler
 
 
-SONG_DATA_CACHE = None
+@functools.cache
 def get_song_data() -> list[dict]:
-    global SONG_DATA_CACHE
-
-    if SONG_DATA_CACHE is not None:
-        return SONG_DATA_CACHE
-
     OsuSongData = load_text_file("OsuSongData.json")
-    packs = json.loads(OsuSongData)
-    beatmapsets = []
-    for pack in packs:
-        for beatmapset in pack["beatmapsets"]:
-            if beatmapset not in beatmapsets:
-                beatmapsets.append(beatmapset)
-    SONG_DATA_CACHE = beatmapsets
-
-    return SONG_DATA_CACHE
+    return orjson.loads(OsuSongData)
 
 
 def find_beatmapset(id) -> dict:
