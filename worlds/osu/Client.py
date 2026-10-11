@@ -366,7 +366,7 @@ class APosuClientCommandProcessor(ClientCommandProcessor):
                 f.write(content)
 
             self.output(f'Opening {filename}...')  # More feedback to the user
-            webbrowser.open(file_path)
+            Utils.open_file(file_path)
         except Exception as e:
             self.output(f"An error occurred: {repr(e)}")
 
@@ -543,7 +543,7 @@ async def download_next_beatmapset(ctx: APosuContext, task, output_function=prin
         with open(file_path, 'wb') as f:
             f.write(content)
 
-        webbrowser.open(file_path)
+        Utils.open_file(file_path)
     except Exception as e:
         output_function(f"An error occurred: {e}")
 
